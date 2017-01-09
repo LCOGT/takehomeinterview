@@ -19,7 +19,7 @@ class PlanetForm(forms.ModelForm):
                 attrs={'placeholder': 'ordinality'}
             ),
             'description': forms.Textarea(
-                attrs={'placeholder': 'planet description', 
-                       'cols': 50, 'rows':20}
+                attrs={'placeholder': 'planet description',
+                       'cols': 50, 'rows': 20}
             ),
         }
