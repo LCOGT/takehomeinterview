@@ -1,0 +1,7 @@
+Built with Python 3.5.1
+
+To use this simple web project:
+ - create a python virtual environment
+ - clone the repo
+ - install from the requirements file
+ - start the django server
