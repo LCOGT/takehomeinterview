@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+  <tr><th>Planet</th><th>Size</th><th>Distance</th><th>Ordinality</th></tr>
+{% for planet in object_list %}
+    <tr>
+      <td><a href="{% url 'planet-detail' planet.id %}">{{ planet.name }}</a>
+      <td>{{planet.size}}</td>
+      <td>{{planet.distance}}</td>
+      <td>{{planet.ordinality}}</td>
+    </tr>
+{% empty %}
+    <tr><td>No planets yet.</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

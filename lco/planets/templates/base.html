@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Planets</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+  </head>
+<body>
+<h1><a href="{% url "planet-list" %}"> planets</a></h1>
+<nav>
+  <ul>
+    <li><a href="{% url 'planet-create' %}">add a planet</a></li>
+  </ul>
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

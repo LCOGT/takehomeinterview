@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ object.name }}</h2>
+<dl>
+  <dt>Size</dt>
+  <dd>{{ object.size }}</dd>
+  <dt>Distance</dt>
+  <dd>{{ object.distance }}</p>
+  <dt>Ordinality</dt>
+  <dd>{{ object.ordinality }}</p>
+  <dt>Description</dt>
+  <dd>{{ object.description }}</p>
+</dl>
+{% endblock %}
