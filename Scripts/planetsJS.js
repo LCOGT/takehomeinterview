@@ -1,4 +1,6 @@
-                                                                                                                                                    
+////   Create SQLite Table and initialize database functions 
+
+
 var createStatement = "CREATE TABLE IF NOT EXISTS Planets (id INTEGER PRIMARY KEY AUTOINCREMENT, planetName TEXT, planetOrdinality INTEGER, planetDistance REAL, planetSize REAL, pl\
 anetDescription TEXT)";
 
@@ -14,58 +16,38 @@ var dataset;
 
 var DataType;
 
-function initDatabase()                                                                                                                         
-
-{
-
+////   Check for browser compatability and if so create table
+function initDatabase(){
     try {
 
         if (!window.openDatabase)                                                                                                      
-
         {
-
             alert('SQLite is not supported in this browser!');
-
         }
-
         else {
-
             createTable();                                                                                            
-
         }
-
     }
     catch (e) {
 
         if (e == 2) {
-
-                                                                                                                                         
-
             console.log("Invalid SQLITE version.");
 
         } else {
-
             console.log("Unknown ERROR" + e + "!");
-
         }
-
         return;
-
     }
-
 }
 
-function createTable()                                                                                                                     
-
-{
-
+////   Initialize database
+function createTable() {
     db.transaction(function (tx) { tx.executeSql(createStatement, [], showEntry, onError); });
-
 }
 
-function insertEntry()                                                                    
 
-{
+//// Functionality to add planets to table
+function insertEntry(){
 
     var planetNameTemp = $('input:text[id=planetName]').val();
 
@@ -77,18 +59,14 @@ function insertEntry()
 
     var planetDescriptionTemp = $('input:text[id=planetDescription]').val();
 
-
     db.transaction(function (tx) { tx.executeSql(insertStatement, [planetNameTemp, planetOrdinalityTemp, planetDistanceTemp, planetSizeTemp, planetDescriptionTemp], loadAndReset, o\
 nError); });
-
-                                                              
-
+                                                             
 }
 
 
-function dropTable()                                                                                 
-
-{
+////    Functionality to clear the database
+function dropTable() {
 
     db.transaction(function (tx) { tx.executeSql(dropStatement, [], showEntry, onError); });
 
@@ -98,9 +76,8 @@ function dropTable()
 
 }
 
-function loadEntry(i)                                                                                               
-
-{
+////   Functionality to load planets
+function loadEntry(i) {
 
     var item = dataset.item(i);
 
@@ -118,9 +95,8 @@ function loadEntry(i)
 
 }
 
-function resetForm()                                                                                                                     
-
-{
+////  Resetting the Add Planet Form
+function resetForm() {
 
     $("#planetName").val("");
 
@@ -136,9 +112,9 @@ function resetForm()
 
 }
 
-function loadAndReset()                                                                                                                            
 
-{
+////  Functionality to reset the Add Planet form and display new planet in the results page
+function loadAndReset(){
 
     resetForm();
 
@@ -146,17 +122,17 @@ function loadAndReset()
 
 }
 
-function onError(tx, error)                                                                                                                
 
-{
+////   Error handling function
+function onError(tx, error){
 
     alert(error.message);
 
 }
 
-function showEntry()                                                                                               
 
-{
+////   Functionality to display database
+function showEntry() {
 
     $("#results").html('')
 
@@ -183,9 +159,9 @@ function showEntry()
 
 }
 
-$(document).ready(function ()                                                                                                         
 
-                  {
+////  Add Functionality to buttons on html page
+$(document).ready(function () {
                       ;
 
                       $("body").fadeIn(2000);                                                                                                     
