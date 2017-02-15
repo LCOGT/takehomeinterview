@@ -1,1 +1,94 @@
+<!DOCTYPE html>
 
+<html>
+
+  <head>
+
+    <title>Planet Database</title>
+
+    <link rel="Stylesheet"  href="./Styles/planetStylesheet.css"/>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+
+    <body>
+
+      <h1>Planet Form</h1>
+
+      <form id="myplanet">
+
+        <fieldset>
+
+          <legend>Planet Info</legend>
+
+          <ol>
+
+            <li>
+
+              <label for="planetName">Name</label>
+
+              <input id="planetName" type="text" placeholder="Ex... Neptune">
+
+              <input type="hidden" id="id"/>
+
+            </li>
+
+            <li>
+
+              <label for="planetOrdinality">Ordinality</label>
+
+              <input id="planetOrdinality" type="text" placeholder="Ex... 9">
+
+            </li>
+
+
+            <li>
+
+              <label for="planetDistance">Distance</label>
+
+              <input id="planetDistance" type="text" placeholder="In AU: Ex... 30.1 ">
+
+            </li>
+
+             <li>
+
+              <label for="planetSize">Size</label>
+
+              <input id="planetSize" type="text" placeholder="Earth Mass: Ex... 17.15">
+
+            </li>
+
+
+            <li>
+
+              <label for="planetDescription">Description</label>
+
+              <input id="planetDescription" type="text" placeholder="Ex... Blue gas giant.">
+
+            </li>
+
+          </ol>
+
+        </fieldset>
+        
+        <button id="btnReset" type=submit>Reset</button>
+
+        <button id="btnAddPlanet" type="submit">ADD Planet</button>
+
+        <button id="btnDrop" type=submit>DROP</button>
+
+      </form><br/>
+
+      <div id="results"></div>
+
+    </body>
+
+    <script type="text/javascript" src="./Scripts/planetDB.js"> </script>
+
+  </html>
+    
+<span style="font-family: Calibri; font-size: small;">
+
+
+            
+            
+            
