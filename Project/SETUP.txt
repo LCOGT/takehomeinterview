@@ -1,0 +1,2 @@
+INSTRUCTIONS:
+Open the planets.html file on the Google Chrome Browser (must be chrome).
