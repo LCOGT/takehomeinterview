@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> LCO Planet Database </title>
+	<style> 
+		.form { 
+			float: left;
+			margin-right: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div>
+		<p> <strong>Add planet information to the database: </strong> </p>
+		<p class="form">Name: <input id="name"/> </p>
+		<p class="form">Size: <input id="size" type="number" placeholder="In Earth masses"/> </p>
+		<p class="form">Distance: <input id="distance" type="number" placeholder="In AU"/> </p>
+		<p class="form">Ordinality: <input id="ordinality" type="number"/> </p>
+		<br/><br/><br/>
+		<p>Planet Description: <textarea rows="10" cols="40" id="comments"></textarea></p>
+		<p><input type="submit" value="Submit to the database" onclick="makeNewPlanet()"></p>
+	</div>
+
+	<div>
+	  	<table id="planets" style="text-align:center; cursor: pointer;" border="1" width="100%">
+	  		<thead>
+	  			<th> Ordinality </th>
+			  	<th> Name </th>
+			  	<th> Size </th>
+			  	<th> Distance </th>
+		  	</thead>
+
+		</table>
+	</div>
+
+	<script src="dataBase.js"></script>
+
+	<script> 
+		document.addEventListener("DOMContentLoaded", initializeTables());
+	</script>
+</body>
+</html>
