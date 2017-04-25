@@ -1,0 +1,24 @@
+<h1>Planets</h1>
+
+{% if planets_list_all %}
+	<table cellspacing=10>
+		<tr>
+			<th>Ordinality</th>
+			<th>Name</th>
+			<th>Size</th>
+			<th>Distance</th>
+		</tr>
+	{% for p in planets_list_all %}
+		<tr>
+			<td>{{ p.planet_ordinality }}</td>
+			<td><a href="/planets/{{ p.pk }}/">{{ p.planet_name }}</a></td>
+			<td>{{ p.planet_size }}</td>
+			<td>{{ p.planet_distance }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p>No planets are available.</p>
+{% endif %}
+
+<p><a href="/planets/inputplanet/">Click here to add a planet to the database.</a></p>

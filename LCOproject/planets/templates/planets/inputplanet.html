@@ -1,0 +1,12 @@
+<h1>
+	Input planet
+</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Upload planet to database</button>
+</form>
+
+<p><a href="/planets/">Click here to return to homepage.</a></p>
