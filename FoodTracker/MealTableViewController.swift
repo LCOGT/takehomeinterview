@@ -1,8 +1,8 @@
 //
 //  MealTableViewController.swift
-//  FoodTracker
+//  PlanetDB
 //
-//  Created by Antonio Medrano on 2/15/17.
+//  Created by Antonio Medrano on 4/26/17.
 //  Copyright © 2017 Antonio Medrano. All rights reserved.
 //
 

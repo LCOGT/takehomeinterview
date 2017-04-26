@@ -1,15 +1,15 @@
 //
-//  FoodTrackerTests.swift
-//  FoodTrackerTests
+//  PlanetDBTests.swift
+//  PlanetDB
 //
-//  Created by Antonio Medrano on 2/2/17.
+//  Created by Antonio Medrano on 4/26/17.
 //  Copyright © 2017 Antonio Medrano. All rights reserved.
 //
 
 import XCTest
 @testable import FoodTracker
 
-class FoodTrackerTests: XCTestCase {
+class PlanetDBTests: XCTestCase {
     
     //MARK: Meal Class Tests
     
