@@ -22,7 +22,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
      This value is either passed by `MealTableViewController` in `prepare(for:sender:)`
      or constructed as part of adding a new meal.
      */
-    var meal: Meal?
+    var planet: Planet?
 
     
     override func viewDidLoad() {
@@ -32,11 +32,11 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         nameTextField.delegate = self
         
         // Set up views if editing an existing Meal.
-        if let meal = meal {
-            navigationItem.title = meal.name
-            nameTextField.text = meal.name
-            photoImageView.image = meal.photo
-            ratingControl.rating = meal.rating
+        if let planet = planet {
+            navigationItem.title = planet.name
+            nameTextField.text = planet.name
+            photoImageView.image = planet.photo
+            ratingControl.rating = planet.rating
         }
         
         // Enable the Save button only if the text field has a valid Meal name.
@@ -114,7 +114,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let rating = ratingControl.rating
         
         // Set the meal to be passed to MealTableViewController after the unwind segue.
-        meal = Meal(name: name, photo: photo, rating: rating)
+        planet = Planet(name: name, photo: photo, rating: rating)
     }
     
 

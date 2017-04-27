@@ -13,7 +13,7 @@ class MealTableViewController: UITableViewController {
     
     
     //MARK: Properties
-    var meals = [Meal]()
+    var meals = [Planet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,8 +132,8 @@ class MealTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedMeal = meals[indexPath.row]
-            mealDetailViewController.meal = selectedMeal
+            let selectedPlanet = meals[indexPath.row]
+            mealDetailViewController.planet = selectedPlanet
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -145,18 +145,18 @@ class MealTableViewController: UITableViewController {
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         
         // NOTE: First time in the tutorial the code is wrong, tutorial code is correct in the "the unwindToMealList(_:) action method should look like this:" section though
-        if let sourceViewController = sender.source as? MealViewController, let meal = sourceViewController.meal {
+        if let sourceViewController = sender.source as? MealViewController, let planet = sourceViewController.planet {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing meal.
-                meals[selectedIndexPath.row] = meal
+                meals[selectedIndexPath.row] = planet
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
                 // Add a new meal.
                 let newIndexPath = IndexPath(row: meals.count, section: 0)
                 
-                meals.append(meal)
+                meals.append(planet)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
             
@@ -173,15 +173,15 @@ class MealTableViewController: UITableViewController {
         let photo2 = UIImage(named: "meal2")
         let photo3 = UIImage(named: "meal3")
         
-        guard let meal1 = Meal(name: "Caprese Salad", photo: photo1, rating: 4) else {
+        guard let meal1 = Planet(name: "Caprese Salad", photo: photo1, rating: 4) else {
             fatalError("Unable to instantiate meal1")
         }
         
-        guard let meal2 = Meal(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
+        guard let meal2 = Planet(name: "Chicken and Potatoes", photo: photo2, rating: 5) else {
             fatalError("Unable to instantiate meal2")
         }
         
-        guard let meal3 = Meal(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
+        guard let meal3 = Planet(name: "Pasta with Meatballs", photo: photo3, rating: 3) else {
             fatalError("Unable to instantiate meal3")
         }
         
@@ -190,16 +190,16 @@ class MealTableViewController: UITableViewController {
     }
     
     private func saveMeals() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Meal.ArchiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Planet.ArchiveURL.path)
         
         if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Planets successfully saved.", log: OSLog.default, type: .debug)
         } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+            os_log("Failed to save planets...", log: OSLog.default, type: .error)
         }
     }
     
-    private func loadMeals() -> [Meal]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Meal.ArchiveURL.path) as? [Meal]
+    private func loadMeals() -> [Planet]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Planet.ArchiveURL.path) as? [Planet]
     }
 }

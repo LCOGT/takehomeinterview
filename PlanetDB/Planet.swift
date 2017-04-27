@@ -1,5 +1,5 @@
 //
-//  Meal.swift
+//  Planet.swift
 //  PlanetDB
 //
 //  Created by Antonio Medrano on 4/26/17.
@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-class Meal: NSObject, NSCoding {
+class Planet: NSObject, NSCoding {
     
     //MARK: Properties
     
