@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y5w-wS-fIm" id="RKQ-Nf-w4f">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="uSe-q1-wor">
@@ -69,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="276" y="122.78860569715144"/>
         </scene>
-        <!--New Meal-->
+        <!--New Planet-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MealViewController" customModule="PlanetDB" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="K6c-dU-Xrn" secondAttribute="trailing" id="UrI-XQ-bJi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Meal" id="avL-Ye-dml">
+                    <navigationItem key="navigationItem" title="New Planet" id="avL-Ye-dml">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kd3-aO-Kqp">
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="QXI-ze-qbO"/>
@@ -186,6 +186,6 @@
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y9T-bt-Os7"/>
+        <segue reference="cLU-gm-gZc"/>
     </inferredMetricsTieBreakers>
 </document>

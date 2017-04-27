@@ -13,7 +13,7 @@ class MealTableViewController: UITableViewController {
     
     
     //MARK: Properties
-    var meals = [Planet]()
+    var planets = [Planet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class MealTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         
         // Load any saved meals, otherwise load sample data.
-        if let savedMeals = loadMeals() {
-            meals += savedMeals
+        if let savedPlanets = loadPlanets() {
+            planets += savedPlanets
         }
         else {
             // Load the sample data.
@@ -51,7 +51,7 @@ class MealTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
-        return meals.count
+        return planets.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,7 +64,7 @@ class MealTableViewController: UITableViewController {
         }
         
         // Fetches the appropriate meal for the data source layout.
-        let meal = meals[indexPath.row]
+        let meal = planets[indexPath.row]
         
         cell.nameLabel.text = meal.name
         cell.photoImageView.image = meal.photo
@@ -83,8 +83,8 @@ class MealTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            meals.remove(at: indexPath.row)
-            saveMeals()            // Save the meals.
+            planets.remove(at: indexPath.row)
+            savePlanets()            // Save the meals.
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -120,7 +120,7 @@ class MealTableViewController: UITableViewController {
             os_log("Adding a new meal.", log: OSLog.default, type: .debug)
             
         case "ShowDetail":
-            guard let mealDetailViewController = segue.destination as? MealViewController else {
+            guard let mealDetailViewController = segue.destination as? PlanetViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             
@@ -132,7 +132,7 @@ class MealTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedPlanet = meals[indexPath.row]
+            let selectedPlanet = planets[indexPath.row]
             mealDetailViewController.planet = selectedPlanet
             
         default:
@@ -142,26 +142,25 @@ class MealTableViewController: UITableViewController {
     
     
     //MARK: Actions
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+    @IBAction func unwindToPlanetList(sender: UIStoryboardSegue) {
         
-        // NOTE: First time in the tutorial the code is wrong, tutorial code is correct in the "the unwindToMealList(_:) action method should look like this:" section though
-        if let sourceViewController = sender.source as? MealViewController, let planet = sourceViewController.planet {
+        if let sourceViewController = sender.source as? PlanetViewController, let planet = sourceViewController.planet {
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing meal.
-                meals[selectedIndexPath.row] = planet
+                planets[selectedIndexPath.row] = planet
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
                 // Add a new meal.
-                let newIndexPath = IndexPath(row: meals.count, section: 0)
+                let newIndexPath = IndexPath(row: planets.count, section: 0)
                 
-                meals.append(planet)
+                planets.append(planet)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
             
             // Save the meals.
-            saveMeals()
+            savePlanets()
         }
     }
     
@@ -186,11 +185,11 @@ class MealTableViewController: UITableViewController {
         }
         
         // Add Meal objects to the meals array
-        meals += [meal1, meal2, meal3]
+        planets += [meal1, meal2, meal3]
     }
     
-    private func saveMeals() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(meals, toFile: Planet.ArchiveURL.path)
+    private func savePlanets() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(planets, toFile: Planet.ArchiveURL.path)
         
         if isSuccessfulSave {
             os_log("Planets successfully saved.", log: OSLog.default, type: .debug)
@@ -199,7 +198,7 @@ class MealTableViewController: UITableViewController {
         }
     }
     
-    private func loadMeals() -> [Planet]? {
+    private func loadPlanets() -> [Planet]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Planet.ArchiveURL.path) as? [Planet]
     }
 }

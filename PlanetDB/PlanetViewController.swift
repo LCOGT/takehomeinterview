@@ -1,5 +1,5 @@
 //
-//  MealViewController.swift
+//  PlanetViewController.swift
 //  PlanetDB
 //
 //  Created by Antonio Medrano on 4/26/17.
@@ -9,7 +9,7 @@
 import UIKit
 import os.log
 
-class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
@@ -31,7 +31,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
         
-        // Set up views if editing an existing Meal.
+        // Set up views if editing an existing Planet.
         if let planet = planet {
             navigationItem.title = planet.name
             nameTextField.text = planet.name
