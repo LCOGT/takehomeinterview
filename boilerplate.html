@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- boilerplate html for planet database web application -->
+<!-- LCO take-home interview project -->
+<!-- Danny Bazo -->
+<!-- April 2017 -->
+<!-- used by server.js -->
+
+<html>
+
+<head>
+<title>Danny's Planet Database</title>    
+<style> td, th {
+    border: 1px solid;
+    text-align: left;
+    padding: 10px;
+}
+</style>
+</head>
+
+<body>
+<h1>Planet Database</h1>
+<hr align=left width=25%>
+
+<h2>Add New Planet</h2>
+
+<form id="input_form" method="post">
+    <p>Name: <input type="text" name="pname" value="" size="30"></p>
+    <p>Ordinality: <input type="text" name="pordinality" value="" size="3"> &nbsp;
+        Size: <input type="text" name="psize" value="" size="5"> &nbsp;
+        Distance: <input type="text" name="pdistance" value="" size="5"></p>
+    <p>Description:</p>
+    <textarea name="pdescription" rows="10" cols="60"></textarea></p>
+    <input type="submit" value="Submit">
+</form>
+
+<br>
+<hr align=left width=25%>
+
+<h2>Planet List</h2>
+
+<table id="ptable">
+    <tr>
+        <th>Ordinality</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Distance</th>
+    </tr>
