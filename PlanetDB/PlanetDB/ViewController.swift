@@ -13,6 +13,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     //MARK: Properties
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var ordinalityTextField: UITextField!
+    @IBOutlet weak var sizeTextField: UITextField!
+    @IBOutlet weak var distanceTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var planetNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
 
