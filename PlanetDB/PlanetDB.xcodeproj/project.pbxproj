@@ -15,6 +15,7 @@
 		A9CCA1E91EB2AF4D0016E7F9 /* PlanetDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1E81EB2AF4D0016E7F9 /* PlanetDBTests.swift */; };
 		A9CCA1F41EB314BE0016E7F9 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1F31EB314BE0016E7F9 /* Planet.swift */; };
 		A9CCA1F61EB31DB80016E7F9 /* PlanetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1F51EB31DB80016E7F9 /* PlanetTableViewCell.swift */; };
+		A9CCA1F81EB324D50016E7F9 /* PlanetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1F71EB324D50016E7F9 /* PlanetTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		A9CCA1EA1EB2AF4D0016E7F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9CCA1F31EB314BE0016E7F9 /* Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A9CCA1F51EB31DB80016E7F9 /* PlanetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetTableViewCell.swift; sourceTree = "<group>"; };
+		A9CCA1F71EB324D50016E7F9 /* PlanetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				A9CCA1F31EB314BE0016E7F9 /* Planet.swift */,
 				A9CCA1D51EB2AF4D0016E7F9 /* ViewController.swift */,
 				A9CCA1F51EB31DB80016E7F9 /* PlanetTableViewCell.swift */,
+				A9CCA1F71EB324D50016E7F9 /* PlanetTableViewController.swift */,
 				A9CCA1D71EB2AF4D0016E7F9 /* Main.storyboard */,
 				A9CCA1DA1EB2AF4D0016E7F9 /* Assets.xcassets */,
 				A9CCA1DC1EB2AF4D0016E7F9 /* LaunchScreen.storyboard */,
@@ -208,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9CCA1F41EB314BE0016E7F9 /* Planet.swift in Sources */,
+				A9CCA1F81EB324D50016E7F9 /* PlanetTableViewController.swift in Sources */,
 				A9CCA1D61EB2AF4D0016E7F9 /* ViewController.swift in Sources */,
 				A9CCA1D41EB2AF4D0016E7F9 /* AppDelegate.swift in Sources */,
 				A9CCA1F61EB31DB80016E7F9 /* PlanetTableViewCell.swift in Sources */,
