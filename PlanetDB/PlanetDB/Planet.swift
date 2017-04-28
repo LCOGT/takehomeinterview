@@ -22,8 +22,8 @@ class Planet {
     //MARK: Initialization
     init?(name: String, ordinality: Int?, size: Double?, distance: Double?, description: String?, photo: UIImage?) {
         
-        // Initialization should fail if there is no name
-        if name.isEmpty {
+        // The name must not be empty
+        guard !name.isEmpty else {
             return nil
         }
         
