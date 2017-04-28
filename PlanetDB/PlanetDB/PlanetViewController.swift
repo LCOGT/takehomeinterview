@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PlanetViewController.swift
 //  PlanetDB
 //
 //  Created by Antonio Medrano on 4/27/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     //MARK: Properties
@@ -17,7 +17,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var sizeTextField: UITextField!
     @IBOutlet weak var distanceTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var planetNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
 
     override func viewDidLoad() {
@@ -38,7 +37,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        planetNameLabel.text = textField.text
     }
     
     
