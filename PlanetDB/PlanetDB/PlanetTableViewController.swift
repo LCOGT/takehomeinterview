@@ -30,24 +30,33 @@ class PlanetTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return planets.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
-
+        // Table view cells are reused and should be dequeued using a cell identifier.
+        let cellIdentifier = "PlanetTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PlanetTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of PlanetTableViewCell.")
+        }
+        
+        // Fetches the appropriate planet for the data source layout.
+        let planet = planets[indexPath.row]
+        
+        cell.nameLabel.text = planet.name
+        cell.ordinalityLabel.text = String(describing: planet.ordinality!)
+        cell.sizeLabel.text = String(describing: planet.size!)
+        cell.distanceLabel.text = String(describing: planet.distance!)
+        cell.photoImageView.image = planet.photo
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
