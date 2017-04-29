@@ -1,0 +1,8 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+<form action="/">
+    <input type="submit" value="Return to home page" />
+</form>

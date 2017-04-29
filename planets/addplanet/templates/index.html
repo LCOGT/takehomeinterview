@@ -1,0 +1,18 @@
+<h1>PlanetDB</h1>
+<table>
+    <th>Ordinality</th>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Distance</th>
+    {% for planet in planets %}
+    <tr>
+        <td>{{ planet.Ordinality }}</td>
+        <td><a href="/detail/{{ planet.Name }}">{{ planet.Name }}</a></td>
+        <td>{{ planet.Size }}</td>
+        <td>{{ planet.Distance }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<form action="/input">
+    <input type="submit" value="Add or update a planet" />
+</form>
