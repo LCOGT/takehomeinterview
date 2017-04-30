@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Planet Table View Controller-->
+        <!--LCO Planet Database-->
         <scene sceneID="sXZ-YM-46L">
             <objects>
                 <tableViewController id="IjM-tt-wS7" customClass="PlanetTableViewController" customModule="PlanetDB" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +96,9 @@
                             <outlet property="delegate" destination="IjM-tt-wS7" id="OXg-dd-wr9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="W5w-o3-wvg"/>
+                    <navigationItem key="navigationItem" title="LCO Planet Database" id="W5w-o3-wvg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cxd-NV-Ufk"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="noQ-XR-co7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
