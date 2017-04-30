@@ -25,7 +25,10 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
-        
+        ordinalityTextField.delegate = self
+        sizeTextField.delegate = self
+        distanceTextField.delegate = self
+        descriptionTextView.delegate = self as? UITextViewDelegate
     }
     
     
@@ -33,6 +36,13 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
+        return true
+    }
+    
+    //MARK: UITextViewDelegate
+    func textViewShouldReturn(_ textView: UITextView) -> Bool {
+        // Hide the keyboard.
+        textView.resignFirstResponder()
         return true
     }
     

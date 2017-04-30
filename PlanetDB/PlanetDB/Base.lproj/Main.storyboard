@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Planet Table View Controller-->
+        <!--LCO Planet Database-->
         <scene sceneID="sXZ-YM-46L">
             <objects>
                 <tableViewController id="IjM-tt-wS7" customClass="PlanetTableViewController" customModule="PlanetDB" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,13 +96,19 @@
                             <outlet property="delegate" destination="IjM-tt-wS7" id="OXg-dd-wr9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="W5w-o3-wvg"/>
+                    <navigationItem key="navigationItem" title="LCO Planet Database" id="W5w-o3-wvg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cxd-NV-Ufk">
+                            <connections>
+                                <segue destination="3XO-C9-ASF" kind="presentation" identifier="AddItem" id="krT-aU-V9X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="noQ-XR-co7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="284" y="112.89355322338831"/>
         </scene>
-        <!--Planet View Controller-->
+        <!--New Planet-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PlanetViewController" customModule="PlanetDB" customModuleProvider="target" sceneMemberID="viewController">
@@ -115,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="232.5" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HIJ-yU-dwP">
-                                <rect key="frame" x="16" y="40" width="343" height="539.5"/>
+                                <rect key="frame" x="16" y="84" width="343" height="539.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-GC-ZHs">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="55.5"/>
@@ -225,7 +231,7 @@
                                                     <constraint firstAttribute="height" constant="64" id="qG7-RA-mVb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.95138888889999995" alpha="1" colorSpace="calibratedWhite"/>
@@ -264,13 +270,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="HIJ-yU-dwP" secondAttribute="trailing" id="8x3-K8-7vi"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="New Planet" id="Wf4-dL-pEa">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OJO-S7-OLB"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OCZ-BO-9HS"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="rkS-E8-9y9" id="XKm-ia-zsO"/>
                         <outlet property="distanceTextField" destination="wbi-a8-G1V" id="I9f-4k-xPB"/>
                         <outlet property="nameTextField" destination="ui0-Ss-9vZ" id="ChN-S8-Xrd"/>
                         <outlet property="ordinalityTextField" destination="8En-hk-WYp" id="lUN-HV-drN"/>
                         <outlet property="photoImageView" destination="WK9-FC-hGu" id="Ze7-MB-0s8"/>
-                        <outlet property="planetNameLabel" destination="3qb-ig-VZj" id="GfT-OB-GAe"/>
                         <outlet property="sizeTextField" destination="qim-tH-pBa" id="PLB-SF-bBL"/>
                     </connections>
                 </viewController>
@@ -281,7 +290,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1064.8" y="112.89355322338831"/>
+            <point key="canvasLocation" x="2004" y="112.89355322338831"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5hx-mc-CBp">
@@ -299,7 +308,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQr-ll-x4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-655.20000000000005" y="112.89355322338831"/>
+            <point key="canvasLocation" x="-588" y="113"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NeN-FH-7DV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3XO-C9-ASF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eAc-bZ-7fP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QEa-4k-lBS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ml-PK-bJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1177" y="113"/>
         </scene>
     </scenes>
     <resources>
