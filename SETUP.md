@@ -5,7 +5,7 @@ I'm primarily a back-end algorithm engineer, but I've been playing around with m
 
 The app is based off of a tutorial I did while learning iOS app development using Swift, the repo for that is here:  
 https://github.com/antoniomedrano/FoodTracker  
-Despite the similarities, this was a lot more complicated due to the custom criteria of the challenge. I learned a lot while developing this.  
+Despite the similarities, this was a lot more complicated due to the custom criteria of the challenge. At first I tried modifying my prior code, but quickly realized the differences were great enough that I needed to start from scratch to do it right.  
 
 To load the app, just clone the project onto a Mac with the latest version of XCode (version 8.3.2), then open the PlanetDB.xcodeproj file, then run the project by clicking the "play" button on the top-left or by pressing "⌘-R". I recommend testing on the virtual iPhone 7, although it should work well on all the phone devices while in profile view. I did not test on iPad devices. Using it should be pretty self-explanitory once you have it up and running.  
 
