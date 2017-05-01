@@ -39,10 +39,21 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         distanceTextField.delegate = self
         descriptionTextView.delegate = self as? UITextViewDelegate
         
+        // Set up views if editing an existing Planet.
+        if let planet = planet {
+            navigationItem.title = planet.name
+            nameTextField.text = planet.name
+            ordinalityTextField.text = planet.ordinality
+            sizeTextField.text = planet.size
+            distanceTextField.text = planet.distance
+            descriptionTextView.text = planet.description
+            photoImageView.image = planet.photo
+        }
+        
         // Disable the Save button at the start.
         saveButton.isEnabled = false
         
-        // Enable the Save button only if the text field has a valid Meal name.
+        // Enable the Save button only if the text field has a valid Planet name.
         updateSaveButtonState()
     }
     
@@ -98,7 +109,18 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     //MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddPlanetMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddPlanetMode {
+            dismiss(animated: true, completion: nil)
+        }
+        else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        }
+        else {
+            fatalError("The MealViewController is not inside a navigation controller.")
+        }
     }
     
     // This method lets you configure a view controller before it's presented.
@@ -114,9 +136,9 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         let name = nameTextField.text ?? ""
         let photo = photoImageView.image
-        let ordinality = Int(ordinalityTextField.text!)
-        let size = Double(sizeTextField.text!)
-        let distance = Double(distanceTextField.text!)
+        let ordinality = ordinalityTextField.text ?? ""
+        let size = sizeTextField.text ?? ""
+        let distance = distanceTextField.text ?? ""
         let description = descriptionTextView.text ?? ""
         
         // Set the meal to be passed to MealTableViewController after the unwind segue.
