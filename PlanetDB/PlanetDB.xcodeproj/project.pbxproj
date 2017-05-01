@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A92C97981EB704000078A351 /* img_bluemarble_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A92C97971EB704000078A351 /* img_bluemarble_1.jpg */; };
+		A92C979D1EB704570078A351 /* img_mars525.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A92C97991EB704570078A351 /* img_mars525.jpg */; };
+		A92C979E1EB704570078A351 /* img_neptune525.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A92C979A1EB704570078A351 /* img_neptune525.jpg */; };
+		A92C979F1EB704570078A351 /* img_uranus525.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A92C979B1EB704570078A351 /* img_uranus525.jpg */; };
+		A92C97A01EB704570078A351 /* img_venus525.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A92C979C1EB704570078A351 /* img_venus525.jpg */; };
 		A9CCA1D41EB2AF4D0016E7F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1D31EB2AF4D0016E7F9 /* AppDelegate.swift */; };
 		A9CCA1D61EB2AF4D0016E7F9 /* PlanetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CCA1D51EB2AF4D0016E7F9 /* PlanetViewController.swift */; };
 		A9CCA1D91EB2AF4D0016E7F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9CCA1D71EB2AF4D0016E7F9 /* Main.storyboard */; };
@@ -29,6 +34,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A92C97971EB704000078A351 /* img_bluemarble_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_bluemarble_1.jpg; sourceTree = "<group>"; };
+		A92C97991EB704570078A351 /* img_mars525.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_mars525.jpg; sourceTree = "<group>"; };
+		A92C979A1EB704570078A351 /* img_neptune525.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_neptune525.jpg; sourceTree = "<group>"; };
+		A92C979B1EB704570078A351 /* img_uranus525.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_uranus525.jpg; sourceTree = "<group>"; };
+		A92C979C1EB704570078A351 /* img_venus525.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_venus525.jpg; sourceTree = "<group>"; };
 		A9CCA1D01EB2AF4D0016E7F9 /* PlanetDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanetDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CCA1D31EB2AF4D0016E7F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9CCA1D51EB2AF4D0016E7F9 /* PlanetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +102,11 @@
 				A9CCA1DA1EB2AF4D0016E7F9 /* Assets.xcassets */,
 				A9CCA1DC1EB2AF4D0016E7F9 /* LaunchScreen.storyboard */,
 				A9CCA1DF1EB2AF4D0016E7F9 /* Info.plist */,
+				A92C97971EB704000078A351 /* img_bluemarble_1.jpg */,
+				A92C97991EB704570078A351 /* img_mars525.jpg */,
+				A92C979A1EB704570078A351 /* img_neptune525.jpg */,
+				A92C979B1EB704570078A351 /* img_uranus525.jpg */,
+				A92C979C1EB704570078A351 /* img_venus525.jpg */,
 			);
 			path = PlanetDB;
 			sourceTree = "<group>";
@@ -190,9 +205,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A92C97A01EB704570078A351 /* img_venus525.jpg in Resources */,
 				A9CCA1DE1EB2AF4D0016E7F9 /* LaunchScreen.storyboard in Resources */,
 				A9CCA1DB1EB2AF4D0016E7F9 /* Assets.xcassets in Resources */,
+				A92C97981EB704000078A351 /* img_bluemarble_1.jpg in Resources */,
+				A92C979F1EB704570078A351 /* img_uranus525.jpg in Resources */,
 				A9CCA1D91EB2AF4D0016E7F9 /* Main.storyboard in Resources */,
+				A92C979E1EB704570078A351 /* img_neptune525.jpg in Resources */,
+				A92C979D1EB704570078A351 /* img_mars525.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

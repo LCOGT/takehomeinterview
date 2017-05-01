@@ -22,8 +22,14 @@ class PlanetTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Load the sample data.
-        loadSampleMeals()
+        // Load any saved meals, otherwise load sample data.
+        if let savedPlanets = loadPlanets() {
+            planets += savedPlanets
+        }
+        else {
+            // Load the sample data if desired
+            // loadSamplePlanets()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,10 +80,11 @@ class PlanetTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             planets.remove(at: indexPath.row)
+            savePlanets()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
 
     /*
@@ -145,12 +152,15 @@ class PlanetTableViewController: UITableViewController {
                 planets.append(planet)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            
+            // Save the planets.
+            savePlanets()
         }
     }
     
     
     //MARK: Private Methods
-    private func loadSampleMeals() {
+    private func loadSamplePlanets() {
         
         let photo1 = UIImage(named: "planet1")
         let photo2 = UIImage(named: "planet2")
@@ -166,4 +176,16 @@ class PlanetTableViewController: UITableViewController {
         planets += [planet1, planet2]
     }
     
+    private func savePlanets() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(planets, toFile: Planet.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Planets successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save planets...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadPlanets() -> [Planet]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Planet.ArchiveURL.path) as? [Planet]
+    }
 }
