@@ -9,6 +9,8 @@ Despite the similarities, this was a lot more complicated due to the custom crit
 
 To load the app, just clone the project onto a Mac with the latest version of XCode (version 8.3.2), then open the PlanetDB.xcodeproj file, then run the project by clicking the "play" button on the top-left or by pressing "⌘-R". I recommend testing on the virtual iPhone 7, although it should work well on all the phone devices while in profile view. I did not test on iPad devices. Using it should be pretty self-explanitory once you have it up and running.  
 
+I've included a few planet photos to use in the project, but you have to manually add them to the virtual phone device. You can do so by dragging and dropping the images into the app while it's running. This will put the photos into the photo album, and then you have to return to the PlanetDB app by touching the extreme top-left corner.  
+
 Please feel free to ask any questions, and feedback is always welcome. Enjoy!
 
 Antonio Medrano
