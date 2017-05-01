@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class PlanetTableViewController: UITableViewController {
     
@@ -17,6 +18,9 @@ class PlanetTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Use the edit button item provided by the table view controller.
+        navigationItem.leftBarButtonItem = editButtonItem
         
         // Load the sample data.
         loadSampleMeals()
@@ -50,9 +54,9 @@ class PlanetTableViewController: UITableViewController {
         let planet = planets[indexPath.row]
         
         cell.nameLabel.text = planet.name
-        cell.ordinalityLabel.text = String(describing: planet.ordinality!)
-        cell.sizeLabel.text = String(describing: planet.size!)
-        cell.distanceLabel.text = String(describing: planet.distance!)
+        cell.ordinalityLabel.text = planet.ordinality// ?? ""
+        cell.sizeLabel.text = planet.size// ?? ""
+        cell.distanceLabel.text = planet.distance// ?? ""
         cell.photoImageView.image = planet.photo
         
         return cell
@@ -93,26 +97,56 @@ class PlanetTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "AddItem":
+            os_log("Adding a new planet.", log: OSLog.default, type: .debug)
+            
+        case "ShowDetail":
+            guard let planetDetailViewController = segue.destination as? PlanetViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedPlanetCell = sender as? PlanetTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedPlanetCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedPlanet = planets[indexPath.row]
+            planetDetailViewController.planet = selectedPlanet
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+        }
     }
-    */
     
     
     //MARK: Actions
     @IBAction func unwindToPlanetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PlanetViewController, let planet = sourceViewController.planet {
             
-            // Add a new planet.
-            let newIndexPath = IndexPath(row: planets.count, section: 0)
-            
-            planets.append(planet)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing planet.
+                planets[selectedIndexPath.row] = planet
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else {
+                // Add a new planet.
+                let newIndexPath = IndexPath(row: planets.count, section: 0)
+                
+                planets.append(planet)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
     
@@ -123,11 +157,11 @@ class PlanetTableViewController: UITableViewController {
         let photo1 = UIImage(named: "planet1")
         let photo2 = UIImage(named: "planet2")
         
-        guard let planet1 = Planet(name: "Earth", ordinality: 3, size: 1, distance: 0, description: "Our humble home",  photo: photo1) else {
+        guard let planet1 = Planet(name: "Earth", ordinality: "3", size: "1.0", distance: "0.0", description: "Our humble home",  photo: photo1) else {
             fatalError("Unable to instantiate planet1")
         }
         
-        guard let planet2 = Planet(name: "Mars", ordinality: 4, size: 0.107, distance: 1.41, description: "Mars is the dry and inhospitable 4th planet from the Sun. It is here that Matt Damon grew potatoes using his own poop.",  photo: photo2) else {
+        guard let planet2 = Planet(name: "Mars", ordinality: "4", size: "0.107", distance: "1.41", description: "Mars is the dry and inhospitable 4th planet from the Sun. It is here that Matt Damon grew potatoes using his own poop.",  photo: photo2) else {
             fatalError("Unable to instantiate meal2")
         }
         

@@ -12,15 +12,15 @@ class Planet {
     
     //MARK: Properties
     var name: String
-    var ordinality: Int?
-    var size: Double?
-    var distance: Double?
+    var ordinality: String?
+    var size: String?
+    var distance: String?
     var description: String?
     var photo: UIImage?
     
     
     //MARK: Initialization
-    init?(name: String, ordinality: Int?, size: Double?, distance: Double?, description: String?, photo: UIImage?) {
+    init?(name: String, ordinality: String?, size: String?, distance: String?, description: String?, photo: UIImage?) {
         
         // The name must not be empty
         guard !name.isEmpty else {
