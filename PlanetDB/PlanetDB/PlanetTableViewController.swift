@@ -14,7 +14,9 @@ class PlanetTableViewController: UITableViewController {
     //MARK: Properties
     
     var planets = [Planet]()
-    
+    var names = Set<String>()
+    var ordinals = Set<String>()
+    var errorCode = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +27,46 @@ class PlanetTableViewController: UITableViewController {
         // Load any saved planets, otherwise load sample data.
         if let savedPlanets = loadPlanets() {
             planets += savedPlanets
+            for planet in planets {
+                names.insert(planet.name)
+                ordinals.insert(planet.ordinality!)
+                ordinals.remove("")
+            }
         }
         else {
             // Load the sample data if desired
             // loadSamplePlanets()
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let alert3 = UIAlertController(title: "Duplicate Name", message: "Please try again", preferredStyle: .alert)
+        alert3.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in })
+        
+        let alert4 = UIAlertController(title: "Duplicate Ordinality", message: "Please try again", preferredStyle: .alert)
+        alert4.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in })
+        
+        // if returned a duplicate name or duplicate ordinality
+        if errorCode == 3 {
+            self.present(alert3, animated: true)
+            errorCode = 0
+        } else if errorCode == 4 {
+            self.present(alert4, animated: true)
+            errorCode = 0
+        }
+        
+        // re-initialize the name and ordinality sets
+        names.removeAll()
+        ordinals.removeAll()
+        for planet in planets {
+            names.insert(planet.name.lowercased())
+            ordinals.insert(planet.ordinality!)
+            ordinals.remove("")
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,9 +96,9 @@ class PlanetTableViewController: UITableViewController {
         let planet = planets[indexPath.row]
         
         cell.nameLabel.text = planet.name
-        cell.ordinalityLabel.text = planet.ordinality// ?? ""
-        cell.sizeLabel.text = planet.size// ?? ""
-        cell.distanceLabel.text = planet.distance// ?? ""
+        cell.ordinalityLabel.text = planet.ordinality
+        cell.sizeLabel.text = planet.size
+        cell.distanceLabel.text = planet.distance
         cell.photoImageView.image = planet.photo
         
         return cell
@@ -79,6 +115,8 @@ class PlanetTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            names.remove(planets[indexPath.row].name.lowercased())
+            ordinals.remove(planets[indexPath.row].ordinality!)
             planets.remove(at: indexPath.row)
             savePlanets()
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -129,6 +167,8 @@ class PlanetTableViewController: UITableViewController {
             
             let selectedPlanet = planets[indexPath.row]
             planetDetailViewController.planet = selectedPlanet
+            names.remove(selectedPlanet.name.lowercased())
+            ordinals.remove(selectedPlanet.ordinality!)
             
         default:
             fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
@@ -139,6 +179,18 @@ class PlanetTableViewController: UITableViewController {
     //MARK: Actions
     @IBAction func unwindToPlanetList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PlanetViewController, let planet = sourceViewController.planet {
+            
+            // check or non-duplicate name
+            if names.contains(planet.name.lowercased()) {
+                errorCode = 3
+                return
+            }
+            
+            // check or non-duplicate ordinality
+            if ordinals.contains(planet.ordinality!) {
+                errorCode = 4
+                return
+            }
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing planet.

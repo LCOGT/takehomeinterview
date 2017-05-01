@@ -90,13 +90,12 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
         // Define alerts for valid inputs
         let alert1 = UIAlertController(title: "Invalid Input", message: "Please enter a valid positive number", preferredStyle: .alert)
-        alert1.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in
-            // perhaps use action.title here
-        })
+        alert1.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in })
+        
         let alert2 = UIAlertController(title: "Invalid Input", message: "Please enter a positive integer", preferredStyle: .alert)
-        alert2.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in
-            // perhaps use action.title here
-        })
+        alert2.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in })
+        
+
         
         // update title if name is not empty
         if let nameText = nameTextField.text, !nameText.isEmpty {
@@ -105,7 +104,6 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         // check for valid ordinality input
         if !(ordinalityTextField.text!.isEmpty) {
-            print("test: \(ordinalityTextField.text!)")
             let ordinalityText = numberFormatter.number(from: ordinalityTextField.text!)
             let ordinalityNumber = Double(ordinalityTextField.text!)
             if ordinalityText == nil {
@@ -131,7 +129,7 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             let distanceText = numberFormatter.number(from: distanceTextField.text!)
             if distanceText == nil || Double(distanceTextField.text!)! < 0.0 {
                 self.present(alert1, animated: true)
-                sizeTextField.text = nil
+                distanceTextField.text = nil
             }
         }
     }
@@ -214,12 +212,10 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
 
     //MARK: Private Methods
-    // THIS IS WHERE I WILL DO THE CHECKING OF THE INPUTS
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
         let text = nameTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
-    
 }
 
