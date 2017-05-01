@@ -1,0 +1,3 @@
+This is a Django project. To start it, cd into the planets directory, 
+run "python manage.py runserver", and then open "localhost:8000" in 
+your browser. Thanks!
