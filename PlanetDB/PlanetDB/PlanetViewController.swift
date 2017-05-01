@@ -54,7 +54,7 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             ordinalityTextField.text = planet.ordinality
             sizeTextField.text = planet.size
             distanceTextField.text = planet.distance
-            descriptionTextView.text = planet.description
+            descriptionTextView.text = planet.descript
             photoImageView.image = planet.photo
         }
         
@@ -189,12 +189,11 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         let ordinality = ordinalityTextField.text ?? ""
         let size = sizeTextField.text ?? ""
         let distance = distanceTextField.text ?? ""
-        let description = descriptionTextView.text ?? ""
+        let descript = descriptionTextView.text ?? ""
         
         // Set the planet to be passed to PlanetTableViewController after the unwind segue.
-        planet = Planet(name: name, ordinality: ordinality, size: size, distance: distance, description: description, photo: photo)
+        planet = Planet(name: name, ordinality: ordinality, size: size, distance: distance, descript: descript, photo: photo)
     }
-    
 
 
     //MARK: Actions

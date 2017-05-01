@@ -22,7 +22,7 @@ class PlanetTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Load any saved meals, otherwise load sample data.
+        // Load any saved planets, otherwise load sample data.
         if let savedPlanets = loadPlanets() {
             planets += savedPlanets
         }
@@ -165,12 +165,12 @@ class PlanetTableViewController: UITableViewController {
         let photo1 = UIImage(named: "planet1")
         let photo2 = UIImage(named: "planet2")
         
-        guard let planet1 = Planet(name: "Earth", ordinality: "3", size: "1.0", distance: "0.0", description: "Our humble home",  photo: photo1) else {
+        guard let planet1 = Planet(name: "Earth", ordinality: "3", size: "1.0", distance: "0.0", descript: "Our humble home",  photo: photo1) else {
             fatalError("Unable to instantiate planet1")
         }
         
-        guard let planet2 = Planet(name: "Mars", ordinality: "4", size: "0.107", distance: "1.41", description: "Mars is the dry and inhospitable 4th planet from the Sun. It is here that Matt Damon grew potatoes using his own poop.",  photo: photo2) else {
-            fatalError("Unable to instantiate meal2")
+        guard let planet2 = Planet(name: "Mars", ordinality: "4", size: "0.107", distance: "1.41", descript: "Mars is the dry and inhospitable 4th planet from the Sun. It is here that Matt Damon grew potatoes using his own poop.",  photo: photo2) else {
+            fatalError("Unable to instantiate planet2")
         }
         
         planets += [planet1, planet2]
