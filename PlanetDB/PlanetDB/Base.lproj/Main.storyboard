@@ -271,8 +271,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Planet" id="Wf4-dL-pEa">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OJO-S7-OLB"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OCZ-BO-9HS"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OJO-S7-OLB">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="izj-8t-wq4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OCZ-BO-9HS">
+                            <connections>
+                                <segue destination="sWi-lW-DQ0" kind="unwind" unwindAction="unwindToPlanetListWithSender:" id="81y-dH-X2a"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="rkS-E8-9y9" id="XKm-ia-zsO"/>
@@ -280,10 +288,12 @@
                         <outlet property="nameTextField" destination="ui0-Ss-9vZ" id="ChN-S8-Xrd"/>
                         <outlet property="ordinalityTextField" destination="8En-hk-WYp" id="lUN-HV-drN"/>
                         <outlet property="photoImageView" destination="WK9-FC-hGu" id="Ze7-MB-0s8"/>
+                        <outlet property="saveButton" destination="OCZ-BO-9HS" id="NIh-5y-jKB"/>
                         <outlet property="sizeTextField" destination="qim-tH-pBa" id="PLB-SF-bBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="sWi-lW-DQ0" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="eSe-oJ-6fz">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="RHd-7y-opT"/>

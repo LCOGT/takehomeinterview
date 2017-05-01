@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -18,6 +19,14 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var distanceTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    /*
+     This value is either passed by `PlanetTableViewController` in `prepare(for:sender:)`
+     or constructed as part of adding a new planet.
+     */
+    var planet: Planet?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +38,12 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         sizeTextField.delegate = self
         distanceTextField.delegate = self
         descriptionTextView.delegate = self as? UITextViewDelegate
+        
+        // Disable the Save button at the start.
+        saveButton.isEnabled = false
+        
+        // Enable the Save button only if the text field has a valid Meal name.
+        updateSaveButtonState()
     }
     
     
@@ -46,7 +61,18 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        //saveButton.isEnabled = false
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+        
+        // update title if name is not empty
+        if let text = nameTextField.text, !text.isEmpty {
+            navigationItem.title = text
+        }
     }
     
     
@@ -70,6 +96,34 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         dismiss(animated: true, completion: nil)
     }
 
+    //MARK: Navigation
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // This method lets you configure a view controller before it's presented.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        let name = nameTextField.text ?? ""
+        let photo = photoImageView.image
+        let ordinality = Int(ordinalityTextField.text!)
+        let size = Double(sizeTextField.text!)
+        let distance = Double(distanceTextField.text!)
+        let description = descriptionTextView.text ?? ""
+        
+        // Set the meal to be passed to MealTableViewController after the unwind segue.
+        planet = Planet(name: name, ordinality: ordinality, size: size, distance: distance, description: description, photo: photo)
+    }
+    
+
 
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
@@ -88,5 +142,13 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    //MARK: Private Methods
+    // THIS IS WHERE I WILL DO THE CHECKING OF THE INPUTS
+    private func updateSaveButtonState() {
+        // Disable the Save button if the text field is empty.
+        let text = nameTextField.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
+    }
+    
 }
 
