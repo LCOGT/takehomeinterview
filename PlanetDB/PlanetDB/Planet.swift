@@ -38,7 +38,7 @@ class Planet: NSObject, NSCoding {
     
     
     //MARK: Initialization
-    init?(name: String, ordinality: String?, size: String?, distance: String?, description: String?, photo: UIImage?) {
+    init?(name: String, ordinality: String?, size: String?, distance: String?, descript: String?, photo: UIImage?) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -50,7 +50,7 @@ class Planet: NSObject, NSCoding {
         self.ordinality = ordinality
         self.size = size
         self.distance = distance
-        self.descript = description
+        self.descript = descript
         self.photo = photo
     }
     
@@ -89,7 +89,7 @@ class Planet: NSObject, NSCoding {
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         
         // Must call designated initializer.
-        self.init(name: name, ordinality: ordinality, size: size, distance: distance, description: descript, photo: photo)
+        self.init(name: name, ordinality: ordinality, size: size, distance: distance, descript: descript, photo: photo)
     }
 }
 
