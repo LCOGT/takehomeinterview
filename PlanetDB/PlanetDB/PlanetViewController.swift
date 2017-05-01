@@ -27,6 +27,14 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
      */
     var planet: Planet?
     
+    // Number formatter used for checking input validity
+    let numberFormatter: NumberFormatter = {
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        nf.minimumFractionDigits = 0
+        nf.maximumFractionDigits = 1
+        return nf
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,10 +87,52 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
+
+        // Define alerts for valid inputs
+        let alert1 = UIAlertController(title: "Invalid Input", message: "Please enter a valid positive number", preferredStyle: .alert)
+        alert1.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in
+            // perhaps use action.title here
+        })
+        let alert2 = UIAlertController(title: "Invalid Input", message: "Please enter a positive integer", preferredStyle: .alert)
+        alert2.addAction(UIAlertAction(title: "Okay, fine...", style: .default) { action in
+            // perhaps use action.title here
+        })
         
         // update title if name is not empty
-        if let text = nameTextField.text, !text.isEmpty {
-            navigationItem.title = text
+        if let nameText = nameTextField.text, !nameText.isEmpty {
+            navigationItem.title = nameText
+        }
+        
+        // check for valid ordinality input
+        if !(ordinalityTextField.text!.isEmpty) {
+            print("test: \(ordinalityTextField.text!)")
+            let ordinalityText = numberFormatter.number(from: ordinalityTextField.text!)
+            let ordinalityNumber = Double(ordinalityTextField.text!)
+            if ordinalityText == nil {
+                self.present(alert2, animated: true)
+                ordinalityTextField.text = nil
+            } else if ordinalityNumber! != round(ordinalityNumber!) || ordinalityNumber! < 0.0 {
+                self.present(alert2, animated: true)
+                ordinalityTextField.text = nil
+            }
+        }
+        
+        // check for valid size input
+        if !(sizeTextField.text!.isEmpty) {
+            let sizeText = numberFormatter.number(from: sizeTextField.text!)
+            if sizeTextField.text != nil, sizeText == nil || Double(sizeTextField.text!)! < 0.0 {
+                self.present(alert1, animated: true)
+                sizeTextField.text = nil
+            }
+        }
+        
+        // check for valid distance input
+        if !(distanceTextField.text!.isEmpty) {
+            let distanceText = numberFormatter.number(from: distanceTextField.text!)
+            if distanceText == nil || Double(distanceTextField.text!)! < 0.0 {
+                self.present(alert1, animated: true)
+                sizeTextField.text = nil
+            }
         }
     }
     
@@ -119,7 +169,7 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             owningNavigationController.popViewController(animated: true)
         }
         else {
-            fatalError("The MealViewController is not inside a navigation controller.")
+            fatalError("The PlanetViewController is not inside a navigation controller.")
         }
     }
     
@@ -141,7 +191,7 @@ class PlanetViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         let distance = distanceTextField.text ?? ""
         let description = descriptionTextView.text ?? ""
         
-        // Set the meal to be passed to MealTableViewController after the unwind segue.
+        // Set the planet to be passed to PlanetTableViewController after the unwind segue.
         planet = Planet(name: name, ordinality: ordinality, size: size, distance: distance, description: description, photo: photo)
     }
     
