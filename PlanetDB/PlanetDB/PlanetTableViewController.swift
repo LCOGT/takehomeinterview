@@ -103,8 +103,21 @@ class PlanetTableViewController: UITableViewController {
     }
     */
     
-    //MARK: Private Methods
     
+    //MARK: Actions
+    @IBAction func unwindToPlanetList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? PlanetViewController, let planet = sourceViewController.planet {
+            
+            // Add a new planet.
+            let newIndexPath = IndexPath(row: planets.count, section: 0)
+            
+            planets.append(planet)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+    }
+    
+    
+    //MARK: Private Methods
     private func loadSampleMeals() {
         
         let photo1 = UIImage(named: "planet1")
