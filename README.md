@@ -67,3 +67,6 @@ For example:
 1. Use sqlite/memory/flat files instead of something like mysql or postgresql to store data. This will make the setup much less complicated.
 
 2. Don't worry about styling: the pages don't have to be pretty, just functional.
+
+### Bonus
+Provide an application that can serve multiple users, with a backend component as opposed to a pure client side application.
