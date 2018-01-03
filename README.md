@@ -13,7 +13,7 @@ The database should be blank: you do not need to provide any data with the deliv
 
 Place any special setup instructions in a file called SETUP.
 
-Using github, you should fork this repository ([Github: how to fork a reposiroy](https://help.github.com/articles/fork-a-repo/)) and add the code you have written to it. When you are done, open a pull request. It will then be reviewed.
+Using github, you should fork this repository ([Github: how to fork a repository](https://help.github.com/articles/fork-a-repo/)) and add the code you have written to it. When you are done, open a pull request. It will then be reviewed.
 
 ## Requirements
 
