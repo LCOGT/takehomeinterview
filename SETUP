@@ -19,3 +19,5 @@ python3 manage.py runserver
 Then visit 127.0.0.1:8000/planets/
 
 To visit the admin page visit 127.0.0.1:8000/admin
+username: admin
+password: letmeinplease
