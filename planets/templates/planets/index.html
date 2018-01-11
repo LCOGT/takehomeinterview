@@ -1,0 +1,41 @@
+<h1>Planets</h1>
+<table>
+	<tr>
+		<th>Ordinality </th>
+		<th>Name </th>
+		<th>Size </th>
+		<th>Distance </th>
+	</tr>
+	<tr>
+	{% for planet in planets %}
+		<td>{{ planet.Ordinality }}</td>
+		<td><a href="/planets/{{ planet.Name }}">{{ planet.Name }}</a></td>
+		<td>{{ planet.Size }}</td>
+		<td>{{ planet.Distance }}</td>
+	{% endfor %}
+	</tr>
+</table>
+<form action="/planets/" method="post">
+	{% csrf_token %}
+	{{ form.non_field_errors }}
+	<div class="fieldWrapper">
+	    {{ form.Name.errors }}
+	    <label for="{{ form.Name.id_for_label }}">Name:</label>
+	    {{ form.Name }}
+	    {{ form.Size.errors }}
+	    <label for="{{ form.Size.id_for_label }}">Size:</label>
+	    {{ form.Size }}
+	    {{ form.Distance.errors }}
+	    <label for="{{ form.Distance.id_for_label }}">Distance:</label>
+	    {{ form.Distance }}
+	    {{ form.cc_myself.errors }}
+	    <label for="{{ form.Ordinality.id_for_label }}">Ordinality:</label>
+	    {{ form.Ordinality }}
+	</div>
+	<div class="fieldWrapper">
+	    {{ form.Description.errors }}
+	    <label for="{{ form.Description.id_for_label }}">Description:</label>
+	    {{ form.Description }}
+	</div><br/>
+	<input type="submit" value="SUBMIT">
+</form>

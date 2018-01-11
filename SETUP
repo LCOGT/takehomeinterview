@@ -1,0 +1,23 @@
+Django 2.0 requires python3
+
+Installation Instructions
+
+This document assumes one is using Ubuntu 16.04 LTS
+
+
+Run the following from the command line
+
+sudo apt-get install python3-pip
+
+pip3 install django
+
+To run the development server move into the source directory
+
+cd ./takehomeinterview/
+python3 manage.py runserver
+
+Then visit 127.0.0.1:8000/planets/
+
+To visit the admin page visit 127.0.0.1:8000/admin
+username: admin
+password: letmeinplease
