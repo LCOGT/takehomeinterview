@@ -1,0 +1,16 @@
+<h1>Add Planet</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'planets:planet_add' %}" method="post">
+{% csrf_token %}
+    <br>
+    Ordinality: <input name="ordinality" id="ordinality" type="number" min="1" style="font-size: 14pt; height: 32px; width:100px;" required/>
+    Name: <input name="name" id="name" type="text" style="font-size: 14pt; height: 32px; width:200px;" required/>
+    Size: <input name="size" id="size" type="number" step="0.01" style="font-size: 14pt; height: 32px; width:100px;" required/>
+    Distance: <input name="distance" id="distance" step="0.01" type="number"  style="font-size: 14pt; height: 32px; width:100px;" required/>
+    <br>
+    Description: <input name="description" id="description" type="text"  style="font-size: 14pt; height: 100px; width:300px;"/>
+    <br>
+    <input id="add" type="submit" value="Add"/>
+</form>
