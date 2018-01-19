@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block content %}
+<div>
+    {% for planet in planets_list %}
+    <div>
+        {{ planet.name }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
