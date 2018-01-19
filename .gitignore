@@ -1,0 +1,3 @@
+.vscode
+*.sql
+app/__pycache__

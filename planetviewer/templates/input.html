@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+    <form class="p-3" action="add_planet" method="post">
+        <div class="row p-2">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Planet name" name="planet_name">
+            </div>
+            <div class="col-md-3">
+                <input type="number" min="0" step="any" class="form-control" placeholder="Size (Earth masses)" name="size">
+            </div>
+            <div class="col-md-3">
+                <input type="number" min="0" step="any" class="form-control" placeholder="Distance (in AU)" name="distance">
+            </div>
+            <div class="col-md-3">
+                <input type="number" min="0" step="1" class="form-control" placeholder="Ordinality" name="ordinality">
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col-lg">
+                <input type="text" class="form-control" placeholder="Description" name="description">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}

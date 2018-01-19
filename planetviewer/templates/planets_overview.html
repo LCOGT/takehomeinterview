@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Planets{% endblock title %}
+{% block body %}
+<div>
+    <a href="/add_planet"><button type="button" class="btn btn-outline-info m-3">Add planet to database</button></a>
+    {% if not planets_list %}
+    <div>
+        No planets saved. Care to <a href="/add_planet">add one?</a>
+    </div>
+    {% else %}
+        <table class="table table-striped">
+            <thead class="thead dark">
+              <tr>
+                <th scope="col">Planet Name</th>
+                <th scope="col">Planet Size</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Ordinality</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for planet in planets_list %}
+              <tr class="clickable-row">
+                <td><a href="{{ 'detail/%s'%planet.planet_id }}">{{ planet.name }}</a></th>
+                <td>{{ planet.size }}</a></td>
+                <td>{{ planet.distance }}</a></td>
+                <td>{{ planet.ordinality }}</a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Error{% endblock title %}
+{% block body %}
+<div class="alert alert-danger">
+    {{ error.text }}
+</div>
+<a href="/"><button type="button" class="btn btn-secondary btn-sm">Back to home</button></a>
+{% endblock body %}
