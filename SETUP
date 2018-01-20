@@ -1,6 +1,9 @@
 The following commands should be run to set up the project on OS X/Linux:
 
+From takehomeinterview/planetviewer:
+
 pip3 install flask (or pip depending on the python version)
-export FLASK_APP=planetviewer (for Windows, add an environment variable)
+export FLASK_APP=planetviewer (Windows: set FLASK_APP=planetviewer)
+pip3 install -e . (or pip!)
 flask initdb
 flask run
