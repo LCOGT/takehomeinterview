@@ -1,0 +1,6 @@
+The following commands should be run to set up the project on OS X/Linux:
+
+pip3 install flask (or pip depending on the python version)
+export FLASK_APP=planetviewer (for Windows, add an environment variable)
+flask initdb
+flask run
