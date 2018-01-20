@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ planet.name }}{% endblock title %}
+{% block body %}
+<div class="card">
+    <div class="card-block p-2">
+        <h4 class="card-title">{{ planet.planet_name }}</h4>
+        <p class="card-text p-3">{{ planet.description }}</p>
+    </div>
+    <ul class="list-group p-4">
+        <li class="list-group-item">Ordinality: {{ planet.ordinality }}</li>
+        <li class="list-group-item">Size: {{ planet.size }} Earth Masses</li>
+        <li class="list-group-item">Distance: {{ planet.distance }} AU</li>
+    </ul>
+    <div class="card-block p-2">
+        <a href="/" class="card-link">Back to planet list</a>
+    </div>
+</div>
+{% endblock body %}
