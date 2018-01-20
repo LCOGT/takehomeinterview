@@ -20,7 +20,7 @@
             <tbody>
             {% for planet in planets_list %}
               <tr class="clickable-row">
-                <td><a href="{{ 'detail/%s'%planet.planet_id }}">{{ planet.name }}</a></th>
+                <td><a href="{{ 'detail/%s'%planet.planet_id }}">{{ planet.planet_name }}</a></th>
                 <td>{{ planet.size }}</a></td>
                 <td>{{ planet.distance }}</a></td>
                 <td>{{ planet.ordinality }}</a></td>

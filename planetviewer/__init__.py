@@ -39,7 +39,7 @@ def initdb_command():
 @app.route('/')
 def index():
     db = get_db()
-    cur = db.execute('select planet_id, name, size, distance, ordinality from planets order by ordinality asc')
+    cur = db.execute('select planet_id, planet_name, size, distance, ordinality from planets order by ordinality asc')
     planets = cur.fetchall()
     for row in cur:
         print(row)
@@ -55,32 +55,32 @@ def add_planet():
         return render_template("input.html")
     elif request.method == 'POST':
         db = get_db()
-        try:
-            db.execute('insert into planets (name, size, distance, ordinality, description) values (?, ?, ?, ?, ?)',
-                [request.form['planet_name'], request.form['size'], request.form['distance'], request.form['ordinality'], request.form['description']])
-            db.commit()
-            flash('Successfully added planet!')
-            return redirect(url_for('index'))
-        except Exception as e:
-            print(e)
-            return redirect(url_for('error'))
+        db.execute('insert into planets (planet_name, size, distance, ordinality, description) values (?, ?, ?, ?, ?)',
+            [request.form['planet_name'], request.form['size'], request.form['distance'], request.form['ordinality'], request.form['description']])
+        db.commit()
+        flash('Successfully added planet!')
+        return redirect(url_for('index'))
     else:
         return make_response(jsonify({'error': 'Method not allowed'}), 405)
 
 @app.route('/detail/<int:planet_id>', methods=['GET'])
 def get_planet_for_id(planet_id):
     db = get_db()
-    cur = db.execute('select name, size, distance, ordinality, description from planets where planet_id = \"' + str(planet_id) + '\"')
+    cur = db.execute('select planet_name, size, distance, ordinality, description from planets where planet_id = \"' + str(planet_id) + '\"')
     planet = cur.fetchone()
     return render_template("detail.html", planet=planet)
 
-@app.route('/error', methods=['GET'])
-def error():
-    return render_template("error.html", error={'text': "Something went wrong"})
+@app.errorhandler(400)
+def bad_request(error):
+    return render_template('error.html')
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Something went wrong'}), 404)
+    return render_template('error.html')
+
+@app.errorhandler(500)
+def bad_request(error):
+    return render_template('error.html')
 
 # Teardown methods
 @app.teardown_appcontext
