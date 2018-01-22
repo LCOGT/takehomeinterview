@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/bzuhair/takehomeinterview/issues"
   },
-  "homepage": "https://github.com/bzuhair/takehomeinterview#readme"
+  "homepage": "https://github.com/bzuhair/takehomeinterview#readme",
+  "dependencies": {
+    "sqlite": "^2.9.1"
+  }
 }
