@@ -1,8 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-    <script src="index.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">  
+  <title>Add Planet To Database</title>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <h1>Add Planet To Database</h1>
+    <form id="planetForm">
+      Name <input id="name" type="text">
+      Size <input id="size" type="text">
+      Distance <input id="distance" type="text">
+      Ordinality <input id="ordinality" type="text">
+      <br><br>
+      Description
+      <br>
+      <textarea id="description"></textarea>
+      <br>
+      <button type="submit">Submit</button>      
+    </form>
+  </div>
+</body>
+
 </html>
