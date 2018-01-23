@@ -19,8 +19,10 @@ const getPlanets = () => {
 const addPlanet = () => {
   $('#planetForm').submit((e) => {
     e.preventDefault();
+    let name = $('#name').val();
+    name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     const data = {
-      name: $('#name').val(),
+      name,
       size: $('#size').val(),
       distance: $('#distance').val(),
       ordinality: $('#ordinality').val(),
