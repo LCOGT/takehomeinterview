@@ -22,7 +22,7 @@ module.exports = {
     });
   },
 
-  // adds planets to database
+  // adds planet to database
   addPlanet: (request, response) => {
     const sql = 'INSERT INTO planets(name, size, distance, ordinality, description) VALUES(?, ?, ?, ?, ?)';
     const planetData = [
@@ -37,6 +37,14 @@ module.exports = {
       if (err) console.error(err.message);
       console.log(`New planet has been inserted with rowid ${this.lastID}`);
       response.status(200);
+    });
+  },
+
+  // grabs all planets from database
+  getPlanets: (request, response) => {
+    db.all('SELECT * FROM planets;', [], (err, planets) => {
+      if (err) console.error(err.message);
+      response.status(200).send(planets);
     });
   },
 };
