@@ -1,0 +1,26 @@
+{
+  "name": "takehomeinterview",
+  "version": "1.0.0",
+  "description": "### Goal Create a web application where a user can view and add planets to a database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bzuhair/takehomeinterview.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bzuhair/takehomeinterview/issues"
+  },
+  "homepage": "https://github.com/bzuhair/takehomeinterview#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "sqlite3": "^3.1.13"
+  }
+}
