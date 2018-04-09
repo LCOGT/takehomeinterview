@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} New Planet {% endblock title %}
+{% block body %}
+<div>
+    <form action="add_planet" method="post">
+        <div class="form-group pt-2">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="planet_name_input"> Name of planet </label>
+                    <input type="text" class="form-control" placeholder="Enter a name" name="planet_name"
+                           id="planet_name_input" minlength="3">
+                </div>
+                <div class="col-md-3">
+                    <label for="size_input"> Size of planet</label>
+                    <div class="input-group-append">
+                        <input type="number" min="0" step="any" class="form-control" placeholder="" name="size"
+                               id="size_input" minlength="1">
+                        <span class="input-group-text" id="basic-addon1">Earth masses</span></div>
+                </div>
+                <div class="col-md-3">
+                    <label for="distance_input"> Distance (from Sun) </label>
+                    <div class="input-group-append">
+                        <input type="number" min="0" step="any" class="form-control" placeholder="" name="distance"
+                               id="distance_input" minlength="1">
+                        <span class="input-group-text" id="basic-addon1">AU</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="ordinality_input"> Ordinality (relative to Sun)</label>
+                    <input type="number" min="1" step="1" class="form-control" placeholder="Enter an ordinality"
+                           name="ordinality" id="ordinality_input" minlength="1">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg">
+                    <label for="description_input"> Description of the planet </label>
+                    <input type="text" class="form-control" placeholder="Enter some information about the planet"
+                           name="description" id="description_input" minlength="1">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}

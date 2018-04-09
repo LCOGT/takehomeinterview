@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Overview of Planets{% endblock title %}
+{% block body %}
+<div>
+    <a href="{{ url_for('add_planet') }}">
+        <button type="button" class="btn btn-outline-info m-3">Add planet to database</button>
+    </a>
+    <table class="table table-striped">
+        <thead class="thead light">
+        <tr>
+            <th scope="col">Ordinality</th>
+            <th scope="col">Name</th>
+            <th scope="col">Size (Earth masses)</th>
+            <th scope="col">Distance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for planet in planets_list %}
+        <tr class="clickable-row">
+            <td>{{ planet.ordinality }}</a></td>
+            <td><a href="{{ url_for('get_planet', planet_id= planet.planet_id) }}">{{ planet.planet_name }}</a>
+            </th>
+            <td>{{ planet.size }}</a></td>
+            <td>{{ planet.distance }}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
