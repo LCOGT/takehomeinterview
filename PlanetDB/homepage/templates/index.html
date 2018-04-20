@@ -1,0 +1,36 @@
+{% include "base_template.html" %}
+
+{% block content %}
+<h1>Matt Daily//PlanetDB</h1>
+
+  <p>Welcome to <b>PlanetDB</b>, a very basic Django app developed for my
+    interview at LCO!</p>
+
+<h2>Current Entries</h2>
+
+<table>
+    <tr>
+        <th>Ordinality</th>
+        <th>Name</th>
+        <th>Size (Earth masses)</th>
+        <th>Distance from Sun(AU)</th>
+    </tr>
+    {% for item in cur_list %}
+    <tr>
+        <td>{{ item.ordinality}}</td>
+        <td><a href="planet_detail/{{item.id}}">{{ item.name }}</a></td>
+        <td>{{ item.size }}</td>
+        <td>{{ item.distance }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Add a Planet!</h2>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

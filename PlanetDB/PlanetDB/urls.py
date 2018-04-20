@@ -20,8 +20,8 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/homepage/', include('homepage.urls')), #redirect to homepage url module
-    path('', RedirectView.as_view(url = '/homepage/')) #redirect to homepage by default
+    path('homepage/', include('homepage.urls')), #redirect to homepage url module
+    path('', RedirectView.as_view(url = 'homepage/')) #redirect to homepage by default
 ]
 
 # Use static() to add url mapping to serve static files during development (only)

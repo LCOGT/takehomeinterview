@@ -1,0 +1,11 @@
+{% include "base_template.html" %}
+
+{% block content %}
+  <p><strong>Name: </strong>{{ planet.name }}
+  <p><strong>Ordinality:</strong> {{ planet.ordinality }}</a></p>
+  <p><strong>Size:</strong> {{ planet.size }} Earth masses</p>
+  <p><strong>Distance:</strong> {{ planet.distance }} AU</p>
+  <p><strong>Description:</strong> {{ planet.description }}</p>
+
+<a href="{% url 'index' %}">Home</a>
+{% endblock %}
