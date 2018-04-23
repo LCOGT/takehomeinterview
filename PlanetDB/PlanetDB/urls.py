@@ -23,9 +23,3 @@ urlpatterns = [
     path('homepage/', include('homepage.urls')), #redirect to homepage url module
     path('', RedirectView.as_view(url = 'homepage/')) #redirect to homepage by default
 ]
-
-# Use static() to add url mapping to serve static files during development (only)
-from django.conf import settings
-from django.conf.urls.static import static
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
