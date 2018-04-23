@@ -1,0 +1,14 @@
+PlanetDB
+Author: Matt Daily
+
+Dependencies:
+Django (2.0.4)
+Python 3
+
+Setup:
+1. Clone/download the repository
+2. cd to <project_directory>/PlanetDB/
+3. run 'python3 manage.py runserver'
+4. the server should start and display a confirmation message
+5. navigate to http://127.0.0.1:8000/
+6. Enjoy! Thanks for the opportunity!
