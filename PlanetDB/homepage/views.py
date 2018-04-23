@@ -4,15 +4,14 @@ from django.views import generic
 from .forms import AddPlanetForm
 
 def index(request):
-
     #fetch all existing Planet objects from database to display
     cur_list = Planet.objects.all()
 
-    # if user has entered form data
+    # if user has entered form data (POST)
     if request.method == 'POST':
         form = AddPlanetForm(request.POST)
         if form.is_valid():
-            #clean data, error-check and add to db if needed
+            #clean data and add to database
             data = form.cleaned_data
             new_planet = Planet(ordinality = data['ordinality'],
                                 name = data['name'],
@@ -20,8 +19,6 @@ def index(request):
                                 distance = data['distance'],
                                 description = data['description'])
             new_planet.save()
-            return HttpResponseRedirect('index')
-
     #if presenting page (GET)
     else:
         form = AddPlanetForm()
