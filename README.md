@@ -32,7 +32,7 @@ The name of the object should link to that object's detail page.
 
 #### The input form
 
-A simple form for adding a planet to the database. The form should have 4 inputs:
+A simple form for adding a planet to the database. The form should have 5 inputs:
 Name, Size (in Earth Masses), Distance (from the sun, In Astronomical Units), Ordinality (Mercury: 1, Neptune: 8)
 and Description.
 
