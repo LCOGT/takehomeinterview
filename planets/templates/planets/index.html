@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container">
+
+<div>
+  {% if planet_list %}
+  <table class="table">
+    <tr>
+      <th> Ordinality </th>
+      <th> Name </th>
+      <th> Size (Earth Mass)</th>
+      <th> Distance (AU)</th>
+    </tr>
+    {% for planet in planet_list %}
+    <tr>
+      <td> {{ planet.ordinality }} </td>
+      <td><a href="{% url 'detail' planet.id %}">{{ planet.name }}</a> </td>
+      <td> {{ planet.size }} </td>
+      <td>  {{ planet.distance }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No planets yet.</p>
+  {% endif %}
+</div>
+
+<div>
+  <a href="{% url 'add_planet' %}">Add planet</a>
+</div>
+{% endblock %}

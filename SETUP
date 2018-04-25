@@ -1,0 +1,28 @@
+This is a Django project in a docker container for easy deployment.
+
+These instruction assumes you have a docker server running on your machine. (docker can be downloaded from https://www.docker.com/community-edition ).
+
+With the docker server up and running:
+
+1. docker-compose build
+2. docker-compose run web python manage.py migrate
+3. docker-compose up
+
+Now, point your browser to localhost:8000 and you're all set.
+
+
+If you wish to access the Django admin facility, you must first create an admin username and password.
+Here's the command to do this within the docker container:
+
+  docker-compose run web python manage.py createsuperuser
+
+
+You can shutdown the service with:
+
+docker-compose down
+
+
+Please contact me if you have and questions.
+Thanks!
+
+

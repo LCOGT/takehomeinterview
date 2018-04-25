@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container">
+  <h2> {{ planet.name }} </h2>
+  <p> {{ planet.description }} </p>
+  <p> Ordinality: {{ planet.ordinality }} </p>
+  <p> Size: {{ planet.size }} </p>
+  <p> Distance: {{ planet.distance }} </p>
+  <a href="{% url 'index' %}">View Planet Index</a>
+</div>
+{% endblock %}
