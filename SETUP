@@ -1,0 +1,3 @@
+This command should setup the application and run it on port 3000.
+It requires that ruby 2.3 is installed on your machine.
+bundle install && bundle exec rails db:create && bundle exec rails db:migrate && rails server
