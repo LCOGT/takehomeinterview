@@ -1,4 +1,5 @@
 <h1>Planets</h1>
+<%= link_to 'Add a planet', new_planet_path %>
 <table>
   <thead>
     <tr>
@@ -12,7 +13,7 @@
     <% @planets.each do |planet| %>
     <tr>
       <td> <%= planet.ordinality %> </td>
-      <td> <%= planet.name %> </td>
+      <td> <%= link_to planet.name, planet_path(planet) %> </td>
       <td> <%= planet.size %> </td>
       <td> <%= planet.distance %> </td>
     </tr>

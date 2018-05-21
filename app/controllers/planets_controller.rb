@@ -3,6 +3,10 @@ class PlanetsController < ApplicationController
     @planets = Planet.all
   end
 
+  def show
+    @planet = Planet.find(params[:id])
+  end
+
   def new
     @planet = Planet.new
   end
@@ -10,7 +14,7 @@ class PlanetsController < ApplicationController
   def create
     @planet = Planet.new(planet_params)
     if @planet.save
-      render :index
+      redirect_to @planet
     else
       render 'new'
     end

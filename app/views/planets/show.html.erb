@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+   <%= @planet.name %>
+  </div>
+  <div class="row">
+    <%= @planet.description %>
+  </div>
+  <br />
+  <div class="row">
+    Ordinality: <%= @planet.ordinality %>
+  </div>
+  <div class="row">
+    Size: <%= @planet.size %>
+  </div>
+  <div class="row">
+    Distance: <%= @planet.distance %>
+  </div>
+</div>
+<%= link_to 'Return to Index', planets_path %>
