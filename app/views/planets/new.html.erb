@@ -1,8 +1,10 @@
+<div class="col-sm-8">
 <%= simple_form_for @planet do |f| %>
   <%= f.input :name %>
   <%= f.input :size %>
   <%= f.input :distance %>
   <%= f.input :ordinality %>
   <%= f.input :description %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: 'btn-primary' %>
 <% end %>
+</div>
