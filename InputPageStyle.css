@@ -1,0 +1,32 @@
+
+p {
+    font-size: 14px;
+}
+
+.description * {
+    vertical-align: top;
+}
+
+.display * {
+    display: inline;
+}
+
+.button * {
+    float: right;
+    padding: 10px;
+}
+
+.table * {
+    padding-right: 5em;
+    border-spacing: 5px;
+}
+
+table {
+    text-align: left;
+    width: 50%;
+}
+
+th {
+    height: 50px;
+}
+

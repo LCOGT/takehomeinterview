@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Planets</title>
+</head>
+<body>
+<?php require("planet_details.php"); ?>
+
+<h1>Planet database</h1>
+<p>Type values in the following fields then click button to add to database.</p>
+
+<!--creating input fields-->
+<form action="http://localhost/planetwebsite/save_file.php" target="_blank" method="post">
+<p class="display">
+    <label>Name:</label>
+    <input id="name" name="name" type="text" title="name of planet">
+
+    <label>Ordinality:</label>
+    <input id="ordinality" name="ordinality" type="number" title="position number of planet relative to sun and surrounding planets">
+
+    <label>Size:</label>
+    <input id="size" name="size" type="number" title="size of planet with respect to earth size">
+
+    <label>Distance:</label>
+    <input id="distance" name="distance" type="number" title="distance of planet from sun">
+
+</p>
+
+<p class="description">
+    <label for="description" class="description">Description:</label>
+    <textarea name="description" id="description" cols="50" rows="3" style="float: bottom"></textarea>
+    <link rel="stylesheet" type="text/css" href="InputPageStyle.css">
+</p>
+<!--</p>-->
+<input type="submit" value="submit" onclick="addRow();">
+</form>
+
+<!--creating table utilizing memory-->
+<br/><br/><br/>
+<table>
+    <tr>
+        <th width="20%">Ordinality</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Distance</th>
+    </tr>
+
+</table>
+
+<script>
+    // adds row every time the button is clicked
+    var ord1 = [];
+    var name1 = [];
+    function addRow()
+    {
+        // get input values
+        let ordinality = document.getElementById('ordinality').value;
+        ord1.push(ordinality);
+        let name = document.getElementById('name').value;
+        name1.push(name);
+        let size = document.getElementById('size').value;
+        let distance = document.getElementById('distance').value;
+
+        let table = document.getElementsByTagName('table')[0];
+
+        // add new empty row to the table
+        let newRow = table.insertRow(table.rows.length/2+1);
+
+        // add cells to the row
+        let ord = newRow.insertCell(0);
+        let nam = newRow.insertCell(1);
+        let siz = newRow.insertCell(2);
+        let dis = newRow.insertCell(3);
+
+        // add values to the cells
+        ord.innerHTML = ordinality;
+        nam.innerHTML = '<a target="_blank" onclick="passVariable();" href="">'+name+'</a>'; // linking to description page
+        // nam.innerHTML = '<form target="_blank" method="post"><input type="url" onclick="/planet_details.php">" '+name+'</form>'; // linking to description page
+        siz.innerHTML = size;
+        dis.innerHTML = distance;
+    }
+
+    function passVariable()
+    {
+        const ordinality = document.getElementById('ordinality').value;
+        window.open("http://localhost/planetwebsite/planet_details.php?id="+ordinality, "_blank");
+    }
+</script>
+
+
+</body>
+</html>
