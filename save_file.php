@@ -13,7 +13,7 @@ $string = $ordinality.",".$name.",".$size.",".$distance.",".$description;
 $fileName = "planets.csv";
 $temp = "temp.csv";
 
-$inputFile = fopen($fileName, 'w+') or die("can't open file");
+$inputFile = fopen($fileName, 'r') or die("can't open file");
 $outputFile = fopen($temp, 'w') or die("can't open file");
 
 $foundRepeat = false;
@@ -35,12 +35,15 @@ if(!$foundRepeat) {
     fputcsv($outputFile, explode(',', $string));
 }
 
+if (false == ($stringLine = fgetcsv($inputFile))) {
+    fputcsv($outputFile, $stringLine);
+}
+
 fclose($inputFile);
 fclose($outputFile);
 
 unlink($fileName);
 rename($temp, $fileName);
-
 
 ?>
 

@@ -11,16 +11,6 @@ p {
     display: inline;
 }
 
-.button * {
-    float: right;
-    padding: 10px;
-}
-
-.table * {
-    padding-right: 5em;
-    border-spacing: 5px;
-}
-
 table {
     text-align: left;
     width: 50%;
