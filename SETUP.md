@@ -1,9 +1,5 @@
-Using XAMPP for the PHP interpreter. 
+Used XAMPP for local testing. Download found here: https://www.apachefriends.org/download.html
 
-Currently, the database file location and php file for viewing planet details
-is hard coded to be in the same folder called planetwebsite.
+All files are assumed to be in the pathway C:\xampp\htdocs\planetwebsite when testing
 
-As of May 28, 2018, the project is mostly done, still working out how to get the hyperlinks to link to the related 
-planet every time rather than linking to the last planet added to the HTML table. 
-
-Will be able to continue working on it next weekend.
+You do not need to create the flat file for the database.

@@ -38,31 +38,33 @@
 
 <!--creating table utilizing memory-->
 <br/><br/><br/>
-<table>
+<table id="table">
     <tr>
         <th width="20%">Ordinality</th>
         <th>Name</th>
         <th>Size</th>
         <th>Distance</th>
     </tr>
-
 </table>
 
 <script>
+
     // adds row every time the button is clicked
-    var ord1 = [];
-    var name1 = [];
     function addRow()
     {
         // get input values
         let ordinality = document.getElementById('ordinality').value;
-        ord1.push(ordinality);
         let name = document.getElementById('name').value;
-        name1.push(name);
         let size = document.getElementById('size').value;
         let distance = document.getElementById('distance').value;
 
         let table = document.getElementsByTagName('table')[0];
+
+        for(let i = 0; i < table.rows.length; i++) {
+            if(ordinality === table.rows[i].cells[0].innerHTML) {
+                table.deleteRow(i);
+            }
+        }
 
         // add new empty row to the table
         let newRow = table.insertRow(table.rows.length/2+1);
@@ -76,15 +78,22 @@
         // add values to the cells
         ord.innerHTML = ordinality;
         nam.innerHTML = '<a target="_blank" onclick="passVariable();" href="">'+name+'</a>'; // linking to description page
-        // nam.innerHTML = '<form target="_blank" method="post"><input type="url" onclick="/planet_details.php">" '+name+'</form>'; // linking to description page
         siz.innerHTML = size;
         dis.innerHTML = distance;
     }
 
     function passVariable()
     {
-        const ordinality = document.getElementById('ordinality').value;
-        window.open("http://localhost/planetwebsite/planet_details.php?id="+ordinality, "_blank");
+        let table = document.getElementsByTagName('table')[0], row_idx;
+        for(let i = 0; i < table.rows.length; i++) {
+            table.rows[i].cells[1].onclick = function() {
+                row_idx = this.parentElement.rowIndex;
+
+                let ordinality = table.rows[row_idx].cells[0].innerHTML;
+                window.open("http://localhost/planetwebsite/planet_details.php?id="+ordinality, "_blank");
+
+            };
+        }
     }
 </script>
 

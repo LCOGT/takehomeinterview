@@ -13,7 +13,7 @@ $string = $ordinality.",".$name.",".$size.",".$distance.",".$description;
 $fileName = "planets.csv";
 $temp = "temp.csv";
 
-$inputFile = fopen($fileName, 'r') or die("can't open file");
+$inputFile = fopen($fileName, 'w+') or die("can't open file");
 $outputFile = fopen($temp, 'w') or die("can't open file");
 
 $foundRepeat = false;
@@ -41,4 +41,9 @@ fclose($outputFile);
 unlink($fileName);
 rename($temp, $fileName);
 
+
 ?>
+
+echo "<script>window.close();</script>";
+
+

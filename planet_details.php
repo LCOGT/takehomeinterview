@@ -1,7 +1,7 @@
 <?php
 
-if(isset($_GET['id'])) {
-    $ordinality = $_GET['id'];
+if(isset($_GET["id"])) {
+    $ordinality = $_GET["id"];
 }
 
 if(file_exists("planets.csv")) {
@@ -25,6 +25,6 @@ Ordinality: <?php echo $ord; ?><br/>
 Size: <?php echo $size; ?> Earth Masses <br/>
 Distance: <?php echo $dist; ?> AU
 
-</html>
 </body>
+</html>
 
