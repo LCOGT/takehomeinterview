@@ -1,15 +1,18 @@
 <template>
-  <Row>   
+  <Row>
     <Col :xs="1" :lg="6"> . </Col>
 
     <Col :xs="22" :lg="12">
       <p> VIEW </p>
       <p> {{data}} </p>
-      <!-- <Alert type="error" :v-if="displayMsg">Cannot connect to server</Alert> -->
-      <Table :columns="columns" :data="data" @on-row-click="goDetail"></Table>
-    
+      <div class="host">
+        <p>Backend Host: </p>
+        <Input type="text" v-model="host" @on-blur="setHost" style="width:50%"></Input>
+      </div>
       <br/>
-      
+      <Table :columns="columns" :data="data" @on-row-click="goDetail"></Table>
+      <br/>
+
       <Form ref="form" :model="form" :rules="rule" label-position="left" :label-width="80">
 
         <FormItem label="Name" prop="name">
@@ -42,13 +45,13 @@
         <!-- </FormItem> -->
 
       </Form>
-       
+
     </Col>
 
     <Col :xs="1" :lg="6"> . </Col>
 
   </Row>
-    
+
 
 </template>
 
@@ -60,5 +63,11 @@
   flex-direction: column;
   justify-content: flex-end;
   /* width: 500px; */
+}
+.host {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 </style>

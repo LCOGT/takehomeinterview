@@ -1,5 +1,5 @@
 <template>
-  <Row>   
+  <Row>
     <Col :xs="1" :lg="6"> . </Col>
 
     <Col :xs="22" :lg="12">
@@ -22,9 +22,9 @@
         <p>Distance: {{detail.distance}} AU</p>
       </div>
     </Col>
-    
+
     <Col :xs="1" :lg="6"> . </Col>
-  </Row>   
+  </Row>
 </template>
 
 <script>
@@ -33,34 +33,33 @@ export default {
 
   computed: {
     detail() {
-      var d = this.$store.state.data.find(e => e.name == this.$route.params.name)
+      const d = this.$store.state.data.find(e => e.name == this.$route.params.name);
       return d || {
         name: '',
         ordinality: null,
         size: null,
         distance: null,
         desription: '',
-      }
+      };
     },
   },
   methods: {
     goHome() {
-      this.$router.push('/')
-    }
+      this.$router.push('/');
+    },
   },
 
-  created: function() {
-    console.log('mounted')
+  created() {
+    console.log('mounted');
 
-    if(!this.$store.state.interval){
-      var interval = window.setInterval(()=>{
-        this.$store.dispatch('load')
-      }, 2000)
-      this.$store.commit('setInterval', interval)
+    if (!this.$store.state.interval) {
+      const interval = window.setInterval(() => {
+        this.$store.dispatch('load');
+      }, 2000);
+      this.$store.commit('setInterval', interval);
     }
-
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

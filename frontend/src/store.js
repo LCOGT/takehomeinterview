@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // import axios from 'axios';
-import ai from './ai'
 import iView from 'iview';
+import ai from './ai';
 
 Vue.use(Vuex);
 
@@ -16,42 +16,42 @@ export default new Vuex.Store({
   state: {
     data: [],
     // displayMsg: true
-    interval: null
+    interval: null,
   },
   mutations: {
     setData(state, newData) {
-      state.data = newData
+      state.data = newData;
     },
 
     setInterval(state, newInterval) {
-      state.interval = newInterval
+      state.interval = newInterval;
     },
 
     fill(state) {
-      console.log('fill commited')
+      console.log('fill commited');
       state.data = {
-        name: "Petry",
+        name: 'Petry',
         ordinality: 1,
         size: 6,
         distance: 100,
-        description: "wkfg"
-      }
-    }
+        description: 'wkfg',
+      };
+    },
 
   },
   actions: {
-    async load({commit, state}) {
+    async load({ commit, state }) {
       try {
-        var getContent = await ai.get('/')
-        commit('setData', getContent.data)
+        const getContent = await ai.get('/');
+        commit('setData', getContent.data);
         // state.displayMsg = false
-        console.log(getContent.data)
+        console.log(getContent.data);
       } catch (e) {
-        console.log(e)
-        iView.Message.error(e.response? e.response.data:'Cannot connect to server');
+        console.log(e);
+        iView.Message.error(e.response ? e.response.data : 'Cannot connect to server');
       }
     },
-    a(){console.log(a)},
-    
+    a() { console.log(a); },
+
   },
 });

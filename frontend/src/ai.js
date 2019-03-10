@@ -5,4 +5,4 @@ export default axios.create({
   timeout: 1000,
   // headers: {'Access-Control-Allow-Headers': '*'},
   headers: { 'content-type': 'application/x-www-form-urlencoded' },
-})
+});
