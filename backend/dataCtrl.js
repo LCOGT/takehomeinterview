@@ -2,27 +2,27 @@ fs = require('fs')
 filename = './database.txt'
 
 var data = []
-
+/*
 // read data from file on launch
-// async function launch(){
-//   try {
-//     data = await new Promise((res, rej) => {
-//       fs.readFile(filename, (err, fileContent)=>{
-//         if(err) rej(err)
+async function launch(){
+  try {
+    data = await new Promise((res, rej) => {
+      fs.readFile(filename, (err, fileContent)=>{
+        if(err) rej(err)
 
 
-//         else {
-//           fileData = JSON.parse(fileContent)
-//           res(fileData)
-//         }
-//       });
-//     })
-//   } catch (e){
-//     console.log('WARNING IN LAUNCH: ' + e)
-//   } 
-// }
-// launch()
-
+        else {
+          fileData = JSON.parse(fileContent)
+          res(fileData)
+        }
+      });
+    })
+  } catch (e){
+    console.log('WARNING IN LAUNCH: ' + e)
+  } 
+}
+launch()
+*/
 function get() {
   return data
 }
