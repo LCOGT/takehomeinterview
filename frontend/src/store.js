@@ -14,16 +14,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     data: [],
-    msg: '',
     displayMsg: true
   },
   mutations: {
     setData(state, newData) {
       state.data = newData
-    },
-
-    setMsg(state, newMsg) {
-      state.msg = newMsg
     },
 
     fill(state) {

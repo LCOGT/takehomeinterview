@@ -1,11 +1,10 @@
 <template>
-  <Row>    
+  <Row>   
     <Col :xs="1" :lg="6"> . </Col>
 
     <Col :xs="22" :lg="12">
       <p> VIEW </p>
       <p> {{data}} </p>
-      <p> {{msg}} </p>
       <Table :columns="columns" :data="data" @on-row-click="onRowClick"></Table>
     
       <br/>
@@ -37,9 +36,9 @@
           </Input>
         </FormItem>
 
-        <FormItem>
-            <Button type="primary" @click="submit()">Submit</Button>
-        </FormItem>
+        <!-- <FormItem> -->
+          <Button type="primary" @click="submit()">Submit</Button>
+        <!-- </FormItem> -->
 
       </Form>
        

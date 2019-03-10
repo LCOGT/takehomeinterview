@@ -15,7 +15,6 @@ export default {
         {title: 'Size', key: 'size'},
         {title: 'Distance', key: 'distance'},
         {title: 'Ordinality', key: 'ordinality'},
-        {title: 'Description', key: 'description'},
       ],
       form: {
         name: '',
@@ -66,11 +65,13 @@ export default {
         }
         try{
           let postRes = await ai.post('/', JSON.stringify(postData))
+          this.$Message.success('Submitted')
         } catch(e) {
           console.log(e)
           this.$Message.error(e.response? e.response.data:'Unexpected error');
+        } finally {
+          this.$store.dispatch('load')
         }
-        
         // console.log(postRes)
       })
     },
@@ -80,6 +81,7 @@ export default {
   mounted: function() {
     console.log('mounted')
     // this.$store.commit('fill')
+    
     this.$store.dispatch('load')
   }
 };
