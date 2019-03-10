@@ -87,3 +87,5 @@ backend/typings/
 
 # next.js build output
 .next
+
+backend/database.txt

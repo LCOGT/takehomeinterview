@@ -1,21 +1,32 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
+// import axios from 'axios';
+import ai from './ai'
 
 Vue.use(Vuex);
 
-var ai = axios.create({
-  baseURL: 'http://localhost:3000/data/',
-  timeout: 1000,
-})
+// var ai = axios.create({
+//   baseURL: 'http://localhost:3000/data/',
+//   timeout: 1000,
+// })
+
 
 export default new Vuex.Store({
   state: {
-    data: []
+    data: [],
+    msg: '',
+    displayMsg: true
   },
   mutations: {
-    set: function(state){},
-    fill: function(state){
+    setData(state, newData) {
+      state.data = newData
+    },
+
+    setMsg(state, newMsg) {
+      state.msg = newMsg
+    },
+
+    fill(state) {
       console.log('fill commited')
       state.data = {
         name: "Petry",
@@ -28,8 +39,15 @@ export default new Vuex.Store({
 
   },
   actions: {
-    load: function() {
-
+    async load({commit}) {
+      try {
+        var getContent = await ai.get('/')
+        commit('setData', getContent.data)
+        console.log(getContent.data)
+      } catch (e) {
+        console.log(e)
+        commit('setMsg', e)
+      }
     }
 
   },

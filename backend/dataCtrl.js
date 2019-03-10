@@ -49,10 +49,14 @@ function checkUnique(d) {
   return 'Pass'
 }
 
-function add(newData) {
+function add(rawData) {
   // Name and ordinality should be unique. 
   // Size, Ordinality and Distance should be restricted to numerical input.
-
+  try {
+    var newData = JSON.parse(rawData)
+  } catch(e) {
+    return 'Cannot Pass JSON string'
+  }
   var validicity = checkValid(newData)
   if(validicity != 'Pass') return validicity
 
