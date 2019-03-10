@@ -1,23 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import axios from 'axios';
 import iView from 'iview';
 import ai from './ai';
 
 Vue.use(Vuex);
 
-// var ai = axios.create({
-//   baseURL: 'http://localhost:3000/data/',
-//   timeout: 1000,
-// })
-
-
 export default new Vuex.Store({
   state: {
     data: [],
-    // displayMsg: true
     interval: null,
   },
+
   mutations: {
     setData(state, newData) {
       state.data = newData;
@@ -27,31 +20,18 @@ export default new Vuex.Store({
       state.interval = newInterval;
     },
 
-    fill(state) {
-      console.log('fill commited');
-      state.data = {
-        name: 'Petry',
-        ordinality: 1,
-        size: 6,
-        distance: 100,
-        description: 'wkfg',
-      };
-    },
-
   },
+
   actions: {
-    async load({ commit, state }) {
+    async load({ commit }) {
       try {
         const getContent = await ai.get('/');
         commit('setData', getContent.data);
-        // state.displayMsg = false
-        console.log(getContent.data);
       } catch (e) {
         console.log(e);
-        iView.Message.error(e.response ? e.response.data : 'Cannot connect to server');
+        iView.Message.error(e.response ? e.response.data : 'Cannot connect to server... Retrying');
       }
     },
-    a() { console.log(a); },
 
   },
 });

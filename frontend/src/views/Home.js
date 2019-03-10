@@ -12,10 +12,10 @@ export default {
     return {
       host: 'localhost:3000',
       columns: [
+        { title: 'Ordinality', key: 'ordinality' },
         { title: 'Name', key: 'name' },
         { title: 'Size', key: 'size' },
         { title: 'Distance', key: 'distance' },
-        { title: 'Ordinality', key: 'ordinality' },
       ],
       form: {
         name: '',
@@ -47,7 +47,7 @@ export default {
     setHost(){
       console.log('setHost')
       ai.defaults.baseURL = `http://${this.host}/data/`
-      this.$Message.success(`Host set to ${this.host}`)
+      this.$Message.success(`Server set to ${this.host}`)
     },
 
     goDetail(val) {
@@ -55,14 +55,13 @@ export default {
       this.$router.push(`/detail/${val.name}`);
     },
 
-
     submit() {
       const f = this.form;
       this.$refs.form.validate(async (valid) => {
-        // if (!valid) {
-        //   this.$Message.error('Please correct the input form');
-        //   return;
-        // }
+        if (!valid) {
+          this.$Message.error('Please correct the input form');
+          return;
+        }
         const postData = {
           name: f.name,
           size: parseFloat(f.size),
@@ -79,7 +78,6 @@ export default {
         } finally {
           this.$store.dispatch('load');
         }
-        // console.log(postRes)
       });
     },
 

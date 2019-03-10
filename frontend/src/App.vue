@@ -1,12 +1,8 @@
 <template>
   <div id="app">
-    <br/>
+    <br/><br/>
     <img src="logo.png" style="height: 100px">
-    <br/>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <br/><br/>
     <router-view/>
   </div>
 </template>

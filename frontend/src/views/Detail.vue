@@ -35,7 +35,7 @@ export default {
     detail() {
       const d = this.$store.state.data.find(e => e.name == this.$route.params.name);
       return d || {
-        name: '',
+        name: 'Planet not found',
         ordinality: null,
         size: null,
         distance: null,

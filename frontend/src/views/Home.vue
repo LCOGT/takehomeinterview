@@ -1,14 +1,13 @@
 <template>
   <Row>
     <Col :xs="1" :lg="6"> . </Col>
-
     <Col :xs="22" :lg="12">
-      <p> VIEW </p>
-      <p> {{data}} </p>
+    
       <div class="host">
-        <p>Backend Host: </p>
+        <p>Backend Server: </p>
         <Input type="text" v-model="host" @on-blur="setHost" style="width:50%"></Input>
       </div>
+
       <br/>
       <Table :columns="columns" :data="data" @on-row-click="goDetail"></Table>
       <br/>
@@ -40,16 +39,12 @@
           </Input>
         </FormItem>
 
-        <!-- <FormItem> -->
-          <Button type="primary" @click="submit()">Submit</Button>
-        <!-- </FormItem> -->
+        <Button type="primary" @click="submit()">Submit</Button>
 
       </Form>
 
     </Col>
-
     <Col :xs="1" :lg="6"> . </Col>
-
   </Row>
 
 
@@ -58,12 +53,6 @@
 <script src="./Home.js"></script>
 
 <style>
-.form_row_1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  /* width: 500px; */
-}
 .host {
   display: flex;
   flex-direction: row;
