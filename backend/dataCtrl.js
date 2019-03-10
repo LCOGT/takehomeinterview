@@ -1,28 +1,7 @@
 fs = require('fs')
-filename = './database.txt'
 
 var data = []
-/*
-// read data from file on launch
-async function launch(){
-  try {
-    data = await new Promise((res, rej) => {
-      fs.readFile(filename, (err, fileContent)=>{
-        if(err) rej(err)
 
-
-        else {
-          fileData = JSON.parse(fileContent)
-          res(fileData)
-        }
-      });
-    })
-  } catch (e){
-    console.log('WARNING IN LAUNCH: ' + e)
-  } 
-}
-launch()
-*/
 function get() {
   return data
 }
@@ -40,10 +19,6 @@ function checkValid(d) {
 }
 
 function checkUnique(d) {
-  // for(let i of data) {
-    // if(i.name == d.name) return 'Duplicate Name'
-    // if(i.ordinality == d.ordinality) return 'Duplicate Ordinality'
-  // }
   if(data.find(e => e.name == d.name)) return 'Duplicate Name'
   if(data.find(e => e.ordinality == d.ordinality)) return 'Duplicate Ordinality'
   return 'Pass'
@@ -68,11 +43,6 @@ function add(rawData) {
   data.push(newData)
   return 'Pass'
 
-  // try {
-  //   fs.writeFile(filename, JSON.stringify(data), (err)=>{throw err});
-  // } catch (e){
-  //   console.log('ERROR IN ADD: ' + e)
-  // }
 }
 
 module.exports = {get, add};
