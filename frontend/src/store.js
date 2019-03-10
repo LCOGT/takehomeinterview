@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 // import axios from 'axios';
 import ai from './ai'
+import iView from 'iview';
 
 Vue.use(Vuex);
 
@@ -14,11 +15,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     data: [],
-    displayMsg: true
+    // displayMsg: true
+    interval: null
   },
   mutations: {
     setData(state, newData) {
       state.data = newData
+    },
+
+    setInterval(state, newInterval) {
+      state.interval = newInterval
     },
 
     fill(state) {
@@ -34,16 +40,18 @@ export default new Vuex.Store({
 
   },
   actions: {
-    async load({commit}) {
+    async load({commit, state}) {
       try {
         var getContent = await ai.get('/')
         commit('setData', getContent.data)
+        // state.displayMsg = false
         console.log(getContent.data)
       } catch (e) {
         console.log(e)
-        commit('setMsg', e)
+        iView.Message.error(e.response? e.response.data:'Cannot connect to server');
       }
-    }
-
+    },
+    a(){console.log(a)},
+    
   },
 });

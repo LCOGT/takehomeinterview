@@ -39,14 +39,14 @@ export default {
   },
   computed: {
     data: function() { return this.$store.state.data },
-    msg: function() { return this.$store.state.msg },
 
   },
 
   methods: {
-    onRowClick(val){
-      console.log('onRowClick')
+    
+    goDetail(val) {
       console.log(val)
+      this.$router.push(`/detail/${val.name}`)
     },
 
     submit(){
@@ -78,10 +78,15 @@ export default {
 
     
   },
-  mounted: function() {
+  created: function() {
     console.log('mounted')
-    // this.$store.commit('fill')
-    
-    this.$store.dispatch('load')
+
+    if(!this.$store.state.interval){
+      var interval = window.setInterval(()=>{
+        this.$store.dispatch('load')
+      }, 2000)
+      this.$store.commit('setInterval', interval)
+    }
+
   }
 };

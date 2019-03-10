@@ -5,7 +5,8 @@
     <Col :xs="22" :lg="12">
       <p> VIEW </p>
       <p> {{data}} </p>
-      <Table :columns="columns" :data="data" @on-row-click="onRowClick"></Table>
+      <!-- <Alert type="error" :v-if="displayMsg">Cannot connect to server</Alert> -->
+      <Table :columns="columns" :data="data" @on-row-click="goDetail"></Table>
     
       <br/>
       
