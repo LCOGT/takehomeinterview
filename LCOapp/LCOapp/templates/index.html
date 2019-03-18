@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+	<div class='planetlist'>
+		{% for planet in planets %}
+			<div class='planet'>
+				<p>{{ planet }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = 'stylesheet'
+		type='text/css' 
+		href='{{ url_for("static", filename="css/style.css") }}'>
+	</head>
+	<body>
+		<nav class = 'navbar'>
+			<ul class='left'>
+				<li><a href ='/' class='name'>LCO Planet App</a></li>
+			</ul>
+			<ul class='right'>
+				<li><a href ='/createplanet'>+New Planet</a></li>
+			</ul>
+			<ul class='right'>
+				<li><a href ='#'>Planet Detail Page</a></li>
+			</ul>
+		</nav>
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>
