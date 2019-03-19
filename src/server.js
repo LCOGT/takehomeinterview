@@ -20,7 +20,7 @@ let Post = database.define('posts', {
   name: Sequelize.TEXT,
   size: Sequelize.FLOAT,
   distance: Sequelize.FLOAT,
-  ordinality: Sequelize.FLOAT,
+  ordinality: Sequelize.INTEGER,
   description: Sequelize.TEXT
 })
 

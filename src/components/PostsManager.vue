@@ -19,7 +19,7 @@
               <th>Ordinality</th>
               <th>Name</th>
               <th>Size</th>
-              <th>Distance</th>
+              <th>Distance (AU)</th>
             </tr>
           </thead>
           <tbody>
@@ -41,10 +41,10 @@
             <b-form-input type="number" v-model="model.size" required placeholder="Enter size in Earth mass"/>
           </b-form-group>
           <b-form-group label="Distance">
-            <b-form-input type="number" v-model="model.distance" required placeholder="Enter distance from sun"/>
+            <b-form-input type="number" v-model="model.distance" required placeholder="Enter distance from sun in AU"/>
           </b-form-group>
           <b-form-group label="Ordinality">
-            <b-form-input type="number" v-model="model.ordinality" required placeholder="Enter Ordinality"/>
+            <b-form-input type="number" min = 1 max = 8 v-model="model.ordinality" required placeholder="Enter Ordinality"/>
           </b-form-group>
           <b-form-group label="Description">
             <b-form-textarea rows="4" v-model="model.description" required placeholder="Enter description"/>
