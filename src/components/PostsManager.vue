@@ -2,6 +2,15 @@
   <div class="container-fluid mt-4">
     <h1 class="h1">Planet Database</h1>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
+    <!-- Renders detail of clicked planet when the name of the planet is clicked -->
+    <div v-if="this.detail">
+      <h1> {{ model.name }} </h1>
+      <h2> {{ model.description }} </h2>
+      <br>
+      <p>Ordinality: {{ model.ordinality }}</p>
+      <p>Size: {{ model.size }}</p>
+      <p>Distance: {{ model.distance }}</p>
+    </div>
     <b-row>
       <b-col>
         <table class="table table-striped">
@@ -16,7 +25,7 @@
           <tbody>
             <tr v-for="post in posts" :key="post.id">
               <td>{{ post.ordinality }}</td>
-              <td><a href="#" @click.prevent="">{{ post.name }}</a></td>
+              <td><a href="#" @click.prevent="getDetail(post.name)">{{ post.name }}</a></td>
               <td>{{ post.size }}</td>
               <td>{{ post.distance }}</td>
             </tr>
@@ -29,10 +38,10 @@
             <b-form-input type="text" v-model="model.name" required placeholder="Enter name"/>
           </b-form-group>
           <b-form-group label="Size">
-            <b-form-input type="float" v-model="model.size" required placeholder="Enter size in Earth mass"/>
+            <b-form-input type="number" v-model="model.size" required placeholder="Enter size in Earth mass"/>
           </b-form-group>
           <b-form-group label="Distance">
-            <b-form-input type="float" v-model="model.distance" required placeholder="Enter distance from sun"/>
+            <b-form-input type="number" v-model="model.distance" required placeholder="Enter distance from sun"/>
           </b-form-group>
           <b-form-group label="Ordinality">
             <b-form-input type="number" v-model="model.ordinality" required placeholder="Enter Ordinality"/>
@@ -42,6 +51,7 @@
           </b-form-group>
           <div>
             <b-btn type="submit" variant="success">Save Post</b-btn>
+            <b-alert :show="warning" variant="warning">No Duplicate data</b-alert>
           </div>
         </form>
       </b-col>
@@ -55,6 +65,8 @@ export default {
   data () {
     return {
       loading: false,
+      detail: false,
+      warning: false,
       posts: [],
       model: {},
       fields: {
@@ -87,9 +99,21 @@ export default {
       this.loading = false
     },
     async savePost () {
-      await api.createPost(this.model)
-      this.model = {} // reset form
-      await this.refreshPosts()
+      if (this.posts.filter(post => post.name === this.model.name).length > 0 ||
+        this.posts.filter(post => post.ordinality.toString() === this.model.ordinality).length > 0) {
+        this.warning = true
+        this.model = {}
+      } else {
+        this.warning = false
+        await api.createPost(this.model)
+        this.model = {} // reset form
+        await this.refreshPosts()
+      }
+    },
+    async getDetail (name) {
+      this.detail = true
+      this.model = {}
+      this.model = await api.getPost(name)
     }
   }
 }
