@@ -2,7 +2,7 @@
   <div class="container-fluid mt-4">
     <h1 class="h1">Planet Database</h1>
     <b-alert :show="loading" variant="info">Loading...</b-alert>
-    <!-- Renders detail of clicked planet when the name of the planet is clicked -->
+    <!-- Renders detail of clicked planet when the name of the planet is clicked. Clcik again to hide -->
     <div v-if="this.detail">
       <h1> {{ model.name }} </h1>
       <h2> {{ model.description }} </h2>
@@ -111,9 +111,13 @@ export default {
       }
     },
     async getDetail (name) {
-      this.detail = true
-      this.model = {}
-      this.model = await api.getPost(name)
+      if (this.detail) {
+        this.detail = false
+      } else {
+        this.detail = true
+        this.model = {}
+        this.model = await api.getPost(name)
+      }
     }
   }
 }
