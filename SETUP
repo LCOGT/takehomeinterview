@@ -1,0 +1,5 @@
+To run this WebApp, follow the steps below
+
+1. run "npm i" to install all the dependencies
+2. run "node src/server.js" 
+3. Open another terminal, then run "npm run start"
