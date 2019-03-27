@@ -38,10 +38,10 @@
             <b-form-input type="text" v-model="model.name" required placeholder="Enter name"/>
           </b-form-group>
           <b-form-group label="Size">
-            <b-form-input type="number" v-model="model.size" required placeholder="Enter size in Earth mass"/>
+            <b-form-input type="number" step=0.01 min=0 v-model="model.size" required placeholder="Enter size in Earth mass"/>
           </b-form-group>
           <b-form-group label="Distance">
-            <b-form-input type="number" v-model="model.distance" required placeholder="Enter distance from sun in AU"/>
+            <b-form-input type="number" step=0.01 min=0 v-model="model.distance" required placeholder="Enter distance from sun in AU"/>
           </b-form-group>
           <b-form-group label="Ordinality">
             <b-form-input type="number" min = 1 max = 8 v-model="model.ordinality" required placeholder="Enter Ordinality"/>
