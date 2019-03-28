@@ -1,0 +1,7 @@
+**This is the setup instructions for running my LCO planet application**
+
+1) Set up virtual environment (called "LCOapp" or something similar) before running this application and downloading any other packages/modules
+	- in order to set up virtual environment: install virtualenv and virtualenvwrapper
+
+2) Install Python3
+3) Install Jinja2
