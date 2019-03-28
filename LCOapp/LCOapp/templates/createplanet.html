@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+	<form method='POST' class='planetform'>
+		<label for='planettext'>
+			Planet info
+		<br><pre>Name:
+		<input type="text" name="planet name"><pre>
+		Size:<pre>
+		<input type="text" name="planet size"><pre>
+		Distance:<pre>
+		<input type="text" name="planet distance"><pre>
+		Ordinality:<pre>
+		<input type="text" name="planet ordinality"><pre>
+		Description:<br>
+		<textarea name='planet description' id='planet description'></textarea>
+		</label>
+		<input type = 'submit' name='createplanet' value='Submit'>
+	</form>
+{% endblock %}
