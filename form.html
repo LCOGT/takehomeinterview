@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="homepage.js"></script>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="container">
+        <ul class="pull-left">
+          <li><a href="homepage.html">Home</a></li>
+          <li><a href="form.html">Add a Planet</a></li>        
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+        <form id="myform" action="" method="post">
+          <input id="name" type="text" placeholder = "Name">
+          <input id="size" type="number" step = "0.01" placeholder = "Size in Earth Masses">
+          <input id="distance" type="number" step = "0.01" placeholder = "Distance in AU">
+          <input id="ordinality" type="number" step = "0.01" placeholder = "Ordinality">
+          <input id="description" type="text" placeholder = "Description of Planet">
+          <p id="show" class="errormsg"></p>
+          <p>
+            <input type="submit" value="Add Planet">
+          </p>
+        </form>
+      </div>
+  </body>
+
+</html>
+
