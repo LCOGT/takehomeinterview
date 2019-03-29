@@ -1,0 +1,23 @@
+{
+  "name": "takehomeinterview-master",
+  "version": "1.0.0",
+  "description": "### Goal Create a web application where a user can view and add planets to a database.",
+  "private": true,
+  "scripts": {
+    "test": "echo Hello World!",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.11",
+    "mysql": "^2.16.0",
+    "net": "^1.0.2",
+    "tls": "0.0.1"
+  }
+}
