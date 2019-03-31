@@ -1,0 +1,24 @@
+Hello World!
+
+<table>
+	
+	<tr>
+		<th>Ordinality</th>
+		<th>Name</th>
+		<th>Size</th>
+		<th>Distance</th>
+	</tr>
+	
+	<% @planets.each do | planet | %>
+		<tr>		
+			<td><%= planet.ordinality %></td>
+			<td><%= planet.name %></td>
+			<td><%= planet.size %></td>
+			<td><%= planet.distance %></td>
+		</tr>
+
+	<% end %>
+
+
+
+</table>
