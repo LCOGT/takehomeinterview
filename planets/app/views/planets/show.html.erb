@@ -1,1 +1,30 @@
-Hello World!
+<div>
+	<%= @planet.name %>
+</div>
+
+<div>
+	<%= @planet.description %>
+</div>
+
+<table>
+	<tr>
+		<th>
+			Ordinality:
+		</th>
+		<td><%= @planet.ordinality %></td>
+	</tr>
+	<tr>
+		<th>
+			Size:
+		</th>
+		<td><%= "#{@planet.size} Earth Masses" %></td>
+	</tr>
+	<tr>
+		<th>
+			Distance:
+		</th>
+		<td><%= "#{@planet.distance} AU" %></td>
+
+	</tr>
+
+</table>
