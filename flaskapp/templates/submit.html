@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block content %}
+  <form method="POST" action="">
+    {{form.hidden_tag()}}
+
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-3">Add a planet</legend>
+
+      <div class="form-group">
+        {{form.name.label(class="form-control-label")}}
+        {% if form.name.errors %}
+          {{form.name(class="form-control is-invalid")}}
+          <div class="invalid-feedback d-block">
+            {% for error in form.name.errors %}
+              <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+            {{form.name(class="form-control")}}
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{form.size.label(class="form-control-label")}}
+        {% if form.size.errors %}
+          {{form.size(class="form-control is-invalid")}}
+          <div class="invalid-feedback d-block">
+            {% for error in form.size.errors %}
+              <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.size(class="form-control")}}
+        {% endif %}
+      </div>
+
+
+      <div class="form-group">
+        {{form.distance.label(class="form-control-label")}}
+        {% if form.distance.errors %}
+          {{form.distance(class="form-control is-invalid")}}
+          <div class="invalid-feedback d-block">
+            {% for error in form.distance.errors %}
+              <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.distance(class="form-control")}}
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{form.ordinality.label(class="form-control-label")}}
+        {% if form.ordinality.errors %}
+          {{form.ordinality(class="form-control is-invalid")}}
+          <div class="invalid-feedback d-block">
+            {% for error in form.ordinality.errors %}
+              <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.ordinality(class="form-control")}}
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{form.description.label(class="form-control-label")}}
+        {% if form.description.errors %}
+          {{form.description(class="form-control is-invalid")}}
+          <div class="invalid-feedback d-block">
+            {% for error in form.description.errors %}
+              <span>{{error}}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{form.description(class="form-control")}}
+        {% endif %}
+      </div>
+
+    </fieldset>
+
+    <div class="form-group">
+      {{form.submit(class="btn btn-outline-info")}}
+    </div>
+  </form>
+
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Is Pluto a planet? You decide.
+    </small>
+  </div>
+{% endblock %}
