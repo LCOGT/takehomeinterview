@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<table style="width:100%">
+  <tr>
+    <th>Ordinality</th>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Distance</th>
+  </tr>
+    {% for planet in planets %}
+    <tr>
+      <td>{{planet.ordinality}}</td>
+      <td><a href={{url_for('detail', name=planet.name)}}>{{planet.name}}</a></td>
+      <td>{{planet.size}}</td>
+      <td>{{planet.distance}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
