@@ -5,6 +5,16 @@ const app = express();
 const router = express.Router();
 var fs = require('fs')
 
+// HTML for a "navigation" bar
+const nav = '<div class="nav">'
+              + '<div>'
+              +  '<ul>'
+                  +'<li><a href="/">Home</a></li>'
+                  +'<li><a href="/form">Add a Planet</a></li>'
+                +'</ul>'
+              +'</div>'
+            +'</div>';
+
 function getPlanets() {
   var p = "";
   db.serialize(() => {
@@ -30,19 +40,10 @@ app.get('/', function (req, res) {
       }
       console.log('Connected to the planets database.');
     });
-    db.all('SELECT * FROM Planets', (err, rows) => {
+    var query = 'SELECT Name, Size, Distance, Ordinality FROM Planets';
+    db.all(query, (err, rows) => {
       console.log(rows);
-      // const allPlanets = rows.map(e => e.Name);
-      // console.log(allPlanets);
-      var table = json2table(rows, 'PlanetTable');
-      var nav = '<div class="nav">'
-      + '<div>'
-      +  '<ul>'
-          +'<li><a href="/">Home</a></li>'
-          +'<li><a href="/form">Add a Planet</a></li>'
-        +'</ul>'
-      +'</div>'
-    +'</div>';
+      var table = json2table(rows);
       res.send(nav + table);
     });
   } catch (err) {
@@ -58,19 +59,50 @@ app.get('/', function (req, res) {
   });
 })
 
+app.route("/details/:planet").get(function(req, res) {
+  planet = req.params.planet;
+  var query = 'SELECT * FROM Planets where Name = "' + planet + '"';
+
+  try {
+    // open the database
+    var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('Connected to the planets database.');
+    });
+    db.all(query, (err, rows) => {
+      console.log(rows);
+      var table = json2table(rows);
+      res.send(nav + table);
+    });
+  } catch (err) {
+    console.error(err.message);
+  }
+
+  // Finally, close the database
+  db.close((err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Database connection CLOSED.');
+  });
+
+});
+
 // Allow routing to the form page.
 router.get('/form', function (req, res) {
   res.sendFile(path.join(__dirname+'/form.html'));
 })
 
 
-function json2table(json, classes) {
+function json2table(json) {
   var cols = Object.keys(json[0]);  
   var headerRow = '';
   var bodyRows = '';
-  
-  classes = classes || '';
 
+  console.log(cols);
+  
   // Create the column headers
   cols.map(function(col) {
     headerRow += '<th>' + col + '</th>';
@@ -82,15 +114,18 @@ function json2table(json, classes) {
 
     // Place value for each element in the row
     cols.map(function(colName) {
-      bodyRows += '<td>' + row[colName] + '</td>';
+      // Make planet name linkable
+      if (colName == "Name") {
+        bodyRows += '<td><a href="/details/' + row[colName] + '">' + row[colName] + '</a></td>';
+      } else {
+        // Otherwise just input data
+        bodyRows += '<td>' + row[colName] + '</td>';
+      }
     })
-
     bodyRows += '</tr>';
   });
 
-  return '<table class="' +
-         classes +
-         '"><thead><tr>' +
+  return '<table><thead><tr>' +
          headerRow +
          '</tr></thead><tbody>' +
          bodyRows +
