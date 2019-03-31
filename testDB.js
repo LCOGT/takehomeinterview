@@ -5,6 +5,8 @@ const app = express();
 const router = express.Router();
 var fs = require('fs')
 
+app.use(express.urlencoded());
+
 // HTML for a "navigation" bar
 const nav = '<div class="nav">'
               + '<div>'
@@ -14,22 +16,6 @@ const nav = '<div class="nav">'
                 +'</ul>'
               +'</div>'
             +'</div>';
-
-function getPlanets() {
-  var p = "";
-  db.serialize(() => {
-    db.each(`SELECT * FROM Planets`, (err, row) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log(row.Name + "\t" + row.Size);
-      return (row.Name + "\t" + row.Size);
-    });
-  });
-  console.log("Here: ");
-  console.log(p);
-  return p;
-}
 
 app.get('/', function (req, res) {
   try {
@@ -59,6 +45,7 @@ app.get('/', function (req, res) {
   });
 })
 
+// Handle linking to details page for each planet in database.
 app.route("/details/:planet").get(function(req, res) {
   planet = req.params.planet;
   var query = 'SELECT * FROM Planets where Name = "' + planet + '"';
@@ -95,13 +82,33 @@ router.get('/form', function (req, res) {
   res.sendFile(path.join(__dirname+'/form.html'));
 })
 
+router.post('/form', function (req, res) {
+  var input = req.body;
+  console.log(input);
+
+  try {
+    // open the database
+    var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('Connected to the planets database.');
+    });
+    var query = 'INSERT INTO Planets (Name, Size, Distance, Ordinality, Description) VALUES (?, ?, ?, ?, ?)';
+    db.run(query, [input.name, input.size, input.distance, input.ordinality, input.description]);
+  } catch (err) {
+    console.error(err.message);
+  }
+
+  var reply = "You have submitted the following to the database..." 
+  + JSON.stringify(input);
+  res.send(nav + reply);
+})
 
 function json2table(json) {
   var cols = Object.keys(json[0]);  
   var headerRow = '';
   var bodyRows = '';
-
-  console.log(cols);
   
   // Create the column headers
   cols.map(function(col) {
