@@ -11,5 +11,8 @@
 #
 
 class Planet<ActiveRecord::Base
+	validates :ordinality, :size, :distance, numericality: true
+	validates :name, :ordinality, uniqueness: true
+
 
 end

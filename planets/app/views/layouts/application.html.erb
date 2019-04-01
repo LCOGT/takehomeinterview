@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% flash.each do | key, flash_text | %>
+	<p style='color: red;' ><%= flash_text %></p>
+<% end %> 
+
+
+
 <%= yield %>
 
 </body>
