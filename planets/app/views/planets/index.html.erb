@@ -17,7 +17,7 @@
 	<% end %>
 </table>
 
-<%= form_for :planet do |f| %>
+<%= form_for :planet, url: planets_url do |f| %>
   Name: <%= f.text_field :name %><br />
   Size: <%= f.text_field :size %><br />
   Distance: <%= f.text_field :distance %><br />

@@ -56,7 +56,8 @@ Rails.application.routes.draw do
 
   root to: "planets#index"
 
-  resources :planets, only: [:index, :show]
+  resources :planets, only: [:index, :show, :create]
+
 
 
 

@@ -10,6 +10,7 @@ class PlanetsController < ApplicationController
 	end
 
 	def create
-		binding.pry()
+		Planet.create!(params.require(:planet).permit(:name, :size, :description, :ordinality, :distance))
+		redirect_to planets_url
 	end
 end
