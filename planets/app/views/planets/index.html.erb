@@ -1,5 +1,4 @@
 <table>
-	
 	<tr>
 		<th>Ordinality</th>
 		<th>Name</th>
@@ -10,14 +9,19 @@
 	<% @planets.each do | planet | %>
 		<tr>		
 			<td><%= planet.ordinality %></td>
-			<td><%= planet.name %></td>
+			<td><%= link_to(planet.name, planet_url(planet)) %></td>
 			<td><%= planet.size %></td>
 			<td><%= planet.distance %></td>
 		</tr>
 
 	<% end %>
-
-
-
-
 </table>
+
+<%= form_for :planet do |f| %>
+  Name: <%= f.text_field :name %><br />
+  Size: <%= f.text_field :size %><br />
+  Distance: <%= f.text_field :distance %><br />
+  Ordinality: <%= f.text_field :ordinality %><br />
+  Description: <%= f.text_area :description %><br />
+  <%= f.submit %>
+<% end %>
