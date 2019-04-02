@@ -17,6 +17,9 @@ const nav = '<div class="nav">'
               +'</div>'
             +'</div>';
 
+// HTML for a clear database button.
+const clear = '<form action="/cleared" method="GET"><button>Clear Database</button></form>'
+
 app.get('/', function (req, res) {
   try {
     // open the database
@@ -29,8 +32,13 @@ app.get('/', function (req, res) {
     var query = 'SELECT Name, Size, Distance, Ordinality FROM Planets';
     db.all(query, (err, rows) => {
       console.log(rows);
-      var table = json2table(rows);
-      res.send(nav + table);
+      if (rows === undefined || rows.length == 0) {
+        res.send(nav + "Nothing in the database yet. Add a planet!");
+      }
+      else {
+        var table = json2table(rows);
+        res.send(nav + table + clear);
+      }
     });
   } catch (err) {
     console.error(err.message);
@@ -96,13 +104,47 @@ router.post('/form', function (req, res) {
     });
     var query = 'INSERT INTO Planets (Name, Size, Distance, Ordinality, Description) VALUES (?, ?, ?, ?, ?)';
     db.run(query, [input.name, input.size, input.distance, input.ordinality, input.description]);
+    var reply = "You have submitted the following to the database..." 
+    + JSON.stringify(input);
+    res.send(nav + reply);
+  } catch (err) {
+    console.error(err.message);
+    var reply = "Error inputting to database: " + err.message;
+    res.send(nav + reply);
+  }
+})
+
+app.get('/cleared', function (req, res) {
+  try {
+    // open the database
+    var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.log('Connected to the planets database.');
+    });
+    var query = 'DELETE FROM Planets';
+    db.run(query, (err) => {
+      if (err) {
+        var reply = "Problem clearing the database: " + err.message;
+        res.send(nav + reply);
+      }
+      else{
+        var reply = "Database successfully cleared."
+        res.send(nav + reply);
+      }
+    });
   } catch (err) {
     console.error(err.message);
   }
 
-  var reply = "You have submitted the following to the database..." 
-  + JSON.stringify(input);
-  res.send(nav + reply);
+  // Finally, close the database
+  db.close((err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Database connection CLOSED.');
+  });
 })
 
 function json2table(json) {

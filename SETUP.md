@@ -14,4 +14,5 @@ Handling forms: https://flaviocopes.com/express-forms/
 2. cd into the "takehomeinterview" folder
 3. run "npm install"
 4. run "node testDB.js"
+5. go to "http://localhost:3000" in your browser of choice.
 
