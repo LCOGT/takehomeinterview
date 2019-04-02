@@ -18,6 +18,6 @@ Understanding async and callbacks: https://stackoverflow.com/questions/23667086/
 2. Go to you command line
 3. cd into the "takehomeinterview" folder
 4. run "npm install" to get dependencies. I used express, sqlite3, path, fs
-5. run "node testDB.js"
+5. run "node planetWebApp.js"
 6. go to "http://localhost:3000" in your browser of choice to visit the website
 
