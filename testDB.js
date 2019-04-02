@@ -20,67 +20,19 @@ const nav = '<div class="nav">'
 // HTML for a clear database button.
 const clear = '<form action="/cleared" method="GET"><button>Clear Database</button></form>'
 
+// Homepage
 app.get('/', function (req, res) {
-  try {
-    // open the database
-    var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log('Connected to the planets database.');
-    });
-    var query = 'SELECT Name, Size, Distance, Ordinality FROM Planets';
-    db.all(query, (err, rows) => {
-      console.log(rows);
-      if (rows === undefined || rows.length == 0) {
-        res.send(nav + "Nothing in the database yet. Add a planet!");
-      }
-      else {
-        var table = json2table(rows);
-        res.send(nav + table + clear);
-      }
-    });
-  } catch (err) {
-    console.error(err.message);
-  }
-
-  // Finally, close the database
-  db.close((err) => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log('Database connection CLOSED.');
+  getTable('SELECT Name, Size, Distance, Ordinality FROM Planets', function(table) {
+    res.send(nav + '<h1>Homepage</h1>' + table + clear);
   });
 })
 
 // Handle linking to details page for each planet in database.
 app.route("/details/:planet").get(function(req, res) {
   planet = req.params.planet;
-  var query = 'SELECT * FROM Planets where Name = "' + planet + '"';
-
-  try {
-    // open the database
-    var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log('Connected to the planets database.');
-    });
-    db.all(query, (err, rows) => {
-      console.log(rows);
-      var table = json2table(rows);
-      res.send(nav + table);
-    });
-  } catch (err) {
-    console.error(err.message);
-  }
-
-  // Finally, close the database
-  db.close((err) => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log('Database connection CLOSED.');
+  // Display details.
+  getDetails(planet, function(table) {
+    res.send(nav + table);
   });
 
 });
@@ -90,6 +42,7 @@ router.get('/form', function (req, res) {
   res.sendFile(path.join(__dirname+'/form.html'));
 })
 
+// Handle input of planet form
 router.post('/form', function (req, res) {
   var input = req.body;
   console.log(input);
@@ -102,13 +55,16 @@ router.post('/form', function (req, res) {
       }
       console.log('Connected to the planets database.');
     });
+    // Add planet to database
     var query = 'INSERT INTO Planets (Name, Size, Distance, Ordinality, Description) VALUES (?, ?, ?, ?, ?)';
     db.run(query, [input.name, input.size, input.distance, input.ordinality, input.description]);
     var reply = "You have submitted the following to the database..." 
     + JSON.stringify(input);
+    // Success! Give user feedback.
     res.send(nav + reply);
   } catch (err) {
     console.error(err.message);
+    // Failure :( Give feedback.
     var reply = "Error inputting to database: " + err.message;
     res.send(nav + reply);
   }
@@ -123,13 +79,15 @@ app.get('/cleared', function (req, res) {
       }
       console.log('Connected to the planets database.');
     });
+    // Delete all entries, give feedback to user upon success/failure.
     var query = 'DELETE FROM Planets';
     db.run(query, (err) => {
       if (err) {
         var reply = "Problem clearing the database: " + err.message;
         res.send(nav + reply);
       }
-      else{
+      else {
+        console.log('Planet database cleared.');
         var reply = "Database successfully cleared."
         res.send(nav + reply);
       }
@@ -146,6 +104,70 @@ app.get('/cleared', function (req, res) {
     console.log('Database connection CLOSED.');
   });
 })
+
+function getTable(query, callback) {
+  // open the database
+  var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the planets database.');
+  });
+  db.all(query, (err, rows) => {
+    console.log(rows);
+    if (rows === undefined || rows.length == 0) {
+      callback("Nothing in the database yet. Add a planet!");
+    }
+    else {
+      // Successful access, return in table form.
+      callback(json2table(rows));
+    }
+  });
+  // Finally, close the database
+  db.close((err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Database connection CLOSED.');
+  });
+}
+
+function getDetails(planet, callback) {
+  // open the database
+  var db = new sqlite3.Database('./planets.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Connected to the planets database.');
+  });
+
+  var query = 'SELECT Description FROM Planets where Name = "' + planet + '"';
+  db.all(query, (err, rows) => {
+    console.log(rows);
+    if (rows === undefined || rows.length == 0) {
+      callback("Cannot find information for the planet in the database.");
+    }
+    else {
+      // Format the info and return.
+      const desc = rows.map(e => e.Description);
+      query = 'SELECT Size, Distance, Ordinality FROM Planets where Name = "' + planet + '"';
+      getTable(query, function(table) {
+        callback(
+          '<h1>'+planet+'</h1>'
+          +'<p>'+desc+'</p>'
+          + table
+          );
+      });
+    }
+  });
+  // Finally, close the database
+  db.close((err) => {
+    if (err) {
+      console.error(err.message);
+    }
+    console.log('Database connection CLOSED.');
+  });
+}
 
 function json2table(json) {
   var cols = Object.keys(json[0]);  
