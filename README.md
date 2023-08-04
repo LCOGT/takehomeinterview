@@ -9,7 +9,7 @@ Create a web application using a JavaScript/Typescript framework to track and vi
 ### Instructions
 To give you some context to the problem, LCO operates a network of _telescopes_ spread out geographically throughout the world at locations we call _sites_. Occasionally, we have to take a telescope down for maintenance activities during which they are not operational. We refer to these periods as _downtimes_.
 
-We would like you to create a web application that allows a user to CRUD (create, read, update, delete) downtimes for a telescope at a site. Additionally, we’d like you to visualize these downtimes in a timeline.
+We would like you to create a web application that allows a user to perform CRUD (create, read, update, delete) operations on downtimes for a telescope at a site. Additionally, we’d like you to visualize these downtimes in a timeline.
 
 You are free to use any JavaScript/Typescript framework (React, Vue, etc) you are familiar with. You may also use any libraries.
 
@@ -19,7 +19,7 @@ Using generative AI assistants is highly discouraged, but if you do please inclu
 
 The deliverable product should be the source code to a runnable web application with all the requirements met. You do not need to provide any downtime data with the deliverable.
 
-Place any special setup instructions in a file called SETUP.
+So we know how to run your solution, place any setup instructions in a file called SETUP.
 
 Using Github, you should fork this repository ([Github: how to fork a repository](https://help.github.com/articles/fork-a-repo/)) and add the code you have written to it. When you are done, open a pull request. It will then be reviewed by the LCO software team.
 
