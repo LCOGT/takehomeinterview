@@ -46,4 +46,4 @@ You are free to organize the user-interface as you see fit as long as it has the
   * Be able to edit and save the _Reason_.
   * Be able to delete the downtime entry.
   * Bonus: the ability to filter/search by _site_ or _telescope_
-* Bonus: A timeline component to visualize of all downtimes. (Hint: use https://visjs.github.io/vis-timeline/docs/timeline/)
+* Bonus: A timeline component to visualize all downtimes. (Hint: use https://visjs.github.io/vis-timeline/docs/timeline/)
