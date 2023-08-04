@@ -3,9 +3,6 @@
 ### Goal
 Create a web application using a JavaScript/Typescript framework to track and visualize observatory maintenance time windows.
 
-### Estimated time for completion:
-2-4 Hours
-
 ### Instructions
 To give you some context to the problem, LCO operates a network of _telescopes_ spread out geographically throughout the world at locations we call _sites_. Occasionally, we have to take a telescope down for maintenance activities during which they are not operational. We refer to these periods as _downtimes_.
 
