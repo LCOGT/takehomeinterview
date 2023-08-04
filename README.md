@@ -1,72 +1,49 @@
 # Take Home Interview Project
 
 ### Goal
-Create a web application where a user can view and add planets to a database.
+Create a web application using a JavaScript/Typescript framework to track and visualize observatory maintenance time windows.
 
 ### Estimated time for completion:
 2-4 Hours
 
 ### Instructions
-Use whatever programming language/framework that is most comfortable to you. The deliverable
-product should be the sourcecode to a runnable web application with all the requirements met.
-The database should be blank: you do not need to provide any data with the deliverable.
+To give you some context to the problem, LCO operates a network of _telescopes_ spread out geographically throughout the world at locations we call _sites_. Occasionally, we have to take a telescope down for maintenance activities during which they are not operational. We refer to these periods as _downtimes_.
+
+We would like you to create a web application that allows a user to CRUD (create, read, update, delete) downtimes for a telescope at a site. Additionally, we’d like you to visualize these downtimes in a timeline.
+
+You are free to use any JavaScript/Typescript framework (React, Vue, etc) you are familiar with. You may also use any libraries.
+
+You don’t have to worry about persisting any data (e.g. Postgres, SQLite, etc). You can just use in-memory data structures or Browser Storage APIs (e.g. sessionStorage, localStorage) if that makes it easier.
+
+Using generative AI assistants is highly discouraged, but if you do please include any prompts and cite relevant resources.
+
+The deliverable product should be the source code to a runnable web application with all the requirements met. You do not need to provide any downtime data with the deliverable.
 
 Place any special setup instructions in a file called SETUP.
 
-Using github, you should fork this repository ([Github: how to fork a repository](https://help.github.com/articles/fork-a-repo/)) and add the code you have written to it. When you are done, open a pull request. It will then be reviewed.
+Using Github, you should fork this repository ([Github: how to fork a repository](https://help.github.com/articles/fork-a-repo/)) and add the code you have written to it. When you are done, open a pull request. It will then be reviewed by the LCO software team.
+
 
 ## Requirements
 
-#### The homepage
+#### Downtimes
 
-The homepage should contain a list or table of the planets that have been added to the database
-along with their name, size, distance and ordinality.
+* Each downtime is defined by a site, telescope, start date-time, end date-time and a reason field. An internal ID should also be generated to uniquely identify a downtime.
+* Site & telescope fields should be case-insensitive (upper or lower, you choose) text fields.
+* Reason field should be limited to 255 characters.
+* Start & end date-times should be specified in Coordinated Universal Time (UTC).
+* Two downtime windows cannot overlap for a particular telescope at a site
 
-For example:
 
-    Ordinality  Name     Size    Distance
-    1           Mercury  0.05    0.34
-    2           Venus    0.08    0.72
+#### UI
 
-The name of the object should link to that object's detail page.
-
-#### The input form
-
-A simple form for adding a planet to the database. The form should have 4 inputs:
-Name, Size (in Earth Masses), Distance (from the sun, In Astronomical Units), Ordinality (Mercury: 1, Neptune: 8)
-and Description.
-
-For example:
-
-          ____          ____              ____                ____
-    Name |____|   Size |____|   Distance |____|   Ordinality |____|
-                  __________________________________
-    Description: |                                  |
-                 |                                  |
-                 |__________________________________|
-     ______
-    |SUBMIT|
-
-Name and ordinality should be unique. Size, Ordinality and Distance should be restricted to numerical input.
-
-#### The detail page
-The detail page should simply display all the available information about the planet.
-
-For example:
-
-    Mars
-    Mars is the dry and inhospitable 4th planet from the Sun. It is here that Matt Damon
-    grew potatoes using his own poop.
-
-    Ordinality: 4
-    Size: 0.107 Earth Masses
-    Distance: 1.41 AU
-
-### Hints
-
-1. Use sqlite/memory/flat files instead of something like mysql or postgresql to store data. This will make the setup much less complicated.
-
-2. Don't worry about styling: the pages don't have to be pretty, just functional.
-
-### Bonus
-Provide an application that can serve multiple users, with a backend component as opposed to a pure client side application.
+You are free to organize the user-interface as you see fit as long as it has the following components:
+* A form to add new downtimes as described above.
+  * It should validate inputs and reject invalid entries.
+* A component that lists _all_ downtimes sorted by the start date in descending order. 
+  * Every item should display the downtime _ID_, _Site_, _Telescope_, _Start_, _End_.
+  * Should be expandable to show the downtime _Reason_.
+  * Be able to edit and save the _Reason_.
+  * Be able to delete the downtime entry.
+  * Bonus: the ability to filter/search by _site_ or _telescope_
+* Bonus: A timeline component to visualize of all downtimes. (Hint: use https://visjs.github.io/vis-timeline/docs/timeline/)
