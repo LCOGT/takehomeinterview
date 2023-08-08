@@ -1,8 +1,21 @@
+import React, { useState, useEffect } from 'react';
 import downtimeArray from "./DowntimeArray"
 
 function TableDisplay() {
     // Sorts the table by descending order
-    const sortedDowntimeArray = downtimeArray.sort((a, b) => new Date(b.start) - new Date(a.start));
+    // const sortedDowntimeArray = downtimeArray.sort((a, b) => new Date(b.start) - new Date(a.start));
+    const [sortedDowntimeArray, setSortedDowntimeArray] = useState([]);
+
+    useEffect(() => {
+        const storedData = localStorage.getItem('downtimeArray');
+        if (storedData) {
+            const parsedData = JSON.parse(storedData);
+            // Sort the data when retrieved
+            const sortedData = parsedData.sort((a, b) => new Date(b.start) - new Date(a.start));
+            setSortedDowntimeArray(sortedData);
+        }
+    }, []); // Empty dependency array to run the effect only once on mount
+
     return (
         <div className="container mx-auto mt-4">
             <body>
