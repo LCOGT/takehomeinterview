@@ -1,12 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import DowntimeEntry from './DowntimeEntry';
 
 function Dashboard({ downtimes, setDowntimes }) {
-  function handleDelete(e) {
-    const id = e.target.id;
-    setDowntimes((prevDowntimes) => {
-      return prevDowntimes.filter((downtime) => downtime.id !== id);
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    if (downtimes.length === 0) return;
+
+    const list = downtimes.map((downtime, index) => {
+      return (
+        <DowntimeEntry
+          key={downtime.id}
+          index={index}
+          downtimes={downtimes}
+          setDowntimes={setDowntimes}
+        />
+      );
     });
-  }
+    setEntries(list);
+  }, [downtimes, setDowntimes]);
 
   return (
     <div className="Dashboard">
@@ -23,26 +35,7 @@ function Dashboard({ downtimes, setDowntimes }) {
               <th>End (UTC)</th>
             </tr>
           </thead>
-          <tbody>
-            {downtimes.map((downtime) => (
-              <tr key={downtime.id}>
-                <td>{downtime.id}</td>
-                <td>{downtime.site}</td>
-                <td>{downtime.telescope}</td>
-                <td>{downtime.start}</td>
-                <td>{downtime.end}</td>
-
-                <td>
-                  <button>Edit</button>
-                </td>
-                <td>
-                  <button id={downtime.id} onClick={handleDelete}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <tbody>{entries}</tbody>
         </table>
       ) : (
         <p>No downtimes to display.</p>
