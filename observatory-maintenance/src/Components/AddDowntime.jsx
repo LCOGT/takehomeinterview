@@ -10,17 +10,23 @@ function AddDowntime({ newDowntime, setNewDowntime, setDowntimes, downtimes }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('submitted form', newDowntime);
+    const uid = function () {
+      return Date.now().toString(36) + Math.random().toString(36);
+    };
+    newDowntime.id = uid();
+
+    //Check for empty fields
     for (const key in newDowntime) {
-      newDowntime.id = _uniqueId('downtime_');
       if (newDowntime[key] === '') {
-        alert('Please fill out all fields');
+        alert('Please fill out all fields.');
         return;
       }
-      setDowntimes(() => {
-        return [...downtimes, newDowntime];
-      });
     }
+    setDowntimes(() => {
+      return [...downtimes, newDowntime];
+    });
+
+    document.forms[0].reset();
   }
 
   return (
