@@ -19,9 +19,8 @@ function Dashboard({ downtimes, setDowntimes }) {
               <th>ID</th>
               <th>Site</th>
               <th>Telescope</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Reason</th>
+              <th>Start (UTC)</th>
+              <th>End (UTC)</th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +31,7 @@ function Dashboard({ downtimes, setDowntimes }) {
                 <td>{downtime.telescope}</td>
                 <td>{downtime.start}</td>
                 <td>{downtime.end}</td>
-                <td>{downtime.reason}</td>
+
                 <td>
                   <button>Edit</button>
                 </td>

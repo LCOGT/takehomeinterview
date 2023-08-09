@@ -22,11 +22,45 @@ function AddDowntime({ newDowntime, setNewDowntime, setDowntimes, downtimes }) {
         return;
       }
     }
+
+    //Check for valid dates
+    const newStart = new Date(newDowntime.start);
+    const newEnd = new Date(newDowntime.end);
+
+    if (newStart > newEnd) {
+      alert('Start date must be before end date.');
+      return;
+    }
+    for (let i = 0; i < downtimes.length; i++) {
+      const oldStart = new Date(downtimes[i].start);
+      const oldEnd = new Date(downtimes[i].end);
+      if (newStart < oldEnd && newEnd > oldStart) {
+        alert('This downtime overlaps with an existing downtime.');
+        return;
+      }
+    }
+
+    //Sort and Update downtimes state
     setDowntimes(() => {
-      return [...downtimes, newDowntime];
+      const unsortedTimes = [...downtimes, newDowntime];
+      const sortedTimes = unsortedTimes.sort((a, b) => {
+        const currentStart = new Date(a.start);
+        const nextStart = new Date(b.start);
+        return currentStart - nextStart;
+      });
+      return sortedTimes;
     });
 
+    // Reset form
     document.forms[0].reset();
+    setNewDowntime({
+      id: '',
+      site: '',
+      telescope: '',
+      start: '',
+      end: '',
+      reason: '',
+    });
   }
 
   return (
@@ -84,7 +118,7 @@ function AddDowntime({ newDowntime, setNewDowntime, setDowntimes, downtimes }) {
             }}
           />
           <label htmlFor="reason">Reason</label>
-          {/* <span> {255 - newDowntime.reason.length} characters left</span> */}
+          <span> {255 - newDowntime.reason.length} characters left</span>
           <textarea
             type="text"
             id="reason"
