@@ -18,8 +18,6 @@ function TableDisplay() {
 
     return (
         <div className="container mx-auto mt-4">
-            <body>
-            <div className="">
                 <div className="text-xl mb-4">
                     <h2 className="text-center font-bold">Downtime Records</h2>
                     <table className="table table-zebra text-center">
@@ -31,9 +29,10 @@ function TableDisplay() {
                             <th>Start</th>
                             <th>End</th>
                             <th>Reason</th>
+                            <th></th>
                         </tr>
                         </thead>
-                        <tbody className="">
+                        <tbody>
                         {sortedDowntimeArray.map((record) => (
                             //TODO: Worst case scenario if you cannot get collapse to work use popups
                             <tr key={record.start} className="hover">
@@ -43,13 +42,14 @@ function TableDisplay() {
                                 <td>{record.start}</td>
                                 <td>{record.end}</td>
                                 <td>{record.reason || 'N/A'}</td>
+                                <td>
+
+                                </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
-                </div>
             </div>
-            </body>
         </div>
     );
 }

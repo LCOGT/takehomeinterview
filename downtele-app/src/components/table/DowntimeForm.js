@@ -6,10 +6,10 @@ import moment from "moment";
 import "flatpickr/dist/flatpickr.min.css";
 
 
-function DowntimeForm() {
+function DowntimeForm({ setDowntimeArray }) {
     let newID;
-    const [newLocation, setNewLocation] = useState('');
-    const [newTelescope, setNewTelescope] = useState('');
+    const [newLocation, setLocation] = useState('NORTH');
+    const [newTelescope, setTelescope] = useState('A');
     let newStartTime = useRef(null);
     let newEndTime = useRef(null);
     let newReason = '';
@@ -64,18 +64,22 @@ function DowntimeForm() {
         const selectedStartMoment = moment(startTime);
         const selectedEndMoment = moment(endTime);
 
+        console.log(newLocation);
+        console.log(newTelescope);
         // checks if the end time is set earlier than the start time
         if (endTime-startTime < 0){
             console.log("Error: End time prior to start time")
         } else {
+            // Retrieve existing data from localStorage
+            const existingData = JSON.parse(localStorage.getItem('downtimeArray')) || [];
             // Checks for overlapping entries before input
             let overlapCheck = false;
-            for (let i in downtimeArray){
+            for (let i in existingData){
                 // If the Location and Telescope is the same as an entry prior, check the date/times for overlap
-                if (downtimeArray[i].site === newLocation && downtimeArray[i].telescope === newTelescope){
+                if (existingData[i].site === newLocation && existingData[i].telescope === newTelescope) {
                     console.log("Match!")
-                    const existingStartMoment = moment(downtimeArray[i].start, "LLL");
-                    const existingEndMoment = moment(downtimeArray[i].end, "LLL");
+                    const existingStartMoment = moment(existingData[i].start, "LLL");
+                    const existingEndMoment = moment(existingData[i].end, "LLL");
                     // if NewStart/NewEnd is between a written key
                     if (
                         (existingStartMoment <= selectedStartMoment && existingEndMoment >= selectedStartMoment) ||
@@ -87,10 +91,13 @@ function DowntimeForm() {
                 }
             }
             if (!overlapCheck){
-                let mathMax = Math.max(...downtimeArray.map(entry => entry.id));
-                console.log(newID)
+                // Grabs the last value within the entry.ID then aggregates by 1
+                const mathMax = existingData.length > 0 ? Math.max(...existingData.map(entry => entry.id)) : 0;
+                newID = mathMax + 1
+                console.log("NewID: ",newID)
+                // New Entry input
                 const newEntry ={
-                    id: mathMax + 1,
+                    id: newID,
                     site: newLocation,
                     telescope: newTelescope,
                     start: moment(startTime).format('LLL'),
@@ -98,19 +105,98 @@ function DowntimeForm() {
                     reason: newReason
                 }
                 console.log("No OverLap Found ", newEntry)
-                downtimeArray.push(newEntry);
-                localStorage.setItem('downtimeArray', JSON.stringify(downtimeArray));
+
+                // Push the new entry to the existing data
+                existingData.push(newEntry);
+                localStorage.setItem('downtimeArray', JSON.stringify(existingData));
+                // Update state and localStorage with the updated data
+                setDowntimeArray(existingData);
             }
         }
 
-        // console.log(newID)
-        // console.log(newLocation)
-        // console.log(newTelescope)
-        // console.log("Start Time:", moment(startTime).format('LLL'));
-        // console.log("End Time:", moment(endTime).format('LLL'));
-        // console.log(endTime-startTime)
-        // console.log(newReason)
     };
+    // const handleFormSubmit = () => {
+    //     console.log("--- New ---")
+    //     // Access Flatpickr instances using refs
+    //     const startTimeFlatpickrInstance = newStartTime.current._flatpickr;
+    //     const endTimeFlatpickrInstance = newEndTime.current._flatpickr;
+    //
+    //     // Access selected dates from Flatpickr instances Note: 0 due to only 1 date selected
+    //     const startTime = startTimeFlatpickrInstance.selectedDates[0];
+    //     const endTime = endTimeFlatpickrInstance.selectedDates[0];
+    //
+    //     // Convert selected start and end times to moment objects
+    //     const selectedStartMoment = moment(startTime);
+    //     const selectedEndMoment = moment(endTime);
+    //
+    //     console.log(newLocation)
+    //     console.log(newTelescope)
+    //     // checks if the end time is set earlier than the start time
+    //     if (endTime-startTime < 0){
+    //         console.log("Error: End time prior to start time")
+    //     } else {
+    //         // Checks for overlapping entries before input
+    //         let overlapCheck = false;
+    //         for (let i in downtimeArray){
+    //             // If the Location and Telescope is the same as an entry prior, check the date/times for overlap
+    //             if (downtimeArray[i].site === newLocation && downtimeArray[i].telescope === newTelescope) {
+    //                 console.log("Match!")
+    //                 const existingStartMoment = moment(downtimeArray[i].start, "LLL");
+    //                 const existingEndMoment = moment(downtimeArray[i].end, "LLL");
+    //                 // if NewStart/NewEnd is between a written key
+    //                 if (
+    //                     (existingStartMoment <= selectedStartMoment && existingEndMoment >= selectedStartMoment) ||
+    //                     (existingStartMoment <= selectedEndMoment && existingEndMoment >= selectedEndMoment) ||
+    //                     (selectedStartMoment <= existingStartMoment && existingStartMoment <= selectedEndMoment)){
+    //                     console.log("Error: Start or End value intersects with another entry.")
+    //                     overlapCheck = true;
+    //                 }
+    //             }
+    //         }
+    //         if (!overlapCheck){
+    //             // Retrieve existing data from localStorage
+    //             const existingData = JSON.parse(localStorage.getItem('downtimeArray')) || [];
+    //
+    //             // Grabs the last value within the entry.ID then aggregates by 1
+    //             const mathMax = existingData.length > 0 ? Math.max(...existingData.map(entry => entry.id)) : 0;
+    //             newID = mathMax + 1
+    //             console.log("NewID: ",newID)
+    //             // New Entry input
+    //             const newEntry ={
+    //                 id: newID,
+    //                 site: newLocation,
+    //                 telescope: newTelescope,
+    //                 start: moment(startTime).format('LLL'),
+    //                 end: moment(endTime).format('LLL'),
+    //                 reason: newReason
+    //             }
+    //             console.log("No OverLap Found ", newEntry)
+    //
+    //             // Push the new entry to the existing data
+    //             existingData.push(newEntry);
+    //             // const updatedData = [...existingData, newEntry];
+    //
+    //             localStorage.setItem('downtimeArray', JSON.stringify(existingData));
+    //             // Update state and localStorage with the updated data
+    //             setDowntimeArray(existingData);
+    //             // push the new information to the Array in DowntimeArray.js
+    //             // downtimeArray.push(newEntry);
+    //             //
+    //             // setDowntimeArray([...downtimeArray, newEntry]);
+    //             // setDowntimeArray(prevArray => [...prevArray, newEntry]);
+    //             // // Updates local storage
+    //             // localStorage.setItem('downtimeArray', JSON.stringify([...downtimeArray, newEntry]));
+    //         }
+    //     }
+    //
+    //     // console.log(newID)
+    //     // console.log(newLocation)
+    //     // console.log(newTelescope)
+    //     // console.log("Start Time:", moment(startTime).format('LLL'));
+    //     // console.log("End Time:", moment(endTime).format('LLL'));
+    //     // console.log(endTime-startTime)
+    //     // console.log(newReason)
+    // };
 
     return (
         <div className="grid place-content-center gap-4">
@@ -122,15 +208,15 @@ function DowntimeForm() {
                         <span className="label-text">Location</span>
                     </label>
                     <select className="select select-bordered"
-                            value={newLocation}
+                            value={newLocation.toUpperCase()}
                             onChange={(e) => {
-                                setNewLocation(e.target.value);
+                                setLocation(e.target.value);
                             }}>
                         <option disabled selected>Select Location</option>
-                        <option value="North">North</option>
-                        <option value="South">South</option>
-                        <option value="East">East</option>
-                        <option value="West">West</option>
+                        <option value="NORTH">North</option>
+                        <option value="SOUTH">South</option>
+                        <option value="EAST">East</option>
+                        <option value="WEST">West</option>
                     </select>
                 </div>
                 <div>
@@ -138,9 +224,9 @@ function DowntimeForm() {
                         <span className="label-text">Telescope</span>
                     </label>
                     <select className="select select-bordered"
-                            value={newTelescope}
+                            value={newTelescope.toUpperCase()}
                             onChange={(e) => {
-                                setNewTelescope(e.target.value);
+                                setTelescope(e.target.value);
                             }}>
                         <option disabled selected>Select Telescope</option>
                         <option value="A">A</option>
