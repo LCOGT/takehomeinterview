@@ -1,9 +1,9 @@
 // import logo from './logo.svg';
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import './App.css';
 import TableDisplay from "./components/table/tableDisplay";
 import DowntimeForm from "./components/table/DowntimeForm";
-import downtimeArray from "./components/table/DowntimeArray";
+// import downtimeArray from "./components/table/DowntimeArray";
 
 
 function App() {
