@@ -13,6 +13,7 @@ export const CreateDowntimeForm = (props: {
         endDate: new Date(),
         reason: '',
       });
+    const [errorMsg, setErrorMsg] = useState<string>("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -25,25 +26,32 @@ export const CreateDowntimeForm = (props: {
         setFormData({ ...formData, [name]: dateValue });
     };
 
-      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Handle form submission here, e.g., send data to a server
-        props.context.createDowntime({downtimeProps: {
-            siteId: formData.siteId,
-            telescopeId: formData.telescopeId,
-            startDate: formData.startDate,
-            endDate: formData.endDate,
-            reason: formData.reason,
-        }})
+    const validateForm = (): boolean => {
+      return formData.reason.length < 255;
+    }
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      // Handle form submission here, e.g., send data to a server
+      const result = props.context.createDowntime({downtimeProps: {
+        siteId: formData.siteId,
+        telescopeId: formData.telescopeId,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        reason: formData.reason,
+      }})
+      if (result) {
         setFormData({
-            siteId: '',
-            telescopeId: '',
-            startDate: new Date(),
-            endDate: new Date(),
-            reason: '',
-          });
-      };
+          siteId: '',
+          telescopeId: '',
+          startDate: new Date(),
+          endDate: new Date(),
+          reason: '',
+        });
+      } else {
+        setErrorMsg("Start dates and end dates overlap with existing downtimes. Please change them. ");
+      }
+    };
     
       return (
         <form onSubmit={handleSubmit}>
@@ -78,6 +86,11 @@ export const CreateDowntimeForm = (props: {
                 onChange={handleInputChange}
               />
             </label>
+            <div style={{
+                color: validateForm() ? "#000000" : "#ff0000"
+              }}>
+                {formData.reason.length.toString()} / 255
+              </div>
           </div>
           <div>
             <label>
@@ -102,6 +115,7 @@ export const CreateDowntimeForm = (props: {
             </label>
           </div>
           <button type="submit">Submit</button>
+          {errorMsg}
         </form>
       );
-      }
+}

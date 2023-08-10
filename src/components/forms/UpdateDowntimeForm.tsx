@@ -13,6 +13,8 @@ export const UpdateDowntimeForm = (props: {
         endDate: props.downtime.props.endDate,
         reason: props.downtime.props.reason,
       });
+      const [errorMsg, setErrorMsg] = useState<string>("");
+
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -25,15 +27,22 @@ export const UpdateDowntimeForm = (props: {
         setFormData({ ...formData, [name]: dateValue });
     };
 
+    const validateForm = (): boolean => {
+      return formData.reason.length < 255;
+    }
+
       const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // Handle form submission here, e.g., send data to a server
-        props.context.updateDowntime({
+        const result = props.context.updateDowntime({
             oldDowntimeId: formData.oldDowntimeId,
             startDate: formData.startDate,
             endDate: formData.endDate,
             reason: formData.reason,
         });
+        if (!result) {
+          setErrorMsg("Start dates and end dates overlap with existing downtimes. Please change them. ");
+        }
       };
     
       return (
@@ -47,6 +56,11 @@ export const UpdateDowntimeForm = (props: {
                 onChange={handleInputChange}
               />
             </label>
+            <div style={{
+                color: validateForm() ? "#000000" : "#ff0000"
+              }}>
+                {formData.reason.length.toString()} / 255
+              </div>
           </div>
           <div>
             <label>
@@ -71,6 +85,7 @@ export const UpdateDowntimeForm = (props: {
             </label>
           </div>
           <button type="submit">Submit</button>
+          {errorMsg}
         </form>
       );
       }

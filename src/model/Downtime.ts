@@ -51,6 +51,5 @@ export class Downtime {
         this.props.telescopeId.toUpperCase();
         this.props.startDate = toUTC(this.props.startDate);
         this.props.startDate = toUTC(this.props.endDate);
-        this.props.reason.slice(0, 255);
     }
 }

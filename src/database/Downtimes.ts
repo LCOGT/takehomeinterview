@@ -64,7 +64,7 @@ export default class Downtimes {
     }
 
     // Create a Downtime, and the Telescope if it doesn't already exist, and return the new ID. or return an error of overlaps are detected.
-    createDowntime(props: CreateDowntimeProps): string | Error {
+    createDowntime(props: CreateDowntimeProps): string | null {
         const telescopeId: string = props.downtimeProps.telescopeId;
         if (!this.telescopeGroup.has(telescopeId)) this.createTelescope(telescopeId);
         const downtime = new Downtime(props.downtimeProps)
@@ -73,7 +73,7 @@ export default class Downtimes {
             this.telescopeGroup.get(telescopeId)?.add(downtime.id);
             return downtime.id;
         } else {
-            return new Error("Unable to create downtime due to overlaps with existing downtime. ")
+            return null;
         }
     }
 
