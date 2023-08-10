@@ -13,3 +13,4 @@
 3. Can create a downtime without start and end dates (its a feature)
 
 #### Example
+![LCO tool screenshot](https://github.com/LCOGT/takehomeinterview/assets/54085254/907b126b-c8e7-446d-b5f7-1690bf78099f)
