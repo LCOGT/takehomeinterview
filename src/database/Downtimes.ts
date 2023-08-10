@@ -1,14 +1,26 @@
 import { Downtime, CreateDowntimeProps, DeleteDowntimeProps, ReadDowntimeProps, UpdateDowntimeProps } from "../model/Downtime";
 import { isErrorObject, isOverlap } from "../Utils";
 
+const LOG = true;
+
 export default class Downtimes {
     downtimeDatabase: Map<string, Downtime>; // The main database of all Downtimes by their ID
     telescopeGroup: Map<string, Set<string>>; // Mappings from single telescopeID to all its downtimeIDs
     siteGroup: Map<string, Set<string>>; // Mappings from a single siteGroupID to all telescopeIDs
+    counter: number;
     constructor() {
+        this.counter = 0;
         this.downtimeDatabase = new Map();
         this.telescopeGroup = new Map();
         this.siteGroup = new Map();
+    }
+
+    redux() {
+        let redux = new Downtimes();
+        redux.downtimeDatabase = this.downtimeDatabase;
+        redux.telescopeGroup = this.telescopeGroup;
+        redux.siteGroup = this.siteGroup;
+        return redux;
     }
 
     getDowntimes() {
@@ -79,8 +91,10 @@ export default class Downtimes {
         if (this.validateDowntime(downtime)) {
             this.downtimeDatabase.set(downtime.id, downtime);
             this.telescopeGroup.get(telescopeId)?.add(downtime.id);
+            LOG && console.log("Successfully created downtime {}", downtime.id);
             return downtime.id;
         } else {
+            LOG && console.log("Error creating downtime: timeframe validation error");
             return null;
         }
     }

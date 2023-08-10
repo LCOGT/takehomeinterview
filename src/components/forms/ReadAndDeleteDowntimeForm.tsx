@@ -5,12 +5,12 @@ import { UpdateDowntimeForm } from './UpdateDowntimeForm';
 
 
 export const ReadAndDeleteDowntimeForm = (props: {
-    context: Downtimes, 
-    downtime: Downtime,
+    context: Downtimes; 
+    downtime: Downtime;
+    redux: () => any;
 }) => {
     const [expanded, setExpanded] = useState<boolean>(false);
     const [updateMode, setUpdateMode] = useState<boolean>(false);
-
 
     const toggleExpand = (event: React.MouseEvent<HTMLInputElement>) => {
         setExpanded(!expanded);
@@ -22,6 +22,7 @@ export const ReadAndDeleteDowntimeForm = (props: {
 
     const handleDelete = (event: React.MouseEvent<HTMLInputElement>) => {
         props.context.deleteDowntime({downtimeId: props.downtime.id})
+        props.redux();
     }
 
     return (<div>
@@ -32,7 +33,7 @@ export const ReadAndDeleteDowntimeForm = (props: {
             {updateMode ? "Go back" : "Update"}
         </div>
         {updateMode ? (
-            <UpdateDowntimeForm context={props.context} downtime={props.downtime} />
+            <UpdateDowntimeForm context={props.context} redux={props.redux} downtime={props.downtime} />
         ) : (<div>
             <div> Downtime ID: {props.downtime.id}</div>
             <div> Site ID: {props.downtime.props.siteId}</div>
@@ -46,8 +47,6 @@ export const ReadAndDeleteDowntimeForm = (props: {
                 Delete
             </div>
         </div>
-
         )}
-        
     </div>)
 }
