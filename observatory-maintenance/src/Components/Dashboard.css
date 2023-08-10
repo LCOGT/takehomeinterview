@@ -1,0 +1,14 @@
+.dashboard {
+  border-top: 3px solid #3f51b5;
+  display: flex;
+  justify-content: end;
+}
+
+table {
+  border: 1px solid blue;
+  width: 100%;
+}
+
+.entry-details {
+  width: 40%;
+}

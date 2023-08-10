@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import DowntimeEntry from './DowntimeEntry';
+import EntryDetails from './EntryDetails';
+import './Dashboard.css';
 
 function Dashboard({ downtimes, setDowntimes }) {
   const [entries, setEntries] = useState([]);
+  const [currentDowntime, setCurrentDowntime] = useState('');
 
   useEffect(() => {
     if (downtimes.length === 0) return;
@@ -14,6 +17,8 @@ function Dashboard({ downtimes, setDowntimes }) {
           index={index}
           downtimes={downtimes}
           setDowntimes={setDowntimes}
+          currentDowntime={currentDowntime}
+          setCurrentDowntime={setCurrentDowntime}
         />
       );
     });
@@ -21,26 +26,31 @@ function Dashboard({ downtimes, setDowntimes }) {
   }, [downtimes, setDowntimes]);
 
   return (
-    <div className="Dashboard">
+    <>
       <h1>Planned Downtimes</h1>
-
-      {downtimes.length ? (
-        <table className="sortable">
-          <thead>
-            <tr className="item">
+      <div className="dashboard">
+        {downtimes.length ? (
+          <table>
+            <thead>
               <th>ID</th>
               <th>Site</th>
               <th>Telescope</th>
               <th>Start (UTC)</th>
               <th>End (UTC)</th>
-            </tr>
-          </thead>
-          <tbody>{entries}</tbody>
-        </table>
-      ) : (
-        <p>No downtimes to display.</p>
-      )}
-    </div>
+            </thead>
+            {entries}
+          </table>
+        ) : (
+          <p>No downtimes to display.</p>
+        )}
+        <EntryDetails
+          downtimes={downtimes}
+          setDowntimes={setDowntimes}
+          currentDowntime={currentDowntime}
+          setCurrentDowntime={setCurrentDowntime}
+        />
+      </div>
+    </>
   );
 }
 
