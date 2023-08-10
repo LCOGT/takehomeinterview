@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.background-animate {
+	background-size: 400%;
+
+	-webkit-animation: AnimationName 3s ease infinite;
+	-moz-animation: AnimationName 3s ease infinite;
+	animation: AnimationName 3s ease infinite;
+}
+
+@keyframes AnimationName {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+.link-underline {
+	border-bottom-width: 0;
+	border-radius: 0%;
+	background-image: linear-gradient(transparent, transparent),
+		linear-gradient(#f59e0b, #f59e0b);
+	background-size: 0 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.3s ease-in-out;
+}
+
+.link-underline:hover {
+	background-size: 100% 2px;
+	background-position: 0 100%;
+}
+
+.link-underline-active {
+	border-bottom-width: 0;
+	border-radius: 0%;
+	background-image: linear-gradient(transparent, transparent),
+		linear-gradient(#f59e0b, #f59e0b);
+	background-size: 100% 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+}
+
+.animated-hamburger {
+	width: 30px;
+	height: 20px;
+	position: relative;
+	margin: 0px;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: 0.5s ease-in-out;
+	-moz-transition: 0.5s ease-in-out;
+	-o-transition: 0.5s ease-in-out;
+	transition: 0.5s ease-in-out;
+	cursor: pointer;
+}
+
+.animated-hamburger span {
+	display: block;
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	border-radius: 9px;
+	opacity: 1;
+	left: 0;
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: 0.25s ease-in-out;
+	-moz-transition: 0.25s ease-in-out;
+	-o-transition: 0.25s ease-in-out;
+	transition: 0.25s ease-in-out;
+}
+
+.animated-hamburger span {
+	background: #2d7ef7;
+}
+
+.animated-hamburger span:nth-child(1) {
+	background: #0f4c81;
+	top: 0px;
+}
+
+.animated-hamburger span:nth-child(2) {
+	background: #6667ab;
+	top: 10px;
+}
+
+.animated-hamburger span:nth-child(3) {
+	background: #be3455;
+	top: 20px;
+}
+
+.animated-hamburger.open span:nth-child(1) {
+	top: 11px;
+	-webkit-transform: rotate(135deg);
+	-moz-transform: rotate(135deg);
+	-o-transform: rotate(135deg);
+	transform: rotate(135deg);
+}
+
+.animated-hamburger.open span:nth-child(2) {
+	opacity: 0;
+	left: -60px;
+}
+
+.animated-hamburger.open span:nth-child(3) {
+	top: 11px;
+	-webkit-transform: rotate(-135deg);
+	-moz-transform: rotate(-135deg);
+	-o-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+}

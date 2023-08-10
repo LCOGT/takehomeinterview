@@ -1,0 +1,128 @@
+[
+	{
+		"id": 1,
+		"name": "Siding Spring Observatory",
+		"description": "Siding Spring is near Coonabarabran, New South Wales, Australia.",
+		"image": "/siding_spring.jpg",
+		"location": {
+			"latitude": -31.273333,
+			"longitude": 149.071111
+		},
+		"elevation": 1116,
+		"code": "COJ",
+		"timezone": "UTC+10",
+		"telescopes": [
+			{ "id": 1, "name": "2-meter Faulkes Telescope South" },
+			{ "id": 2, "name": "1-meter Uppsala Telescope" },
+			{ "id": 3, "name": "1-meter Kiso Schmidt Telescope" },
+			{ "id": 4, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 2,
+		"name": "South African Astronomical Observatory",
+		"description": "Sutherland is home to several telescopes including the 11-meter SALT.",
+		"image": "/sutherland_south_africa.jpg",
+		"location": {
+			"latitude": -32.380001,
+			"longitude": 20.810001
+		},
+		"elevation": 1760,
+		"code": "CPT",
+		"timezone": "UTC+2",
+		"telescopes": [
+			{ "id": 5, "name": "1-meter Elizabeth Telescope" },
+			{ "id": 6, "name": "1-meter Uppsala Telescope" },
+			{ "id": 7, "name": "1-meter Kiso Schmidt Telescope" },
+			{ "id": 8, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 3,
+		"name": "Teide Observatory",
+		"description": "Teide Observatory, on Tenerife, is home to several types of telescopes including solar, optical, and radio.",
+		"image": "/teide_tenerife.jpg",
+		"location": {
+			"latitude": 28.300001,
+			"longitude": -16.509722
+		},
+		"elevation": 2330,
+		"code": "TFN",
+		"timezone": "UTC",
+		"telescopes": [
+			{ "id": 9, "name": "1-meter Elizabeth Telescope" },
+			{ "id": 10, "name": "1-meter Uppsala Telescope" },
+			{ "id": 11, "name": "0.4-meter Uppsala Schmidt Telescope" },
+			{ "id": 12, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 4,
+		"name": "Cerro Tololo Interamerican Observatory",
+		"description": "Cerro Tololo Inter-American Observatory is home to many NOAO telescopes.",
+		"image": "/cerro_tololo.jpg",
+		"location": {
+			"latitude": 28.300001,
+			"longitude": -16.509722
+		},
+		"elevation": 2198,
+		"code": "LSC",
+		"timezone": "UTC-3",
+		"telescopes": [
+			{ "id": 13, "name": "1-meter Elizabeth Telescope" },
+			{ "id": 14, "name": "1-meter Uppsala Telescope" },
+			{ "id": 15, "name": "0.4-meter Uppsala Schmidt Telescope" },
+			{ "id": 16, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 5,
+		"name": "McDonald Observatory",
+		"description": "McDonald Observatory is home to several research telescopes and has an extensive education and outreach program.",
+		"image": "/mcdonald.jpg",
+		"location": {
+			"latitude": 30.670001,
+			"longitude": -104.020001
+		},
+		"elevation": 2070,
+		"code": "ELP",
+		"timezone": "UTC-6",
+		"telescopes": [
+			{ "id": 17, "name": "1-meter Elizabeth Telescope" },
+			{ "id": 18, "name": "1-meter Uppsala Telescope" },
+			{ "id": 19, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 6,
+		"name": "Haleakala Observatory",
+		"description": "The observatory site on Mt. Haleakala is 10,000 feet above sea level.",
+		"image": "/haleakala.jpg",
+		"location": {
+			"latitude": 20.707501,
+			"longitude": 156.256111
+		},
+		"elevation": 3055,
+		"code": "OGG",
+		"timezone": "UTC-10",
+		"telescopes": [
+			{ "id": 20, "name": "2-meter Faulkes Telescope North" },
+			{ "id": 21, "name": "0.4-meter Uppsala Schmidt Telescope" },
+			{ "id": 22, "name": "0.4-meter Uppsala Schmidt Telescope" }
+		]
+	},
+	{
+		"id": 7,
+		"name": "Wise Observatory",
+		"description": "LCO has one 1-meter telescope node at the Wise Observatory in Israel.",
+		"image": "/wise_obs.jpg",
+		"location": {
+			"latitude": 30.595833,
+			"longitude": 34.763333
+		},
+		"elevation": 875,
+		"code": "TLV",
+		"timezone": "UTC+2",
+		"telescopes": [{ "id": 23, "name": "1-meter NRES spectograph" }]
+	}
+]
