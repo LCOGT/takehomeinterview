@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import Downtimes from './database/Downtimes'
 
 function App() {
+  const downtimes = new Downtimes();
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <TableView context={downtimes} />
     </div>
   );
 }

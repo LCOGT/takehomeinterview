@@ -11,6 +11,14 @@ export default class Downtimes {
         this.siteGroup = new Map();
     }
 
+    getDowntimes() {
+        let downtimes: Downtime[] = [];
+        this.downtimeDatabase.forEach((value: Downtime, key: string) => {
+            downtimes.push(value);
+        })
+        return downtimes;
+    }
+
     // A boolean function that determines if a Downtime is overlapping with any corresponding telescopes or not.
     validateDowntime(newDowntime: Downtime, newStartDate?: Date, newEndDate?: Date): boolean {
         let overlap: boolean = false;
