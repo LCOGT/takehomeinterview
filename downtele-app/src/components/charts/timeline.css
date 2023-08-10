@@ -1,0 +1,13 @@
+.vis-item-content {
+    background-color: #828df8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.vis-timeline {
+    border-radius: 6px;
+    border: 2px solid purple;
+    font-size: 12pt;
+    font-weight: bold;
+    background: #f1f6fe;
+}

@@ -30,6 +30,9 @@ function TableDisplay() {
         const updatedArray = [...sortedDowntimeArray];
         updatedArray[index].reason =editedReason;
         setSortedDowntimeArray(updatedArray);
+
+        // Update local storage with the updated data
+        localStorage.setItem('downtimeArray', JSON.stringify(updatedArray));
     };
 
     const entryDelete = (index) => {
@@ -45,7 +48,7 @@ function TableDisplay() {
         <div className="container mx-auto mt-4">
             <div className="text-xl mb-4">
                 <h2 className="text-center font-bold">Downtime Records</h2>
-                <table className="table text-center">
+                <table className="table text-center table-zebra">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -60,14 +63,14 @@ function TableDisplay() {
                     {sortedDowntimeArray.map((record, index) => (
                         <React.Fragment key={record.start}>
                         {/*TODO: Worst case scenario if you cannot get collapse to work use popups*/}
-                        <tr className="hover">
+                        <tr className="font-bold">
                             <td>{record.id}</td>
                             <td>{record.site}</td>
                             <td>{record.telescope}</td>
-                            <td>{record.start}</td>
-                            <td>{record.end}</td>
+                            <td className="text-primary">{record.start}</td>
+                            <td className="text-secondary">{record.end}</td>
                             <td>
-                                <button className="btn" onClick={() => toggleCollapse(index)}>
+                                <button className="btn btn-outline btn-accent btn-small" onClick={() => toggleCollapse(index)}>
                                     {collapsedRows[index] ? 'Expand' : 'Collapse'}
                                 </button>
                             </td>
@@ -76,25 +79,31 @@ function TableDisplay() {
                             {!collapsedRows[index] && (
                                 <tr>
                                     <td colSpan="7">
-                                        {/* Add your collapsible content here */}
-                                        <div className="grid grid-rows-2 gap-3">
-                                            <div className="grid grid-cols-2">
-                                                <div className="">
-                                                    <h3>Reason:</h3>
+                                        <div className="grid max-h-40">
+                                            <div className="grid grid-cols-3">
+                                                <div className="py-2 px-1 max-w-xs break-words">
+                                                    <h3 className="font-bold">Reason</h3>
                                                     <p>{record.reason || 'N/A'}</p>
                                                 </div>
-                                                <div>
-                                                    <textarea className="textarea textarea-bordered"
+                                                <div className="py-2 px-1 max-w-xs break-words">
+                                                    <h3 className="font-bold">Edit Reason</h3>
+                                                    <textarea className="textarea textarea-bordered textarea-sm w-full max-w-xs"
                                                               placeholder="Edit Reason"
                                                               value={editedReason}
                                                               onChange={(e) => setEditedReason(e.target.value)}
                                                     ></textarea>
-                                                    <button className="btn btn-primary " onClick={()=> reasonEdit(index)}>Submit</button>
+                                                    <button className="btn btn-primary py-2" onClick={()=> reasonEdit(index)}>Submit</button>
+                                                </div>
+                                                <div className="py-2 gap-2 max-w-xs">
+                                                    <div>
+                                                        <h3 className="font-bold">Delete Entry</h3>
+                                                        <p>This option cannot be undone! </p>
+                                                    </div>
+                                                    <div>
+                                                        <button className="btn btn-outline btn-error btn-small" onClick={()=> entryDelete(index)}>Delete Entry</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <button className="btn btn-outline btn-error" onClick={()=> entryDelete(index)}>Delete Entry</button>
-                                            <div>
-                                        </div>
                                         </div>
                                     </td>
                                 </tr>

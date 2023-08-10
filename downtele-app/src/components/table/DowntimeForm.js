@@ -115,99 +115,17 @@ function DowntimeForm({ setDowntimeArray }) {
         }
 
     };
-    // const handleFormSubmit = () => {
-    //     console.log("--- New ---")
-    //     // Access Flatpickr instances using refs
-    //     const startTimeFlatpickrInstance = newStartTime.current._flatpickr;
-    //     const endTimeFlatpickrInstance = newEndTime.current._flatpickr;
-    //
-    //     // Access selected dates from Flatpickr instances Note: 0 due to only 1 date selected
-    //     const startTime = startTimeFlatpickrInstance.selectedDates[0];
-    //     const endTime = endTimeFlatpickrInstance.selectedDates[0];
-    //
-    //     // Convert selected start and end times to moment objects
-    //     const selectedStartMoment = moment(startTime);
-    //     const selectedEndMoment = moment(endTime);
-    //
-    //     console.log(newLocation)
-    //     console.log(newTelescope)
-    //     // checks if the end time is set earlier than the start time
-    //     if (endTime-startTime < 0){
-    //         console.log("Error: End time prior to start time")
-    //     } else {
-    //         // Checks for overlapping entries before input
-    //         let overlapCheck = false;
-    //         for (let i in downtimeArray){
-    //             // If the Location and Telescope is the same as an entry prior, check the date/times for overlap
-    //             if (downtimeArray[i].site === newLocation && downtimeArray[i].telescope === newTelescope) {
-    //                 console.log("Match!")
-    //                 const existingStartMoment = moment(downtimeArray[i].start, "LLL");
-    //                 const existingEndMoment = moment(downtimeArray[i].end, "LLL");
-    //                 // if NewStart/NewEnd is between a written key
-    //                 if (
-    //                     (existingStartMoment <= selectedStartMoment && existingEndMoment >= selectedStartMoment) ||
-    //                     (existingStartMoment <= selectedEndMoment && existingEndMoment >= selectedEndMoment) ||
-    //                     (selectedStartMoment <= existingStartMoment && existingStartMoment <= selectedEndMoment)){
-    //                     console.log("Error: Start or End value intersects with another entry.")
-    //                     overlapCheck = true;
-    //                 }
-    //             }
-    //         }
-    //         if (!overlapCheck){
-    //             // Retrieve existing data from localStorage
-    //             const existingData = JSON.parse(localStorage.getItem('downtimeArray')) || [];
-    //
-    //             // Grabs the last value within the entry.ID then aggregates by 1
-    //             const mathMax = existingData.length > 0 ? Math.max(...existingData.map(entry => entry.id)) : 0;
-    //             newID = mathMax + 1
-    //             console.log("NewID: ",newID)
-    //             // New Entry input
-    //             const newEntry ={
-    //                 id: newID,
-    //                 site: newLocation,
-    //                 telescope: newTelescope,
-    //                 start: moment(startTime).format('LLL'),
-    //                 end: moment(endTime).format('LLL'),
-    //                 reason: newReason
-    //             }
-    //             console.log("No OverLap Found ", newEntry)
-    //
-    //             // Push the new entry to the existing data
-    //             existingData.push(newEntry);
-    //             // const updatedData = [...existingData, newEntry];
-    //
-    //             localStorage.setItem('downtimeArray', JSON.stringify(existingData));
-    //             // Update state and localStorage with the updated data
-    //             setDowntimeArray(existingData);
-    //             // push the new information to the Array in DowntimeArray.js
-    //             // downtimeArray.push(newEntry);
-    //             //
-    //             // setDowntimeArray([...downtimeArray, newEntry]);
-    //             // setDowntimeArray(prevArray => [...prevArray, newEntry]);
-    //             // // Updates local storage
-    //             // localStorage.setItem('downtimeArray', JSON.stringify([...downtimeArray, newEntry]));
-    //         }
-    //     }
-    //
-    //     // console.log(newID)
-    //     // console.log(newLocation)
-    //     // console.log(newTelescope)
-    //     // console.log("Start Time:", moment(startTime).format('LLL'));
-    //     // console.log("End Time:", moment(endTime).format('LLL'));
-    //     // console.log(endTime-startTime)
-    //     // console.log(newReason)
-    // };
 
     return (
         <div className="grid place-content-center gap-4">
-            <h2 className="text-center font-bold">Add New Record</h2>
+            {/*<h2 className="text-center font-bold">Add New Record</h2>*/}
             {/* Location and Telescope */}
-            <div className="flex flex-row gap-x-2">
+            <div className="grid grid-cols-2 place-content-center">
                 <div>
                     <label className="label">
-                        <span className="label-text">Location</span>
+                        <span className="label-text text-white font-bold">Location</span>
                     </label>
-                    <select className="select select-bordered"
+                    <select className="select select-bordered w-full max-w-xs text-black dark:text-white"
                             value={newLocation.toUpperCase()}
                             onChange={(e) => {
                                 setLocation(e.target.value);
@@ -221,9 +139,9 @@ function DowntimeForm({ setDowntimeArray }) {
                 </div>
                 <div>
                     <label className="label">
-                        <span className="label-text">Telescope</span>
+                        <span className="label-text text-white font-bold">Telescope</span>
                     </label>
-                    <select className="select select-bordered"
+                    <select className="select select-bordered w-full max-w-xs text-black dark:text-white"
                             value={newTelescope.toUpperCase()}
                             onChange={(e) => {
                                 setTelescope(e.target.value);
@@ -242,18 +160,18 @@ function DowntimeForm({ setDowntimeArray }) {
                 <div className="flex flex-row gap-x-2">
                     <div>
                         <label className="label">
-                            <span className="label-text">Start Date/Time</span>
+                            <span className="label-text text-white font-bold">Start Date/Time</span>
                         </label>
-                        <input className="input input-bordered w-full max-w-xs"
+                        <input className="input input-bordered w-full max-w-xs text-black dark:text-white"
                                type="text"
                                id="NewStartTime"
                                ref={newStartTime}/>
                     </div>
                     <div>
                         <label className="label">
-                            <span className="label-text">End Date/Time</span>
+                            <span className="label-text text-white font-bold">End Date/Time</span>
                         </label>
-                        <input className="input input-bordered w-full max-w-xs"
+                        <input className="input input-bordered w-full max-w-xs text-black dark:text-white"
                                type="text"
                                id="NewEndTime"
                                ref={newEndTime}/>
@@ -264,21 +182,20 @@ function DowntimeForm({ setDowntimeArray }) {
             <div className="flex items-end gap-x-1">
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">Reason</span>
-                        <span className={`label-text-alt ${charCountExceeded ? 'text-red-600' : ''}`}>
+                        <span className="label-text text-white font-bold">Reason</span>
+                        <span className={`badge label-text-alt font-bold ${charCountExceeded ? 'text-red-600' : ''}`}>
                             {charCount}/255
                         </span>
                     </label>
-                    <input className="input input-bordered w-full max-w-xs" type="text"
+                    <input className="input input-bordered w-full max-w-xs text-black dark:text-white" type="text"
                            placeholder="Please Type a Reason"
                            value={Reason}
                            onChange={handleReasonChange}
                     />
                 </div>
-                {/* TODO: create new page that appends data a new table element*/}
                 {/* Button */}
                 <div>
-                    <button className="btn btn-primary" onClick={handleFormSubmit}>Submit</button>
+                    <button className="btn btn-secondary dark:btn-primary" onClick={handleFormSubmit}>Submit</button>
                 </div>
             </div>
         </div>
