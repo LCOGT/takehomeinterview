@@ -6,7 +6,9 @@ import 'vis-timeline/styles/vis-timeline-graph2d.css'
 function Time_line() {
     useEffect (() => {
         const chartType = document.getElementById('timeline');
-        const info = JSON.parse(localStorage.getItem('downtimeArray')).map( item => ({
+        const datacheck = localStorage.getItem('downtimeArray');
+        if (datacheck){
+        const info = JSON.parse(localStorage.getItem('downtimeArray')).map(item => ({
             id: item.id,
             start: new Date(item.start),
             end: new Date(item.end),
@@ -17,10 +19,11 @@ function Time_line() {
         const options = {};
 
         const graph = new Timeline(chartType, info, options);
-        graph.setGroups(grouping.map(group => ({id: group, content: group })));
+        graph.setGroups(grouping.map(group => ({id: group, content: group})));
         return () => {
             graph.destroy();
         };
+    }
     }, []);
     return (
         <div>
