@@ -18,4 +18,8 @@ export default class Downtimes {
     getTelescopeDowntimes(telescopeId: string): Downtime[] {
         return []; // TODO
     }
+
+    createDowntime(downtime: Downtime, props?: any) {
+        
+    }
 }

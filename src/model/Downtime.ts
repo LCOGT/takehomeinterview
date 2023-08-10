@@ -1,4 +1,5 @@
 import { toUTC } from "./Utils";
+import {v4 as uuidv4} from 'uuid';
 
 export interface DowntimeProps {
     siteId: string,
@@ -29,9 +30,11 @@ export interface DeleteDowntimeProps {
 }
 
 export default class Downtime {
+    id: string;
     props: DowntimeProps;
 
     constructor(props: DowntimeProps) {
+        this.id = uuidv4();
         this.props = props;
 
         // Process the data according to the first requirement
