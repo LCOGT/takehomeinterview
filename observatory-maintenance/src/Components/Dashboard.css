@@ -5,10 +5,15 @@
 }
 
 table {
-  border: 1px solid blue;
   width: 100%;
 }
 
 .entry-details {
   width: 40%;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
 }

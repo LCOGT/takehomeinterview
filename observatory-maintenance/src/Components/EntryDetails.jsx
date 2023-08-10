@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 function EntryDetails({
   downtimes,
@@ -24,19 +24,24 @@ function EntryDetails({
 
   return (
     <div className="details-container">
-      <div className="entry-details">Further Details</div>
-      <p>Reason for Downtime: {currentDowntimeDetails[0].reason}</p>
       <div>
         {currentDowntime.length ? (
-          <form>
-            <label htmlFor="reason">Update Reason</label>
-            <textarea
-              name="reason"
-              onChange={(e) => setCurrentDetail(e.target.value)}
-              value={currentDetail}
-            ></textarea>
-            <button onClick={handleReasonSave}>Save</button>
-          </form>
+          <>
+            <div className="entry-details">Further Details</div>
+            <p>
+              Reason for Downtime: {'\n'}
+              {currentDowntimeDetails[0].reason}
+            </p>
+            <form>
+              <label htmlFor="reason">Update Reason</label>
+              <textarea
+                name="reason"
+                onChange={(e) => setCurrentDetail(e.target.value)}
+                value={currentDetail}
+              ></textarea>
+              <button onClick={handleReasonSave}>Save</button>
+            </form>
+          </>
         ) : (
           <p>Click Details on an entry to see details.</p>
         )}

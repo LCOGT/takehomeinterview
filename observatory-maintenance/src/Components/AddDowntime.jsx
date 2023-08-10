@@ -65,60 +65,66 @@ function AddDowntime({ newDowntime, setNewDowntime, setDowntimes, downtimes }) {
 
   return (
     <>
+      <h1>Add Downtime</h1>
       <div>
-        <h1>Add Downtime</h1>
-
-        <form>
-          <label htmlFor="site">Site</label>
-          <input
-            type="text"
-            id="site"
-            name="site"
-            required
-            onChange={(e) => {
-              setNewDowntime({
-                ...newDowntime,
-                site: e.target.value.toLowerCase(),
-              });
-            }}
-          />
-          <label htmlFor="telescope">Telescope</label>
-          <input
-            type="text"
-            id="telescope"
-            name="telescope"
-            required
-            onChange={(e) => {
-              setNewDowntime({
-                ...newDowntime,
-                telescope: e.target.value.toLowerCase(),
-              });
-            }}
-          />
-          <label htmlFor="start">Start (UTC Time Required)</label>
-          <input
-            type="datetime-local"
-            id="start"
-            name="start"
-            required
-            onChange={(e) => {
-              const convertedTime = convertLocaltoUTC(e.target.value);
-              setNewDowntime({ ...newDowntime, start: convertedTime });
-            }}
-          />
-          <label htmlFor="end">End (UTC Time Required)</label>
-          <input
-            type="datetime-local"
-            id="end"
-            name="end"
-            required
-            onChange={(e) => {
-              const convertedTime = convertLocaltoUTC(e.target.value);
-              setNewDowntime({ ...newDowntime, end: convertedTime });
-            }}
-          />
+        <form className="add-entry">
+          <div>
+            <label htmlFor="site">Site</label>
+            <input
+              type="text"
+              id="site"
+              name="site"
+              required
+              onChange={(e) => {
+                setNewDowntime({
+                  ...newDowntime,
+                  site: e.target.value.toLowerCase(),
+                });
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="telescope">Telescope</label>
+            <input
+              type="text"
+              id="telescope"
+              name="telescope"
+              required
+              onChange={(e) => {
+                setNewDowntime({
+                  ...newDowntime,
+                  telescope: e.target.value.toLowerCase(),
+                });
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="start">Start (UTC)</label>
+            <input
+              type="datetime-local"
+              id="start"
+              name="start"
+              required
+              onChange={(e) => {
+                const convertedTime = convertLocaltoUTC(e.target.value);
+                setNewDowntime({ ...newDowntime, start: convertedTime });
+              }}
+            />
+          </div>
+          <div>
+            <label htmlFor="end">End (UTC)</label>
+            <input
+              type="datetime-local"
+              id="end"
+              name="end"
+              required
+              onChange={(e) => {
+                const convertedTime = convertLocaltoUTC(e.target.value);
+                setNewDowntime({ ...newDowntime, end: convertedTime });
+              }}
+            />
+          </div>
           <label htmlFor="reason">Reason</label>
-          <span> {255 - newDowntime.reason.length} characters left</span>
           <textarea
             type="text"
             id="reason"
@@ -129,10 +135,11 @@ function AddDowntime({ newDowntime, setNewDowntime, setDowntimes, downtimes }) {
               setNewDowntime({ ...newDowntime, reason: e.target.value });
             }}
           />
-          <button type="submit" onClick={handleSubmit}>
-            Submit
-          </button>
+          <span> {255 - newDowntime.reason.length} characters left</span>
         </form>
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </>
   );

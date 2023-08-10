@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DowntimeEntry.css';
 
 function DowntimeEntry({
@@ -14,11 +14,6 @@ function DowntimeEntry({
     setDowntimes((prevDowntimes) => {
       return prevDowntimes.filter((downtime) => downtime.id !== id);
     });
-  }
-
-  function handleEdit(e) {
-    e.preventDefault();
-    const id = e.target.id;
   }
 
   function showDetails(e) {

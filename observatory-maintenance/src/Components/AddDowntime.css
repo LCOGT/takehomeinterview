@@ -8,6 +8,18 @@ label {
   font-weight: 600;
 }
 
-input {
-  /* margin-bottom: 5%; */
+.add-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 2%;
+  margin-right: 2%;
+  /* border: 1px solid black; */
+}
+
+#reason {
+  width: 40%;
+  height: 100px;
+  resize: none;
 }
