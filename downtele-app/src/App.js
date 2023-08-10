@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import './App.css';
 import TableDisplay from "./components/table/tableDisplay";
 import DowntimeForm from "./components/table/DowntimeForm";
+import Time_line from "./components/charts/timeline";
 // import downtimeArray from "./components/table/DowntimeArray";
 
 
@@ -19,6 +20,7 @@ function App() {
                 <div className="hero-content p-3">
                     <div className="card shadow-2xl gap-3">
                         {/* Parent functions that Pass TableDisplay and DowntimeForm as a prop */}
+                        <Time_line />
                         <TableDisplay downtimeArray={downtimeArray} />
                         <DowntimeForm setDowntimeArray={setDowntimeArray} />
                     </div>
