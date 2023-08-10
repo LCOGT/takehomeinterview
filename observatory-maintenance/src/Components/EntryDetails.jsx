@@ -6,26 +6,42 @@ function EntryDetails({
   currentDowntime,
   setCurrentDowntime,
 }) {
-  const [currentDetail, setCurrentDetail] = useState({});
+  const [currentDetail, setCurrentDetail] = useState('');
   const currentDowntimeDetails = downtimes.filter(
     (downtime) => downtime.id === currentDowntime
   );
 
+  function handleReasonSave(e) {
+    e.preventDefault();
+    const id = currentDowntimeDetails[0].id;
+    const reason = e.target.form.reason.value;
+    const newDowntimes = downtimes.map((downtime) => {
+      return downtime.id === id ? { ...downtime, reason: reason } : downtime;
+    });
+    setDowntimes(newDowntimes);
+    setCurrentDetail('');
+  }
+
   return (
-    <>
+    <div className="details-container">
       <div className="entry-details">Further Details</div>
+      <p>Reason for Downtime: {currentDowntimeDetails[0].reason}</p>
       <div>
         {currentDowntime.length ? (
           <form>
-            <label htmlFor="reason">Reason for Downtime</label>
-            <textarea defaultValue={currentDowntimeDetails.reason}></textarea>
-            <button>Save</button>
+            <label htmlFor="reason">Update Reason</label>
+            <textarea
+              name="reason"
+              onChange={(e) => setCurrentDetail(e.target.value)}
+              value={currentDetail}
+            ></textarea>
+            <button onClick={handleReasonSave}>Save</button>
           </form>
         ) : (
           <p>Click Details on an entry to see details.</p>
         )}
       </div>
-    </>
+    </div>
   );
 }
 

@@ -13,11 +13,12 @@
 You are free to organize the user-interface as you see fit as long as it has the following components:
 [X]\* A form to add new downtimes as described above.
 
-- It should validate inputs and reject invalid entries.
-  []\* A component that lists _all_ downtimes sorted by the start date in descending order.
-- Every item should display the downtime _ID_, _Site_, _Telescope_, _Start_, _End_.
-- Should be expandable to show the downtime _Reason_.
-- Be able to edit and save the _Reason_.
-- Be able to delete the downtime entry.
+[X]- It should validate inputs and reject invalid entries.
+[X]\* A component that lists _all_ downtimes sorted by the start date in descending order.
+[X]- Every item should display the downtime _ID_, _Site_, _Telescope_, _Start_, _End_.
+[X]- Should be expandable to show the downtime _Reason_.
+[X]- Be able to edit and save the _Reason_.
+[X]- Be able to delete the downtime entry.
+
 - Bonus: the ability to filter/search by _site_ or _telescope_
   []\* Bonus: A timeline component to visualize all downtimes. (Hint: use https://visjs.github.io/vis-timeline/docs/timeline/)
