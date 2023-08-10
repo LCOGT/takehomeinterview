@@ -1,25 +1,116 @@
-import Downtime from "../model/Downtime";
+import { Downtime, CreateDowntimeProps, DeleteDowntimeProps, ReadDowntimeProps, UpdateDowntimeProps } from "../model/Downtime";
+import { isErrorObject, isOverlap } from "../model/Utils";
 
 export default class Downtimes {
     downtimeDatabase: Map<string, Downtime>; // The main database of all Downtimes by their ID
-    telescopeGroup: Map<string, string>; // Mappings from single telescopeID to all its downtimeIDs
-    siteGroup: Map<string, string>; // Mappings from a single siteGroupID to all telescopeIDs
-
+    telescopeGroup: Map<string, Set<string>>; // Mappings from single telescopeID to all its downtimeIDs
+    siteGroup: Map<string, Set<string>>; // Mappings from a single siteGroupID to all telescopeIDs
     constructor() {
         this.downtimeDatabase = new Map();
         this.telescopeGroup = new Map();
         this.siteGroup = new Map();
     }
 
-    validateDowntime(downtime: Downtime): boolean | Error {
-        return true; // TODO
+    // A boolean function that determines if a Downtime is overlapping with any corresponding telescopes or not.
+    validateDowntime(newDowntime: Downtime, newStartDate?: Date, newEndDate?: Date): boolean {
+        let overlap: boolean = false;
+        this.getTelescopeDowntimes(newDowntime.props.telescopeId).forEach((existingDowntime: Downtime) => {
+            if (isOverlap(
+                existingDowntime.props.startDate, 
+                existingDowntime.props.endDate, 
+                newStartDate ? newStartDate : newDowntime.props.startDate, 
+                newEndDate ? newEndDate : newDowntime.props.endDate)) {
+                if (existingDowntime.id !== newDowntime.id) {
+                    overlap = true;
+                }
+            }
+        });
+        return !overlap;
     }
 
+    // Create or update a Telescope. This is implicitly called from Downtime CRUD operations.
+    createTelescope(telescopeId: string): boolean | Error {
+        this.telescopeGroup.set(telescopeId, new Set());
+        return true;
+    }
+
+    // Get a list of all downtimes associated with a telescope by ID.
     getTelescopeDowntimes(telescopeId: string): Downtime[] {
-        return []; // TODO
+        const downtimeIDs = this.telescopeGroup.get(telescopeId);
+        if (downtimeIDs) {
+            let downtimes: Downtime[] = [];
+            for (const downtimeId of downtimeIDs) {
+                let downtime = this.readDowntime({downtimeId: downtimeId});
+                if (downtime) {
+                    downtimes.push(downtime);
+                }
+            }
+            return downtimes;
+        } else {
+            return [];
+        }
     }
 
-    createDowntime(downtime: Downtime, props?: any) {
-        
+    // Delete a Telescope by ID, along with all its downtimes.
+    deleteTelescope(telescopeId: string): boolean | Error {
+        const downtimes = this.getTelescopeDowntimes(telescopeId);
+        if (!isErrorObject(downtimes)) {
+            downtimes.forEach((downtime: Downtime) => this.deleteDowntime({downtimeId: downtime.id}));
+            this.telescopeGroup.delete(telescopeId);
+            return true;
+        } else {
+            return new Error("Unable to delete telescope. ")
+        } 
+    }
+
+    // Create a Downtime, and the Telescope if it doesn't already exist, and return the new ID. or return an error of overlaps are detected.
+    createDowntime(props: CreateDowntimeProps): string | Error {
+        const telescopeId: string = props.downtimeProps.telescopeId;
+        if (!this.telescopeGroup.has(telescopeId)) this.createTelescope(telescopeId);
+        const downtime = new Downtime(props.downtimeProps)
+        if (this.validateDowntime(downtime)) {
+            this.downtimeDatabase.set(downtime.id, downtime);
+            this.telescopeGroup.get(telescopeId)?.add(downtime.id);
+            return downtime.id;
+        } else {
+            return new Error("Unable to create downtime due to overlaps with existing downtime. ")
+        }
+    }
+
+    // Get a Downtime by ID, or an error if it does not exist.
+    readDowntime(props: ReadDowntimeProps): Downtime | null {
+        const result = this.downtimeDatabase.get(props.downtimeId);
+        if (result) {
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    // Attempt to replace the existing Downtime
+    updateDowntime(props: UpdateDowntimeProps): boolean | Error {
+        const downtime = this.readDowntime({downtimeId: props.oldDowntimeId});
+        if (downtime) {
+            if (this.validateDowntime(downtime, props.startDate, props.endDate)) {
+                this.downtimeDatabase.set(downtime.id, downtime);
+                return true;
+            } else {
+                return new Error("Unable to update downtime due to overlaps with existing downtime. ")
+            }
+        } else {
+            return new Error("Downtime does not exist. ")
+        }    
+    }
+
+    // Delete the Downtime, and also its corresponding instance in its telescope group.
+    deleteDowntime(props: DeleteDowntimeProps): boolean | Error {
+        const downtime = this.downtimeDatabase.get(props.downtimeId);
+        if (downtime) {
+            this.downtimeDatabase.delete(downtime.id);
+            this.telescopeGroup.get(downtime.props.telescopeId)?.delete(downtime.id);
+            return true;
+        } else {
+            return new Error("Downtime does not exist. ")
+        }
     }
 }
