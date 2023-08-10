@@ -64,7 +64,7 @@ function TableDisplay() {
                         <React.Fragment key={record.start}>
                         {/*TODO: Worst case scenario if you cannot get collapse to work use popups*/}
                         <tr className="font-bold">
-                            <td>{record.id}</td>
+                            <td>#{record.id}</td>
                             <td>{record.site}</td>
                             <td>{record.telescope}</td>
                             <td className="text-primary">{record.start}</td>

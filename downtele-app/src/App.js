@@ -20,8 +20,8 @@ function App() {
                 <div className="hero-content p-3">
                     <div className="card bg-base-100 shadow-2xl p-1">
                         <div className="p-3">
-                            {/* Parent functions that Pass TableDisplay and DowntimeForm as a prop */}
                             <Time_line />
+                            {/* Parent functions that Pass TableDisplay and DowntimeForm as a prop */}
                             <TableDisplay downtimeArray={downtimeArray} />
                             {/* Collapse for Adding a New Record */}
                             <div tabIndex={0} className="collapse bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content dark:bg-secondary">
