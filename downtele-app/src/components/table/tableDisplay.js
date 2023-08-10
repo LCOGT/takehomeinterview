@@ -8,6 +8,8 @@ function TableDisplay() {
     const [sortedDowntimeArray, setSortedDowntimeArray] = useState([]);
     const [collapsedRows, setCollapsedRows] = useState(Array(sortedDowntimeArray.length).fill(true));
     const [editedReason, setEditedReason] = useState('');
+    const [errorCode, setErrorCode] = useState("Error: Unknown");
+    const [showError, setshowError] = useState(false);
 
     useEffect(() => {
         const storedData = localStorage.getItem('downtimeArray');
@@ -26,13 +28,19 @@ function TableDisplay() {
         setCollapsedRows(updatedCollapsedRows);
     };
 
+    const charCountExceeded = editedReason.length > 255;
     const reasonEdit = (index) => {
-        const updatedArray = [...sortedDowntimeArray];
-        updatedArray[index].reason =editedReason;
-        setSortedDowntimeArray(updatedArray);
+        if(!charCountExceeded){
+            const updatedArray = [...sortedDowntimeArray];
+            updatedArray[index].reason = editedReason;
+            setSortedDowntimeArray(updatedArray);
 
-        // Update local storage with the updated data
-        localStorage.setItem('downtimeArray', JSON.stringify(updatedArray));
+            // Update local storage with the updated data
+            localStorage.setItem('downtimeArray', JSON.stringify(updatedArray));
+        } else {
+            setErrorCode("Error: Reason Exceeds the character limit of 255",)
+            setshowError(true);
+        }
     };
 
     const entryDelete = (index) => {
@@ -79,7 +87,13 @@ function TableDisplay() {
                             {!collapsedRows[index] && (
                                 <tr>
                                     <td colSpan="7">
-                                        <div className="grid max-h-40">
+                                        <div className="grid max-h-400">
+                                            {showError && (
+                                                <div className="alert alert-error">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                    <span>{errorCode}</span>
+                                                </div>
+                                            )}
                                             <div className="grid grid-cols-3">
                                                 <div className="py-2 px-1 max-w-xs break-words">
                                                     <h3 className="font-bold">Reason</h3>
