@@ -1,5 +1,5 @@
 import { Downtime, CreateDowntimeProps, DeleteDowntimeProps, ReadDowntimeProps, UpdateDowntimeProps } from "../model/Downtime";
-import { isErrorObject, isOverlap } from "../model/Utils";
+import { isErrorObject, isOverlap } from "../Utils";
 
 export default class Downtimes {
     downtimeDatabase: Map<string, Downtime>; // The main database of all Downtimes by their ID
@@ -39,7 +39,7 @@ export default class Downtimes {
         const downtimeIDs = this.telescopeGroup.get(telescopeId);
         if (downtimeIDs) {
             let downtimes: Downtime[] = [];
-            for (const downtimeId of downtimeIDs) {
+            for (const downtimeId of Array.from(downtimeIDs)) {
                 let downtime = this.readDowntime({downtimeId: downtimeId});
                 if (downtime) {
                     downtimes.push(downtime);

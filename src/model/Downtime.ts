@@ -1,4 +1,4 @@
-import { toUTC } from "./Utils";
+import { toUTC } from "../Utils";
 import {v4 as uuidv4} from 'uuid';
 
 export interface DowntimeProps {
