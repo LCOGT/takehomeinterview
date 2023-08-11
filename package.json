@@ -9,6 +9,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "vis": "^4.21.0-EOL",
+    "vis-data": "^7.1.6",
+    "vis-timeline": "^7.7.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -36,6 +39,7 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.2"
+    "@types/uuid": "^9.0.2",
+    "react-visjs-timeline": "^1.6.0"
   }
 }

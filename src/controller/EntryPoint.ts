@@ -15,20 +15,16 @@ export default class EntryPoint {
         this.counter = 0;
     }
 
-    redux() {
-        let redux = new EntryPoint();
-        redux.downtimeDatabase = this.downtimeDatabase;
-        redux.telescopeGroup = this.telescopeGroup;
-        redux.siteGroup = this.siteGroup;
-        return redux;
-    }
-
     getDowntimes() {
         let downtimes: Downtime[] = [];
         this.downtimeDatabase.forEach((value: Downtime, key: string) => {
             downtimes.push(value);
         })
         return downtimes;
+    }
+
+    getTelescopeGroups() {
+
     }
 
     // A boolean function that determines if a Downtime is overlapping with any corresponding telescopes or not.

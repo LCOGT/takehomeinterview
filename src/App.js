@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import EntryPoint from './controller/EntryPoint'
-import {TableView} from './view/views/TableView'
+import {MainView} from './view/views/MainView'
 import { parseData, serializeData } from './Utils';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <TableView context={entryPoint} />
+      <MainView context={entryPoint} />
     </div>
   );
 }

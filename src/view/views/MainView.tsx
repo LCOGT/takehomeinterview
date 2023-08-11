@@ -5,8 +5,9 @@ import { ReadAndDeleteDowntimeForm } from "../forms/ReadAndDeleteDowntimeForm";
 import { CreateDowntimeForm } from "../forms/CreateDowntimeForm";
 import { FilterForm } from "./FilterForm";
 import { substringMatch } from "../../Utils";
+import { TimelineView } from "./TimelineView";
 
-export const TableView = (props: { context: EntryPoint }) => {
+export const MainView = (props: { context: EntryPoint }) => {
   const [downtimes, setDowntimes] = useState<Downtime[]>(
     props.context.getDowntimes()
   );
@@ -25,6 +26,20 @@ export const TableView = (props: { context: EntryPoint }) => {
     setTelescopeFilter(event.target.value);
   };
 
+  const filteredDowntimes = downtimes
+  .filter((downtime: Downtime) =>
+    siteFilter.length == 0 ? true : substringMatch(siteFilter.toUpperCase(), downtime.props.siteId) 
+  )
+  .filter((downtime: Downtime) =>
+    telescopeFilter.length == 0
+      ? true
+      : substringMatch(telescopeFilter.toUpperCase(), downtime.props.telescopeId) 
+  )
+  .sort(
+    (a: Downtime, b: Downtime) =>
+      (new Date(b.props.startDate)).getTime() - (new Date(a.props.startDate)).getTime()
+  );
+
   return (
     <div>
       {<CreateDowntimeForm context={props.context} redux={forceUpdate} />}
@@ -34,20 +49,9 @@ export const TableView = (props: { context: EntryPoint }) => {
         siteFilterHandler={siteFilterHandler}
         telescopeFilterHandler={telescopeFilterHandler}
       />
+      <TimelineView context={props.context} downtimes={filteredDowntimes} />
       <div style={{ minHeight: 50 }}></div>
-      {downtimes
-        .filter((downtime: Downtime) =>
-          siteFilter.length == 0 ? true : substringMatch(siteFilter.toUpperCase(), downtime.props.siteId) 
-        )
-        .filter((downtime: Downtime) =>
-          telescopeFilter.length == 0
-            ? true
-            : substringMatch(telescopeFilter.toUpperCase(), downtime.props.telescopeId) 
-        )
-        .sort(
-          (a: Downtime, b: Downtime) =>
-            (new Date(b.props.startDate)).getTime() - (new Date(a.props.startDate)).getTime()
-        )
+      {filteredDowntimes
         .map((downtime: Downtime) => (
           <ReadAndDeleteDowntimeForm
             context={props.context}
