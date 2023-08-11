@@ -6,11 +6,13 @@ import {
   UpdateDowntimeProps,
 } from "../../model/Downtime";
 import Downtimes from "../../database/Downtimes";
+import { downtimeStyle } from "./DowntimeTemplate";
 
 export const UpdateDowntimeForm = (props: {
   context: Downtimes;
   downtime: Downtime;
   redux: () => any;
+  callback: () => any;
 }) => {
   const [formData, setFormData] = useState<UpdateDowntimeProps>({
     oldDowntimeId: props.downtime.id,
@@ -58,10 +60,56 @@ export const UpdateDowntimeForm = (props: {
       }
     }
     props.redux();
+    props.callback();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}style={downtimeStyle}
+    >
+      <div style={{ clear: "left" }}>
+        <div style={{ float: "left" as "left", minWidth: 300 }}>
+          <div>
+            <label>
+              Site ID: {props.downtime.id}
+            </label>
+          </div>
+          <div>
+            <label>
+              Site ID: {props.downtime.props.siteId}
+            </label>
+          </div>
+          <div>
+            <label>
+              Site ID: {props.downtime.props.telescopeId}
+            </label>
+          </div>
+        </div>
+        <div style={{ float: "left" as "left", minWidth: 300 }}>
+          <div>
+            <label>
+              Start date:
+              <input
+                type="date"
+                name="startDate"
+                value={formData.startDate?.toISOString().slice(0, 10) || ""}
+                onChange={handleDateInputChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              End date:
+              <input
+                type="date"
+                name="endDate"
+                value={formData.endDate?.toISOString().slice(0, 10) || ""}
+                onChange={handleDateInputChange}
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+
       <div>
         <label>
           Reason:
@@ -79,30 +127,10 @@ export const UpdateDowntimeForm = (props: {
           {formData.reason.length.toString()} / 255
         </div>
       </div>
-      <div>
-        <label>
-          Start date:
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate?.toISOString().slice(0, 10) || ""}
-            onChange={handleDateInputChange}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          End date:
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate?.toISOString().slice(0, 10) || ""}
-            onChange={handleDateInputChange}
-          />
-        </label>
-      </div>
-      <button type="submit">Submit</button>
+
+      <button type="submit">Save Changes</button>
       {errorMsg}
+
     </form>
   );
 };
