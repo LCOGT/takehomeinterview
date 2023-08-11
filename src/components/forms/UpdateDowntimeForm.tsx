@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import {
-  CreateDowntimeProps,
   Downtime,
-  DowntimeProps,
   UpdateDowntimeProps,
 } from "../../model/Downtime";
 import Downtimes from "../../database/Downtimes";
-import { COL1_WIDTH, COL2_WIDTH, columnStyle, downtimeStyle, entryContainer, entryKeyStyle, entryValueStyle } from "./DowntimeTemplate";
+import { COL1_WIDTH, COL2_WIDTH, columnStyle, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, sectionHeader } from "./DowntimeTemplate";
 
 export const UpdateDowntimeForm = (props: {
   context: Downtimes;
@@ -41,6 +39,9 @@ export const UpdateDowntimeForm = (props: {
     return formData.reason.length < 255;
   };
 
+  const handleCancel = (event: any) => {
+    props.callback();
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateForm) {
@@ -64,8 +65,8 @@ export const UpdateDowntimeForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit}style={downtimeStyle}
-    >
+    <form onSubmit={handleSubmit}style={sectionContainer}>
+      <div style={sectionHeader}>{props.downtime.props.telescopeId}</div>
       <div style={{ clear: "left" }}>
         <div
             style={{
@@ -132,6 +133,7 @@ export const UpdateDowntimeForm = (props: {
         </div>
         
         <div style={columnStyle}>
+          <button onMouseDown={handleCancel}>Cancel</button>
           <button type="submit">Submit</button>
           {errorMsg}
         </div>

@@ -6,8 +6,8 @@ import {
   COL1_WIDTH,
   COL2_WIDTH,
   columnStyle,
-  downtimeHeader,
-  downtimeStyle,
+  sectionHeader,
+  sectionContainer,
   entryContainer,
   entryKeyStyle,
   entryValueStyle,
@@ -38,26 +38,6 @@ export const CreateDowntimeForm = (props: {
   ) => {
     const { name, value } = event.target;
     const dateValue = value ? new Date(value) : null;
-    setFormData({ ...formData, [name]: dateValue });
-  };
-
-  const handleStartTimeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    const dateValue = value ? toUTC(new Date(value)) : new Date(0);
-    formData.startDate.setHours(dateValue.getHours());
-    formData.startDate.setMinutes(dateValue.getMinutes());
-    formData.startDate.setSeconds(dateValue.getSeconds());
-    setFormData({ ...formData, startDate: formData.startDate });
-  };
-
-  const handleEndTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    const dateValue = value ? new Date(value) : null;
-    formData.endDate.setHours(dateValue.getHours());
-    formData.endDate.setMinutes(dateValue.getMinutes());
-    formData.endDate.setSeconds(dateValue.getSeconds());
     setFormData({ ...formData, [name]: dateValue });
   };
 
@@ -98,8 +78,8 @@ export const CreateDowntimeForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{...downtimeStyle}}>
-      <div style={downtimeHeader}>Add new Downtime</div>
+    <form onSubmit={handleSubmit} style={{...sectionContainer}}>
+      <div style={sectionHeader}>Add new Downtime</div>
       <div style={{ backgroundColor: "#ffffff" }}>
         <div style={{ minWidth: 300 }}>
           <div

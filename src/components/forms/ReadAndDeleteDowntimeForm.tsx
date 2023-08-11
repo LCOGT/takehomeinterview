@@ -7,7 +7,7 @@ import {
 } from "../../model/Downtime";
 import Downtimes from "../../database/Downtimes";
 import { UpdateDowntimeForm } from "./UpdateDowntimeForm";
-import { COL1_WIDTH, COL2_WIDTH, TOTAL_WIDTH, columnStyle, downtimeHeader, downtimeStyle, entryContainer, entryKeyStyle, entryValueStyle, toggleTextStyle } from "./DowntimeTemplate";
+import { COL1_WIDTH, COL2_WIDTH, TOTAL_WIDTH, columnStyle, sectionHeader, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, toggleTextStyle } from "./DowntimeTemplate";
 
 export const ReadAndDeleteDowntimeForm = (props: {
   context: Downtimes;
@@ -44,8 +44,8 @@ export const ReadAndDeleteDowntimeForm = (props: {
           callback={updateCallback}
         />
       ) : (
-        <div style={downtimeStyle}>
-          <div style={downtimeHeader}>{props.downtime.id}</div>
+        <div style={sectionContainer}>
+          <div style={sectionHeader}>{props.downtime.props.telescopeId}</div>
           <div style={{minWidth: TOTAL_WIDTH, minHeight: 100, textAlign: "left", height: "100%" }} >
             <div style={{ ...columnStyle, float: "left" as "left", minWidth: COL1_WIDTH, padding: 5 }}>
                 <div style={entryContainer}>
@@ -53,8 +53,8 @@ export const ReadAndDeleteDowntimeForm = (props: {
                   <div style={entryValueStyle}>{props.downtime.props.siteId}</div>
                 </div>
                 <div style={entryContainer}>
-                  <div style={entryKeyStyle}>Telescope:</div>
-                  <div style={entryValueStyle}>{props.downtime.props.telescopeId}</div>
+                  <div style={entryKeyStyle}>Downtime ID: </div>
+                  <div style={entryValueStyle}>{expanded ? props.downtime.id : (props.downtime.id.slice(0, 10) + "...")}</div>
                 </div>
             </div>
             <div style={{ ...columnStyle, float: "right" as "right", minWidth: COL2_WIDTH }}>

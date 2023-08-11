@@ -1,37 +1,59 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Downtimes from "../../database/Downtimes";
 import { Downtime } from "../../model/Downtime";
 import { ReadAndDeleteDowntimeForm } from "../forms/ReadAndDeleteDowntimeForm";
 import { CreateDowntimeForm } from "../forms/CreateDowntimeForm";
+import { FilterForm } from "./FilterForm";
 
+export const TableView = (props: { context: Downtimes }) => {
+  const [downtimes, setDowntimes] = useState<Downtime[]>(
+    props.context.getDowntimes()
+  );
+  const [siteFilter, setSiteFilter] = useState<string>("");
+  const [telescopeFilter, setTelescopeFilter] = useState<string>("");
 
+  const forceUpdate = () => {
+    setDowntimes(props.context.getDowntimes());
+  };
 
-export const TableView = (props: {context: Downtimes}) => {
-    const [downtimes, setDowntimes] = useState<Downtime[]>(props.context.getDowntimes());
-    const [myTime, setMyTime] = useState(new Date());
-    const [showAddForm, setShowAddForm] = useState<boolean>(true);
+  const siteFilterHandler = (event: any) => {
+    setSiteFilter(event.target.value);
+  };
 
-    const forceUpdate = () => {
-        setDowntimes(props.context.getDowntimes());
-        // setDowntimes(downtimes.redux());
-    }
+  const telescopeFilterHandler = (event: any) => {
+    setTelescopeFilter(event.target.value);
+  };
 
-    const toggleAddForm = (event: React.MouseEvent<HTMLInputElement>) => {
-        setShowAddForm(!showAddForm);
-    }
-   // console.log(downtimes.getDowntimes());
-    return (<div>
-        <div onMouseDown={toggleAddForm}>
-            {showAddForm ? "Hide form" : "Add new Downtime"}
-        </div>
-        {toggleAddForm && <CreateDowntimeForm 
-            context={props.context}
-            redux={forceUpdate}
-        />}
-        {downtimes.map((downtime: Downtime) => <ReadAndDeleteDowntimeForm 
+  return (
+    <div>
+      {<CreateDowntimeForm context={props.context} redux={forceUpdate} />}
+      <FilterForm
+        siteFilter={siteFilter}
+        telescopeFilter={telescopeFilter}
+        siteFilterHandler={siteFilterHandler}
+        telescopeFilterHandler={telescopeFilterHandler}
+      />
+      <div style={{ minHeight: 50 }}></div>
+      {downtimes
+        .filter((downtime: Downtime) =>
+          siteFilter.length == 0 ? true : downtime.props.siteId == siteFilter
+        )
+        .filter((downtime: Downtime) =>
+          telescopeFilter.length == 0
+            ? true
+            : downtime.props.telescopeId == telescopeFilter
+        )
+        .sort(
+          (a: Downtime, b: Downtime) =>
+            b.props.startDate.getTime() - a.props.startDate.getTime()
+        )
+        .map((downtime: Downtime) => (
+          <ReadAndDeleteDowntimeForm
             context={props.context}
             redux={forceUpdate}
             downtime={downtime}
-        />)}
-    </div>);
-}
+          />
+        ))}
+    </div>
+  );
+};

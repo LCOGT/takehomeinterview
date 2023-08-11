@@ -2,7 +2,7 @@ export const COL1_WIDTH = 350;
 export const COL2_WIDTH = 250;
 export const TOTAL_WIDTH = 800;
 
-export const downtimeHeader = {
+export const sectionHeader = {
     fontWeight: 600,
     fontSize: 20,
     margin: 10,
@@ -10,7 +10,7 @@ export const downtimeHeader = {
 
 }
 
-export const downtimeStyle = {
+export const sectionContainer = {
     margin: 10,
     padding: 10,
     maxWidth: TOTAL_WIDTH,
@@ -54,7 +54,7 @@ export const DowntimeTemplate = (props: {
     expandButton?: any,
     deleteButton?: any,
 }) => {
-   return (<div style={downtimeStyle}>
+   return (<div style={sectionContainer}>
     <div>
         <div style={{float: "left" as "left", minWidth: COL1_WIDTH}}>
             <props.downtimeId />
