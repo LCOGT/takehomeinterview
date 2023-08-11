@@ -1,3 +1,6 @@
+import EntryPoint from "./controller/EntryPoint";
+import { Downtime } from "./model/Downtime";
+
 export const toUTC = (d: Date): Date => {
     return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds()));
 }
@@ -7,7 +10,8 @@ export const isErrorObject = (obj: Object): boolean => {
 }
 
 export const isOverlap = (dateStartA: Date, dateEndA: Date, dateStartB: Date, dateEndB: Date): boolean => {
-    return (dateStartA.getTime() <= dateEndB.getTime() && dateStartB.getTime() <= dateEndA.getTime());
+    return ((new Date(dateStartA)).getTime() <= (new Date(dateEndB)).getTime() 
+    && (new Date(dateStartB)).getTime() <= (new Date(dateEndA)).getTime());
 }
 
 export const getTimestring = (date: Date) => {
@@ -20,4 +24,26 @@ export const getTimestring = (date: Date) => {
     time += ((s < 10) ? "0" + h.toString() : h.toString());
     console.log(time);
     return time;
+}
+
+export const substringMatch = (substring: string, superstring: string) => {
+    return (substring.length <= superstring.length && substring === superstring.slice(0, substring.length))
+}
+
+export const serializeData = (entryPoint: EntryPoint) => {
+    localStorage.setItem('state', JSON.stringify(entryPoint));
+    localStorage.setItem('downtimeDatabase', JSON.stringify(Array.from(entryPoint.downtimeDatabase.entries())));
+    localStorage.setItem('telescopeGroup', JSON.stringify(Array.from(entryPoint.telescopeGroup.entries())));
+    localStorage.setItem('siteGroup', JSON.stringify(Array.from(entryPoint.siteGroup.entries())));
+}
+
+export const parseData = (): EntryPoint => {
+    let entryPoint: EntryPoint = JSON.parse(localStorage.getItem('state'));
+    let tempDowntime: Map<string, Downtime> = new Map(localStorage.getItem('downtimeDatabase').length ? JSON.parse(localStorage.getItem('downtimeDatabase')) : []);
+    let tempTelescopes: Map<string, Set<string>> = new Map(localStorage.getItem('telescopeGroup').length ? JSON.parse(localStorage.getItem('telescopeGroup')) : []);
+    let tempSites: Map<string, Set<string>> = new Map(localStorage.getItem('siteGroup').length ? JSON.parse(localStorage.getItem('siteGroup')) : []);
+    entryPoint.downtimeDatabase = tempDowntime;
+    entryPoint.telescopeGroup = tempTelescopes;
+    entryPoint.siteGroup = tempSites;
+    return entryPoint;
 }

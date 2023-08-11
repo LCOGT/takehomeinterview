@@ -1,11 +1,12 @@
 import { useState } from "react";
-import Downtimes from "../../database/Downtimes";
+import EntryPoint from "../../controller/EntryPoint";
 import { Downtime } from "../../model/Downtime";
 import { ReadAndDeleteDowntimeForm } from "../forms/ReadAndDeleteDowntimeForm";
 import { CreateDowntimeForm } from "../forms/CreateDowntimeForm";
 import { FilterForm } from "./FilterForm";
+import { substringMatch } from "../../Utils";
 
-export const TableView = (props: { context: Downtimes }) => {
+export const TableView = (props: { context: EntryPoint }) => {
   const [downtimes, setDowntimes] = useState<Downtime[]>(
     props.context.getDowntimes()
   );
@@ -36,16 +37,16 @@ export const TableView = (props: { context: Downtimes }) => {
       <div style={{ minHeight: 50 }}></div>
       {downtimes
         .filter((downtime: Downtime) =>
-          siteFilter.length == 0 ? true : downtime.props.siteId == siteFilter
+          siteFilter.length == 0 ? true : substringMatch(siteFilter.toUpperCase(), downtime.props.siteId) 
         )
         .filter((downtime: Downtime) =>
           telescopeFilter.length == 0
             ? true
-            : downtime.props.telescopeId == telescopeFilter
+            : substringMatch(telescopeFilter.toUpperCase(), downtime.props.telescopeId) 
         )
         .sort(
           (a: Downtime, b: Downtime) =>
-            b.props.startDate.getTime() - a.props.startDate.getTime()
+            (new Date(b.props.startDate)).getTime() - (new Date(a.props.startDate)).getTime()
         )
         .map((downtime: Downtime) => (
           <ReadAndDeleteDowntimeForm

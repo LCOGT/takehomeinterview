@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DowntimeProps } from "../../model/Downtime";
-import Downtimes from "../../database/Downtimes";
+import EntryPoint from "../../controller/EntryPoint";
 import {
   COL1_WIDTH,
   COL2_WIDTH,
@@ -13,7 +13,7 @@ import {
 } from "./DowntimeTemplate";
 
 export const CreateDowntimeForm = (props: {
-  context: Downtimes;
+  context: EntryPoint;
   redux: () => any;
 }) => {
   const [formData, setFormData] = useState<DowntimeProps>({
@@ -125,7 +125,7 @@ export const CreateDowntimeForm = (props: {
                 <input
                   type="date"
                   name="startDate"
-                  value={formData.startDate?.toISOString().slice(0, 10) || ""}
+                  value={(new Date(formData.startDate))?.toISOString().slice(0, 10) || ""}
                   onChange={handleDateInputChange}
                 />
               </label>
@@ -136,7 +136,7 @@ export const CreateDowntimeForm = (props: {
                 <input
                   type="date"
                   name="endDate"
-                  value={formData.endDate?.toISOString().slice(0, 10) || ""}
+                  value={(new Date(formData.endDate))?.toISOString().slice(0, 10) || ""}
                   onChange={handleDateInputChange}
                 />
               </label>

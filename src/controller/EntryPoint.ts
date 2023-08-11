@@ -3,20 +3,20 @@ import { isErrorObject, isOverlap } from "../Utils";
 
 const LOG = true;
 
-export default class Downtimes {
+export default class EntryPoint {
     downtimeDatabase: Map<string, Downtime>; // The main database of all Downtimes by their ID
     telescopeGroup: Map<string, Set<string>>; // Mappings from single telescopeID to all its downtimeIDs
     siteGroup: Map<string, Set<string>>; // Mappings from a single siteGroupID to all telescopeIDs
     counter: number;
     constructor() {
-        this.counter = 0;
         this.downtimeDatabase = new Map();
         this.telescopeGroup = new Map();
         this.siteGroup = new Map();
+        this.counter = 0;
     }
 
     redux() {
-        let redux = new Downtimes();
+        let redux = new EntryPoint();
         redux.downtimeDatabase = this.downtimeDatabase;
         redux.telescopeGroup = this.telescopeGroup;
         redux.siteGroup = this.siteGroup;
@@ -92,6 +92,7 @@ export default class Downtimes {
             this.downtimeDatabase.set(downtime.id, downtime);
             this.telescopeGroup.get(telescopeId)?.add(downtime.id);
             LOG && console.log("Successfully created downtime {}", downtime.id);
+            this.counter += 1;
             return downtime.id;
         } else {
             LOG && console.log("Error creating downtime: timeframe validation error");
@@ -103,6 +104,7 @@ export default class Downtimes {
     readDowntime(props: ReadDowntimeProps): Downtime | null {
         const result = this.downtimeDatabase.get(props.downtimeId);
         if (result) {
+            this.counter += 1;
             return result;
         } else {
             return null;
@@ -115,6 +117,7 @@ export default class Downtimes {
         if (downtime) {
             if (this.validateDowntime(downtime, props.startDate, props.endDate)) {
                 this.downtimeDatabase.set(downtime.id, downtime);
+                this.counter += 1;
                 return true;
             } else {
                 return new Error("Unable to update downtime due to overlaps with existing downtime. ")
@@ -130,6 +133,7 @@ export default class Downtimes {
         if (downtime) {
             this.downtimeDatabase.delete(downtime.id);
             this.telescopeGroup.get(downtime.props.telescopeId)?.delete(downtime.id);
+            this.counter += 1;
             return true;
         } else {
             return new Error("Downtime does not exist. ")

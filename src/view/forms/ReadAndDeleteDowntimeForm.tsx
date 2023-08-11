@@ -5,12 +5,12 @@ import {
   DowntimeProps,
   UpdateDowntimeProps,
 } from "../../model/Downtime";
-import Downtimes from "../../database/Downtimes";
+import EntryPoint from "../../controller/EntryPoint";
 import { UpdateDowntimeForm } from "./UpdateDowntimeForm";
 import { COL1_WIDTH, COL2_WIDTH, TOTAL_WIDTH, columnStyle, sectionHeader, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, toggleTextStyle } from "./DowntimeTemplate";
 
 export const ReadAndDeleteDowntimeForm = (props: {
-  context: Downtimes;
+  context: EntryPoint;
   downtime: Downtime;
   redux: () => any;
 }) => {
@@ -60,11 +60,11 @@ export const ReadAndDeleteDowntimeForm = (props: {
             <div style={{ ...columnStyle, float: "right" as "right", minWidth: COL2_WIDTH }}>
                 <div style={entryContainer}>
                   <div style={entryKeyStyle}> Start Date: </div>
-                  <div style={entryValueStyle}> {props.downtime.props.startDate.toISOString().slice(0, 10)} </div>
+                  <div style={entryValueStyle}> {(new Date(props.downtime.props.startDate)).toISOString().slice(0, 10)} </div>
                 </div>
                 <div style={entryContainer}> 
                   <div style={entryKeyStyle}> End Date: </div>
-                  <div style={entryValueStyle}> {props.downtime.props.endDate.toISOString().slice(0, 10)} </div>
+                  <div style={entryValueStyle}> {(new Date(props.downtime.props.endDate)).toISOString().slice(0, 10)} </div>
                 </div>
             </div>    
           </div>

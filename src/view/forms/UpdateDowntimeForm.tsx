@@ -3,11 +3,11 @@ import {
   Downtime,
   UpdateDowntimeProps,
 } from "../../model/Downtime";
-import Downtimes from "../../database/Downtimes";
+import EntryPoint from "../../controller/EntryPoint";
 import { COL1_WIDTH, COL2_WIDTH, columnStyle, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, sectionHeader } from "./DowntimeTemplate";
 
 export const UpdateDowntimeForm = (props: {
-  context: Downtimes;
+  context: EntryPoint;
   downtime: Downtime;
   redux: () => any;
   callback: () => any;
@@ -109,7 +109,7 @@ export const UpdateDowntimeForm = (props: {
                 <input
                   type="date"
                   name="startDate"
-                  value={formData.startDate?.toISOString().slice(0, 10) || ""}
+                  value={(new Date(formData.startDate))?.toISOString().slice(0, 10) || ""}
                   onChange={handleDateInputChange}
                 />
               </label>
@@ -120,7 +120,7 @@ export const UpdateDowntimeForm = (props: {
                 <input
                   type="date"
                   name="endDate"
-                  value={formData.endDate?.toISOString().slice(0, 10) || ""}
+                  value={(new Date(formData.endDate))?.toISOString().slice(0, 10) || ""}
                   onChange={handleDateInputChange}
                 />
               </label>
