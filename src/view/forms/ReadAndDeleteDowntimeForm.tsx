@@ -7,7 +7,7 @@ import {
 } from "../../model/Downtime";
 import EntryPoint from "../../controller/EntryPoint";
 import { UpdateDowntimeForm } from "./UpdateDowntimeForm";
-import { COL1_WIDTH, COL2_WIDTH, TOTAL_WIDTH, columnStyle, sectionHeader, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, toggleTextStyle } from "./DowntimeTemplate";
+import { COL1_WIDTH, COL2_WIDTH, TOTAL_WIDTH, columnStyle, sectionHeader, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, toggleTextStyle } from "./Styles";
 
 export const ReadAndDeleteDowntimeForm = (props: {
   context: EntryPoint;

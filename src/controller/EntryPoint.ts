@@ -112,6 +112,9 @@ export default class EntryPoint {
         const downtime = this.readDowntime({downtimeId: props.oldDowntimeId});
         if (downtime) {
             if (this.validateDowntime(downtime, props.startDate, props.endDate)) {
+                downtime.props.startDate = props.startDate;
+                downtime.props.endDate = props.endDate;
+                downtime.props.reason = props.reason;
                 this.downtimeDatabase.set(downtime.id, downtime);
                 this.counter += 1;
                 return true;

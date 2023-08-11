@@ -4,7 +4,7 @@ import {
   UpdateDowntimeProps,
 } from "../../model/Downtime";
 import EntryPoint from "../../controller/EntryPoint";
-import { COL1_WIDTH, COL2_WIDTH, columnStyle, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, sectionHeader } from "./DowntimeTemplate";
+import { COL1_WIDTH, COL2_WIDTH, columnStyle, sectionContainer, entryContainer, entryKeyStyle, entryValueStyle, sectionHeader } from "./Styles";
 
 export const UpdateDowntimeForm = (props: {
   context: EntryPoint;

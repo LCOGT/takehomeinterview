@@ -4,18 +4,21 @@ export const TOTAL_WIDTH = 800;
 
 export const sectionHeader = {
     fontWeight: 600,
-    fontSize: 20,
+    fontSize: 24,
     margin: 10,
     paddingBottom: 10,
-
 }
 
 export const sectionContainer = {
-    margin: 10,
+    margin: 20,
     padding: 10,
     maxWidth: TOTAL_WIDTH,
     textAlign: "left" as "left",
-    backgroundColor: "#efefff",
+    backgroundImage: "linear-gradient(0deg, rgba(230, 230, 255, 1), rgba(245, 245, 255, 1))",
+    borderStyle: "solid",
+    borderColor: "rgba(230, 230, 255)",
+    borderWidth: 1,
+    borderRadius: 10,
 }
 
 export const columnStyle = {
@@ -31,11 +34,13 @@ export const entryContainer = {
 }
 
 export const entryKeyStyle = {
-
+    fontSize: 16,
+    fontWeight: 600,
 }
 
 export const entryValueStyle = {
-
+    fontSize: 16,
+    fontWeight: 400,
 }
 
 export const toggleTextStyle = {

@@ -4,7 +4,7 @@ import {
   entryKeyStyle,
   entryValueStyle,
   sectionHeader,
-} from "../forms/DowntimeTemplate";
+} from "../forms/Styles";
 
 export const FilterForm = (props: {
   siteFilter: string;

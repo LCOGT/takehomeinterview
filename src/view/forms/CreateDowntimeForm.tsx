@@ -10,7 +10,7 @@ import {
   entryContainer,
   entryKeyStyle,
   entryValueStyle,
-} from "./DowntimeTemplate";
+} from "./Styles";
 
 export const CreateDowntimeForm = (props: {
   context: EntryPoint;
@@ -78,9 +78,9 @@ export const CreateDowntimeForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{...sectionContainer}}>
+    <form onSubmit={handleSubmit} style={{...sectionContainer, paddingBottom: 5}}>
       <div style={sectionHeader}>Add new Downtime</div>
-      <div style={{ backgroundColor: "#ffffff" }}>
+      <div style={{ borderRadius: 8 }}>
         <div style={{ minWidth: 300 }}>
           <div
             style={{

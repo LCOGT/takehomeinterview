@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Downtime } from "../../model/Downtime";
 import { DataGroup, DataItem, Timeline } from "vis-timeline";
 import EntryPoint from "../../controller/EntryPoint";
-import { TOTAL_WIDTH, sectionHeader } from "../forms/DowntimeTemplate";
+import { TOTAL_WIDTH, sectionHeader } from "../forms/Styles";
 
 
 export const TimelineView = (props: {
