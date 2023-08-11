@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import EntryPoint from './controller/EntryPoint'
-import {MainView} from './view/views/MainView'
+import {MainView} from './view/MainView'
 import { parseData, serializeData } from './Utils';
 
 function App() {

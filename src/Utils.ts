@@ -10,8 +10,10 @@ export const isErrorObject = (obj: Object): boolean => {
 }
 
 export const isOverlap = (dateStartA: Date, dateEndA: Date, dateStartB: Date, dateEndB: Date): boolean => {
-    return (dateStartA.getTime() <= dateEndB.getTime() 
-    && dateStartB.getTime() <= dateEndA.getTime());
+    return ((dateStartA.getTime() < dateEndB.getTime() 
+    && dateStartB.getTime() < dateEndA.getTime()) || 
+    (dateStartB.getTime() < dateEndA.getTime() 
+    && dateStartA.getTime() < dateEndB.getTime()));
 }
 
 export const getTimestring = (date: Date) => {

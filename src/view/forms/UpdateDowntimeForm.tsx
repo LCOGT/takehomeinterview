@@ -36,7 +36,9 @@ export const UpdateDowntimeForm = (props: {
   };
 
   const validateForm = (): boolean => {
-    return formData.reason.length < 255;
+    return ((formData.reason.length < 255) 
+    && (formData.startDate.getTime() < formData.endDate.getTime()) 
+    && formData.startDate.toISOString().slice(0, 10) != formData.endDate.toISOString().slice(0, 10));
   };
 
   const handleCancel = (event: any) => {
@@ -44,8 +46,9 @@ export const UpdateDowntimeForm = (props: {
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!validateForm) {
-      setErrorMsg("Form is invalid, reason is longer than 255 characters. ")
+    if (!validateForm()) {
+      setErrorMsg("Form is invalid, make sure reason and dates are valid; dates must be set apart at least one day. ")
+      return
     } else {
       // Entry point
       const result = props.context.updateDowntime({

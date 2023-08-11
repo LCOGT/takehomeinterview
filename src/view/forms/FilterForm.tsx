@@ -4,7 +4,7 @@ import {
   entryKeyStyle,
   entryValueStyle,
   sectionHeader,
-} from "../forms/Styles";
+} from "./Styles";
 
 export const FilterForm = (props: {
   siteFilter: string;
@@ -15,7 +15,7 @@ export const FilterForm = (props: {
   return (
     <div style={sectionContainer}>
       <div style={sectionHeader}>Filters</div>
-      <div style={{ width: "50%", margin: 5 }}>
+      <div style={{ width: "40%", margin: 5 }}>
         <div style={entryContainer}>
           <div style={entryKeyStyle}>Filter by site name: </div>
           <label style={entryValueStyle}>

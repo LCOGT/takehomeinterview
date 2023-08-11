@@ -23,10 +23,6 @@ export default class EntryPoint {
         return downtimes;
     }
 
-    getTelescopeGroups() {
-
-    }
-
     // A boolean function that determines if a Downtime is overlapping with any corresponding telescopes or not.
     validateDowntime(newDowntime: Downtime, newStartDate?: Date, newEndDate?: Date): boolean {
         let overlap: boolean = false;
@@ -36,7 +32,7 @@ export default class EntryPoint {
                 existingDowntime.props.endDate, 
                 newStartDate ? newStartDate : newDowntime.props.startDate, 
                 newEndDate ? newEndDate : newDowntime.props.endDate)) {
-                if (existingDowntime.id !== newDowntime.id) {
+                if (existingDowntime.id != newDowntime.id) {
                     overlap = true;
                 }
             }
@@ -86,7 +82,7 @@ export default class EntryPoint {
         const downtime = new Downtime(props.downtimeProps)
         if (this.validateDowntime(downtime)) {
             this.downtimeDatabase.set(downtime.id, downtime);
-            this.telescopeGroup.get(telescopeId)?.add(downtime.id);
+            this.telescopeGroup.get(telescopeId).add(downtime.id);
             LOG && console.log("Successfully created downtime {}", downtime.id);
             this.counter += 1;
             return downtime.id;

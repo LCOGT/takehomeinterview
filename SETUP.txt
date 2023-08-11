@@ -1,0 +1,17 @@
+First, run 
+
+$ npm i
+
+When the command finishes and all dependencies are installed, then run
+
+$ npm run start
+
+
+
+(Unfinished) Timeline, could not finish the React integration
+
+
+
+
+
+

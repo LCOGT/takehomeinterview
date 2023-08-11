@@ -11,27 +11,21 @@ export interface DowntimeProps {
 
 export interface CreateDowntimeProps {
     downtimeProps: DowntimeProps,
-    options?: any,
 }
 
-// Avoiding using DowntimeProps because creation of the instance forces
-// field-level validation anyways.
 export interface UpdateDowntimeProps {
     oldDowntimeId: string,
     startDate: Date,
     endDate: Date,
     reason: string,
-    options?: any,
 }
 
 export interface ReadDowntimeProps {
     downtimeId: string,
-    options?: any,
 }
 
 export interface DeleteDowntimeProps {
     downtimeId: string,
-    options?: any,
 }
 
 export class Downtime {
@@ -41,12 +35,8 @@ export class Downtime {
     constructor(props: DowntimeProps) {
         this.id = uuidv4();
         this.props = props;
-
-        this.reformat();
-    }
-
-    // Process the data according to the first requirement
-    reformat() {
+        
+        // Process the data according to the assessment requirement
         this.props.siteId.toUpperCase();
         this.props.telescopeId.toUpperCase();
         this.props.startDate = toUTC(this.props.startDate);

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
-  CreateDowntimeProps,
   Downtime,
-  DowntimeProps,
-  UpdateDowntimeProps,
 } from "../../model/Downtime";
 import EntryPoint from "../../controller/EntryPoint";
 import { UpdateDowntimeForm } from "./UpdateDowntimeForm";

@@ -1,12 +1,12 @@
 export const COL1_WIDTH = 350;
 export const COL2_WIDTH = 250;
-export const TOTAL_WIDTH = 800;
+export const TOTAL_WIDTH = 960;
 
 export const sectionHeader = {
     fontWeight: 600,
     fontSize: 24,
     margin: 10,
-    paddingBottom: 10,
+    paddingBottom: 20,
 }
 
 export const sectionContainer = {
@@ -14,11 +14,12 @@ export const sectionContainer = {
     padding: 10,
     maxWidth: TOTAL_WIDTH,
     textAlign: "left" as "left",
-    backgroundImage: "linear-gradient(0deg, rgba(230, 230, 255, 1), rgba(245, 245, 255, 1))",
+    backgroundImage: "linear-gradient(0deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))",
     borderStyle: "solid",
-    borderColor: "rgba(230, 230, 255)",
+    borderColor: "rgb(230, 230, 230)",
     borderWidth: 1,
     borderRadius: 10,
+    filter: "drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.05))",
 }
 
 export const columnStyle = {
