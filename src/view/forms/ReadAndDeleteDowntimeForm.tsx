@@ -80,7 +80,7 @@ export const ReadAndDeleteDowntimeForm = (props: {
               <div>
                 <button onMouseDown={toggleUpdate}> Edit </button>
                 <button onMouseDown={handleDelete}> Delete </button>
-                <div style={{ float: "right" as "right" }}>
+                <div style={{ float: "right" as "right", color: "#aaaaff", fontWeight: 600, }}>
               <div style={toggleTextStyle} onMouseDown={toggleExpand}> {expanded ? "-" : "+"} </div>
             </div>
               </div>

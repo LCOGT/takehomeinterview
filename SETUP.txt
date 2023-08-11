@@ -7,9 +7,14 @@ When the command finishes and all dependencies are installed, then run
 $ npm run start
 
 
+Start and end dates cannot coincide; they must be at least one apart. 
 
-(Unfinished) Timeline, could not finish the React integration
+Downtimes begin at midnight on the start date and end on the midnight of the end date.
 
+
+
+Timeline is unfinished. The HTML elements are all being rendered as per inspect element, I am unable to properly
+display all the items and components.
 
 
 

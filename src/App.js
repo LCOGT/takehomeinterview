@@ -24,7 +24,9 @@ function App() {
 
   return (
     <div className="App">
+      <div style={{display: "inline-block", minWidth: 1000}}>
       <MainView context={entryPoint} />
+      </div>
     </div>
   );
 }
