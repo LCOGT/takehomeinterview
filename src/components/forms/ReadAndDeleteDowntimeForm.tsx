@@ -58,8 +58,14 @@ export const ReadAndDeleteDowntimeForm = (props: {
                 </div>
             </div>
             <div style={{ ...columnStyle, float: "right" as "right", minWidth: COL2_WIDTH }}>
-                <div style={entryContainer}> Start Date: {props.downtime.props.startDate.toISOString().slice(0, 10)} </div>
-                <div style={entryContainer}> End Date: {props.downtime.props.endDate.toISOString().slice(0, 10)} </div>
+                <div style={entryContainer}>
+                  <div style={entryKeyStyle}> Start Date: </div>
+                  <div style={entryValueStyle}> {props.downtime.props.startDate.toISOString().slice(0, 10)} </div>
+                </div>
+                <div style={entryContainer}> 
+                  <div style={entryKeyStyle}> End Date: </div>
+                  <div style={entryValueStyle}> {props.downtime.props.endDate.toISOString().slice(0, 10)} </div>
+                </div>
             </div>    
           </div>
           <div style={{clear: "both" as "both"}}>
@@ -69,7 +75,7 @@ export const ReadAndDeleteDowntimeForm = (props: {
                  <div style={entryContainer}>
                    <div style={{...entryKeyStyle, marginLeft: 10}}>Reason:</div>
                  </div>
-                 <div style={{margin: 15,}}>{props.downtime.props.telescopeId}</div>
+                 <div style={{margin: 15,}}>{props.downtime.props.reason}</div>
 
                </label>
               )}

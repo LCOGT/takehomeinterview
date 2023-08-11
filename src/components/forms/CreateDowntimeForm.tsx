@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { CreateDowntimeProps, DowntimeProps } from "../../model/Downtime";
+import { DowntimeProps } from "../../model/Downtime";
 import Downtimes from "../../database/Downtimes";
-import { toUTC, getTimestring } from "../../Utils";
 import {
   COL1_WIDTH,
   COL2_WIDTH,
@@ -53,8 +52,8 @@ export const CreateDowntimeForm = (props: {
       // Entry point
       const result = props.context.createDowntime({
         downtimeProps: {
-          siteId: formData.siteId,
-          telescopeId: formData.telescopeId,
+          siteId: formData.siteId.toUpperCase(),
+          telescopeId: formData.telescopeId.toUpperCase(),
           startDate: formData.startDate,
           endDate: formData.endDate,
           reason: formData.reason,
@@ -72,6 +71,7 @@ export const CreateDowntimeForm = (props: {
           endDate: new Date(),
           reason: "",
         });
+        setErrorMsg("");
       }
       props.redux();
     }
@@ -90,7 +90,7 @@ export const CreateDowntimeForm = (props: {
             }}
           >
             <div style={entryContainer}>
-              <div style={entryKeyStyle}>Site ID:</div>
+              <div style={entryKeyStyle}>Site Name:</div>
               <label style={entryValueStyle}>
                 <input
                   type="text"
@@ -101,7 +101,7 @@ export const CreateDowntimeForm = (props: {
               </label>
             </div>
             <div style={entryContainer}>
-              <div style={entryKeyStyle}>Telescope ID:</div>
+              <div style={entryKeyStyle}>Telescope Name:</div>
               <label style={entryValueStyle}>
                 <input
                   type="text"
