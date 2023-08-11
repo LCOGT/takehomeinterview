@@ -6,7 +6,7 @@ import {
   UpdateDowntimeProps,
 } from "../../model/Downtime";
 import Downtimes from "../../database/Downtimes";
-import { downtimeStyle } from "./DowntimeTemplate";
+import { COL1_WIDTH, COL2_WIDTH, columnStyle, downtimeStyle, entryContainer, entryKeyStyle, entryValueStyle } from "./DowntimeTemplate";
 
 export const UpdateDowntimeForm = (props: {
   context: Downtimes;
@@ -67,70 +67,78 @@ export const UpdateDowntimeForm = (props: {
     <form onSubmit={handleSubmit}style={downtimeStyle}
     >
       <div style={{ clear: "left" }}>
-        <div style={{ float: "left" as "left", minWidth: 300 }}>
-          <div>
-            <label>
-              Site ID: {props.downtime.id}
-            </label>
-          </div>
-          <div>
-            <label>
-              Site ID: {props.downtime.props.siteId}
-            </label>
-          </div>
-          <div>
-            <label>
-              Site ID: {props.downtime.props.telescopeId}
-            </label>
-          </div>
-        </div>
-        <div style={{ float: "left" as "left", minWidth: 300 }}>
-          <div>
-            <label>
-              Start date:
-              <input
-                type="date"
-                name="startDate"
-                value={formData.startDate?.toISOString().slice(0, 10) || ""}
-                onChange={handleDateInputChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              End date:
-              <input
-                type="date"
-                name="endDate"
-                value={formData.endDate?.toISOString().slice(0, 10) || ""}
-                onChange={handleDateInputChange}
-              />
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label>
-          Reason:
-          <textarea
-            name="reason"
-            value={formData.reason}
-            onChange={handleInputChange}
-          />
-        </label>
         <div
-          style={{
-            color: validateForm() ? "#000000" : "#ff0000",
-          }}
-        >
-          {formData.reason.length.toString()} / 255
+            style={{
+              ...columnStyle,
+              float: "left" as "left",
+              minWidth: COL1_WIDTH,
+            }}
+          >
+            <label style={entryValueStyle}>
+            <div style={entryContainer}>
+              <div style={entryKeyStyle}>Reason:</div>
+            </div>
+            <textarea
+              name="reason"
+              value={formData.reason}
+              onChange={handleInputChange}
+              style={{ margin: 5 }}
+            />
+          </label>
+          <div
+            style={{
+              color: validateForm() ? "#000000" : "#ff0000",
+              fontSize: 10,
+              margin: 5,
+            }}
+          >
+            {formData.reason.length.toString()} / 255
+          </div>
         </div>
+        <div
+            style={{
+              ...columnStyle,
+              float: "right" as "right",
+              minWidth: COL2_WIDTH,
+            }}
+          >
+            <div style={entryContainer}>
+              <div style={entryKeyStyle}>Start Date:</div>
+              <label style={entryValueStyle}>
+                <input
+                  type="date"
+                  name="startDate"
+                  value={formData.startDate?.toISOString().slice(0, 10) || ""}
+                  onChange={handleDateInputChange}
+                />
+              </label>
+            </div>
+            <div style={entryContainer}>
+              <div style={entryKeyStyle}>End Date:</div>
+              <label style={entryValueStyle}>
+                <input
+                  type="date"
+                  name="endDate"
+                  value={formData.endDate?.toISOString().slice(0, 10) || ""}
+                  onChange={handleDateInputChange}
+                />
+              </label>
+            </div>
+          </div>
       </div>
 
-      <button type="submit">Save Changes</button>
-      {errorMsg}
+      <div style={{ ...columnStyle, clear: "both" }}>
+          
+        </div>
+        
+        <div style={columnStyle}>
+          <button type="submit">Submit</button>
+          {errorMsg}
+        </div>
 
     </form>
   );
 };
+
+
+

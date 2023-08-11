@@ -98,7 +98,7 @@ export const CreateDowntimeForm = (props: {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{...downtimeStyle, backgroundColor: "#efefff"}}>
+    <form onSubmit={handleSubmit} style={{...downtimeStyle}}>
       <div style={downtimeHeader}>Add new Downtime</div>
       <div style={{ backgroundColor: "#ffffff" }}>
         <div style={{ minWidth: 300 }}>

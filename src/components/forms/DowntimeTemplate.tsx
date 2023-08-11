@@ -6,6 +6,8 @@ export const downtimeHeader = {
     fontWeight: 600,
     fontSize: 20,
     margin: 10,
+    paddingBottom: 10,
+
 }
 
 export const downtimeStyle = {
@@ -13,6 +15,7 @@ export const downtimeStyle = {
     padding: 10,
     maxWidth: TOTAL_WIDTH,
     textAlign: "left" as "left",
+    backgroundColor: "#efefff",
 }
 
 export const columnStyle = {
