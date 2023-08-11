@@ -6,6 +6,7 @@ import { CreateDowntimeForm } from "../forms/CreateDowntimeForm";
 import { FilterForm } from "./FilterForm";
 import { substringMatch } from "../../Utils";
 import { TimelineView } from "./TimelineView";
+import { TOTAL_WIDTH } from "../forms/DowntimeTemplate";
 
 export const MainView = (props: { context: EntryPoint }) => {
   const [downtimes, setDowntimes] = useState<Downtime[]>(
@@ -49,7 +50,6 @@ export const MainView = (props: { context: EntryPoint }) => {
         siteFilterHandler={siteFilterHandler}
         telescopeFilterHandler={telescopeFilterHandler}
       />
-      <TimelineView context={props.context} downtimes={filteredDowntimes} />
       <div style={{ minHeight: 50 }}></div>
       {filteredDowntimes
         .map((downtime: Downtime) => (
@@ -59,6 +59,12 @@ export const MainView = (props: { context: EntryPoint }) => {
             downtime={downtime}
           />
         ))}
+        <div style={{
+          maxWidth: TOTAL_WIDTH,
+          maxHeight: 600,
+        }}>
+        <TimelineView context={props.context} downtimes={filteredDowntimes} />
+        </div>
     </div>
   );
 };

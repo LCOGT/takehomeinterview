@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Downtime } from "../../model/Downtime";
 import { DataGroup, DataItem, Timeline } from "vis-timeline";
 import EntryPoint from "../../controller/EntryPoint";
-import { TOTAL_WIDTH } from "../forms/DowntimeTemplate";
+import { TOTAL_WIDTH, sectionHeader } from "../forms/DowntimeTemplate";
 
 
 export const TimelineView = (props: {
@@ -26,7 +26,7 @@ export const TimelineView = (props: {
   for (const telescope of telescopes) {
     group.push({
       id: telescope,
-      content: telescope,
+      content: document.getElementById(""),
     });
   }
 
@@ -37,8 +37,26 @@ export const TimelineView = (props: {
       data,
       group,
       {
-        height: 400,
-        stack: true,
+        height: 100,
+        start: Date.now(),
+        margin: {
+          axis: 5,
+          item: {
+            vertical: 5,
+            horizontal: 0
+          }
+        },
+        orientation: {
+          axis: "both",
+          item: "top"
+        },
+        stack: false,
+        stackSubgroups: false,
+        type: "range",
+        width: "100%",
+        zoomable: true,
+        zoomMin: 147600000,
+        zoomMax: 51840000000
       }
     );
     timeline.setGroups(group);
@@ -50,6 +68,8 @@ export const TimelineView = (props: {
   }, [props.downtimes, timelineRef]);
 
   return (
-    <div ref={timelineRef}/>
+    <div ref={timelineRef}>
+      <div style={sectionHeader}>Timeline</div>
+    </div>
   );
 };
